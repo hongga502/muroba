@@ -1,0 +1,3187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>무로바 问吧 — 유학생 알바 후기·Q&amp;A</title>
+<meta name="description" content="중앙대 유학생 선배들이 직접 쓴 아르바이트 후기와 답변. 먼저 겪어본 선배에게 물어보세요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="무로바 问吧 — 유학생 알바 후기·Q&amp;A">
+<meta property="og:description" content="중앙대 유학생 선배들이 직접 쓴 아르바이트 후기와 답변. 问问已经经历过的学长学姐">
+<meta name="theme-color" content="#F8F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1E1614" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23C8321E'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3E바%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Jua&family=ZCOOL+KuaiLe&display=swap">
+<style>
+  /* 색상: 적색 계열(형광펜 노트). --hl은 형광펜·말풍선 색, --accent는 버튼·배지·체크 색 */
+  :root{
+    --backdrop:#E9DFD9; --app-bg:#F8F4F1; --surface:#FFFFFF;
+    --ink:#241A17; --ink-soft:#6B5B55; --ink-faint:#7A6A64;
+    --accent:#C8321E; --accent-contrast:#FFFFFF; --accent-soft:#FFE8E1;
+    --hl:#FFC2B2; --chip-bg:#F1E9E5; --line-strong:#D6CAC4;
+    --jade:#C8321E; --jade-soft:#FFE8E1;
+    --border:rgba(36,26,23,0.13); --shadow:rgba(36,26,23,0.22);
+    --bezel:#1C1614;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+    --backdrop:#120D0B; --app-bg:#1E1614; --surface:#2A201D;
+    --ink:#F5ECE7; --ink-soft:#BBAAA3; --ink-faint:#A39289;
+    --accent:#FF7B63; --accent-contrast:#2A0E08; --accent-soft:#45261F;
+    --hl:#7A3A2C; --chip-bg:#352925; --line-strong:rgba(245,236,231,0.24);
+    --jade:#FF7B63; --jade-soft:#45261F;
+    --border:rgba(245,236,231,0.14); --shadow:rgba(0,0,0,0.55);
+    --bezel:#0C0908;
+    color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --backdrop:#120D0B; --app-bg:#1E1614; --surface:#2A201D;
+    --ink:#F5ECE7; --ink-soft:#BBAAA3; --ink-faint:#A39289;
+    --accent:#FF7B63; --accent-contrast:#2A0E08; --accent-soft:#45261F;
+    --hl:#7A3A2C; --chip-bg:#352925; --line-strong:rgba(245,236,231,0.24);
+    --jade:#FF7B63; --jade-soft:#45261F;
+    --border:rgba(245,236,231,0.14); --shadow:rgba(0,0,0,0.55);
+    --bezel:#0C0908;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"]{
+    --backdrop:#E9DFD9; --app-bg:#F8F4F1; --surface:#FFFFFF;
+    --ink:#241A17; --ink-soft:#6B5B55; --ink-faint:#7A6A64;
+    --accent:#C8321E; --accent-contrast:#FFFFFF; --accent-soft:#FFE8E1;
+    --hl:#FFC2B2; --chip-bg:#F1E9E5; --line-strong:#D6CAC4;
+    --jade:#C8321E; --jade-soft:#FFE8E1;
+    --border:rgba(36,26,23,0.13); --shadow:rgba(36,26,23,0.22);
+    --bezel:#1C1614;
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    overflow-x:hidden;
+    background:var(--backdrop);
+    font-family:"IBM Plex Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Pretendard","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 16px;
+  }
+  .stage{
+    position:relative;
+    width:100%;
+    max-width:1100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:calc(100vh - 80px);
+  }
+  .backdrop-deco{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background-image:radial-gradient(circle, rgba(36,26,23,0.14) 1px, transparent 1.4px);
+    background-size:20px 20px;
+    opacity:.55;
+  }
+  :root[data-theme="dark"] .backdrop-deco, @media (prefers-color-scheme:dark){ .backdrop-deco{opacity:.35;} }
+  .postmark{
+    position:absolute;
+    top:6%;
+    right:6%;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    border:2px dashed var(--ink);
+    opacity:.08;
+    pointer-events:none;
+  }
+  .postmark::after{
+    content:"";
+    position:absolute;
+    inset:22px;
+    border-radius:50%;
+    border:1px solid var(--ink);
+  }
+  .brandmark{
+    position:absolute;
+    left:6%;
+    bottom:8%;
+    max-width:220px;
+    pointer-events:none;
+  }
+  .brandmark .bm-word{
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.02em;
+    color:var(--ink);
+    opacity:.16;
+  }
+  .brandmark .bm-sub{
+    font-size:11px;
+    color:var(--ink);
+    opacity:.14;
+    margin-top:2px;
+  }
+
+  .phone{
+    position:relative;
+    width:392px;
+    height:822px;
+    background:var(--bezel);
+    border-radius:46px;
+    padding:14px;
+    box-shadow:0 30px 60px -20px var(--shadow), 0 2px 0 rgba(255,255,255,0.04) inset;
+    z-index:1;
+  }
+  .phone-notch{
+    position:absolute;
+    top:14px; left:50%;
+    transform:translateX(-50%);
+    width:120px; height:24px;
+    background:var(--bezel);
+    border-radius:0 0 16px 16px;
+    z-index:5;
+  }
+  .phone-screen{
+    position:relative;
+    width:100%; height:100%;
+    background:var(--app-bg);
+    border-radius:34px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .home-indicator{
+    position:absolute;
+    left:50%; bottom:8px;
+    transform:translateX(-50%);
+    width:128px; height:4px;
+    border-radius:3px;
+    background:var(--ink);
+    opacity:.55;
+    z-index:6;
+  }
+
+  .screen{
+    flex:1;
+    overflow-y:auto;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    animation:screenIn .28s ease;
+    -webkit-overflow-scrolling:touch;
+  }
+  @keyframes screenIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  @media (prefers-reduced-motion: reduce){ .screen{animation:none;} }
+
+  .topbar{
+    position:sticky; top:0; z-index:4;
+    display:flex; align-items:center; gap:10px;
+    padding:16px 18px 12px;
+    background:var(--app-bg);
+    border-bottom:1px solid var(--border);
+  }
+  .iconbtn{
+    width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+    flex:none;
+  }
+  .iconbtn:hover{background:var(--border);}
+  .iconbtn svg{width:19px;height:19px;}
+  .topbar-title{
+    font-size:16.5px;
+    font-weight:700;
+    letter-spacing:-.01em;
+    flex:1;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .topbar-title .zh{
+    display:block;
+    font-size:10.5px;
+    font-weight:500;
+    color:var(--ink-faint);
+    margin-top:1px;
+  }
+  .pill-btn{
+    border:none;
+    border-radius:999px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:700;
+    background:var(--accent);
+    color:var(--accent-contrast);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    white-space:nowrap;
+    flex:none;
+  }
+  .pill-btn:hover{filter:brightness(1.06);}
+  .pill-btn:focus-visible, .iconbtn:focus-visible, .ghost-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .pill-btn svg{width:14px;height:14px;}
+
+  .content{padding:16px 18px 28px;}
+
+  .home-hero{padding:20px 18px 6px;}
+  .wordmark{
+    font-size:27px;
+    font-weight:800;
+    letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .wordmark .dot{color:var(--accent);}
+  .tagline{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .proto-note{
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-top:8px;
+  }
+
+  .search-wrap{
+    margin:16px 18px 4px;
+    position:relative;
+  }
+  .search-wrap svg{
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    width:16px;height:16px; color:var(--ink-faint);
+  }
+  .search-input{
+    width:100%;
+    padding:12px 14px 12px 38px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink);
+    font-size:14px;
+    font-family:inherit;
+  }
+  .search-input::placeholder{color:var(--ink-faint);}
+  .search-input:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+
+  .section-label{
+    font-size:12px;
+    font-weight:700;
+    color:var(--ink-soft);
+    letter-spacing:.03em;
+    margin:22px 18px 10px;
+  }
+
+  .cat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:0 18px;
+  }
+  .cat-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:14px;
+    text-align:left;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  .cat-card:hover{border-color:var(--accent);}
+  .cat-card.is-soon{opacity:.62; cursor:default;}
+  .cat-icon{
+    width:36px; height:36px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--accent-soft);
+    color:var(--accent);
+  }
+  .cat-card.is-soon .cat-icon{background:var(--border); color:var(--ink-faint);}
+  .cat-icon svg{width:19px;height:19px;}
+  .cat-name{font-size:14.5px; font-weight:700;}
+  .cat-sub{font-size:11px; color:var(--ink-faint); margin-top:-4px;}
+  .cat-state{
+    font-size:10.5px;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:999px;
+    width:fit-content;
+    background:var(--jade-soft);
+    color:var(--jade);
+  }
+  .cat-card.is-soon .cat-state{background:var(--border); color:var(--ink-faint);}
+
+  .qlist{padding:0 18px; display:flex; flex-direction:column; gap:10px;}
+  .qcard{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    color:var(--ink);
+    display:block;
+    width:100%;
+  }
+  .qcard:hover{border-color:var(--accent);}
+  .qcard-title{font-size:14.5px; font-weight:700; line-height:1.4;}
+  .qcard-snippet{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .qcard-meta{
+    display:flex; align-items:center; gap:10px;
+    margin-top:10px;
+    font-size:11.5px;
+    color:var(--ink-faint);
+  }
+  .qcard-meta span{display:inline-flex; align-items:center; gap:4px;}
+  .qcard-meta svg{width:13px;height:13px;}
+  .badge-adopted{
+    display:inline-flex; align-items:center; gap:3px;
+    background:var(--jade-soft); color:var(--jade);
+    padding:2px 8px; border-radius:999px;
+    font-size:10.5px; font-weight:700;
+  }
+  .badge-adopted svg{width:11px;height:11px;}
+  .badge-waiting{
+    background:var(--border); color:var(--ink-faint);
+    padding:2px 8px; border-radius:999px;
+    font-size:10.5px; font-weight:700;
+  }
+
+  .empty-state{
+    margin:30px 18px; padding:26px 18px;
+    text-align:center;
+    color:var(--ink-faint);
+    font-size:12.5px;
+    border:1px dashed var(--border);
+    border-radius:16px;
+  }
+
+  .field-label{font-size:12.5px; font-weight:700; color:var(--ink-soft); margin:18px 0 6px;}
+  select.field, input.field, textarea.field{
+    width:100%;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    padding:11px 13px;
+  }
+  select.field:focus-visible, input.field:focus-visible, textarea.field:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  textarea.field{resize:vertical; min-height:100px; line-height:1.55;}
+  .field::placeholder{color:var(--ink-faint);}
+
+  .suggest-box{margin-top:8px; display:flex; flex-direction:column; gap:6px;}
+  .suggest-item{
+    display:flex; align-items:center; gap:8px;
+    background:var(--accent-soft);
+    color:var(--ink);
+    border:none;
+    border-radius:10px;
+    padding:9px 11px;
+    font-size:12.5px;
+    text-align:left;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .suggest-item svg{width:13px;height:13px; color:var(--accent); flex:none;}
+  .suggest-label{font-size:11px; color:var(--ink-faint); margin-top:14px;}
+
+  .submit-row{margin-top:22px;}
+  .submit-btn{
+    width:100%;
+    border:none; border-radius:14px;
+    padding:14px;
+    background:var(--accent);
+    color:var(--accent-contrast);
+    font-size:15px; font-weight:800;
+    cursor:pointer;
+  }
+  .submit-btn:disabled{opacity:.4; cursor:not-allowed;}
+  .submit-btn:not(:disabled):hover{filter:brightness(1.06);}
+
+  .q-detail-head{padding:4px 18px 16px; border-bottom:1px solid var(--border);}
+  .q-detail-cat{
+    display:inline-block;
+    font-size:10.5px; font-weight:700;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:3px 9px; border-radius:999px;
+    margin-bottom:10px;
+  }
+  .q-detail-title{font-size:18.5px; font-weight:800; line-height:1.4; text-wrap:balance;}
+  .author-row{display:flex; align-items:center; gap:9px; margin-top:14px;}
+  .avatar{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--ink); color:var(--app-bg);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; flex:none;
+  }
+  .author-name{font-size:13px; font-weight:700;}
+  .author-tag{font-size:11px; color:var(--ink-faint); font-weight:500;}
+  .author-time{font-size:11px; color:var(--ink-faint); margin-top:1px;}
+  .q-detail-body{
+    font-size:14px; line-height:1.75; color:var(--ink);
+    margin:14px 18px 0; white-space:pre-wrap;
+  }
+  .q-detail-stats{
+    display:flex; gap:14px; margin:14px 18px 0;
+    font-size:11.5px; color:var(--ink-faint);
+  }
+  .q-detail-stats span{display:inline-flex; align-items:center; gap:4px;}
+  .q-detail-stats svg{width:13px;height:13px;}
+
+  .answers-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 18px 10px;
+  }
+  .answers-count{font-size:13.5px; font-weight:800;}
+  .answer-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px;
+    margin:0 18px 10px;
+    position:relative;
+  }
+  .answer-card.is-hot{border-color:var(--jade);}
+  .answer-top{display:flex; align-items:flex-start; gap:9px; justify-content:space-between;}
+  .answer-who{display:flex; gap:9px;}
+  .answer-body{
+    font-size:13.5px; line-height:1.7; color:var(--ink);
+    margin:10px 0 0; white-space:pre-wrap;
+  }
+  .answer-actions{
+    display:flex; align-items:center; gap:10px; margin-top:12px;
+  }
+  .like-btn{
+    display:inline-flex; align-items:center; gap:5px;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--ink-soft);
+    border-radius:999px;
+    padding:6px 11px;
+    font-size:12px; font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .like-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .like-btn svg{width:13px;height:13px;}
+  .resolve-btn{
+    border:1px solid var(--jade);
+    background:transparent;
+    color:var(--jade);
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:12px; font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .resolve-btn:hover{background:var(--jade-soft);}
+
+  .stamp{
+    flex:none;
+    display:flex; align-items:center; gap:4px;
+    border:1.5px dashed var(--jade);
+    color:var(--jade);
+    border-radius:999px;
+    padding:4px 10px 4px 8px;
+    font-size:10.5px; font-weight:800;
+    transform:rotate(-7deg);
+  }
+  .stamp svg{width:11px;height:11px;}
+
+  .composer{
+    position:sticky; bottom:0;
+    background:var(--app-bg);
+    border-top:1px solid var(--border);
+    padding:12px 18px 16px;
+    margin-top:auto;
+  }
+  .composer textarea{margin-bottom:8px;}
+
+  .toast{
+    position:absolute;
+    left:50%; bottom:80px;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:var(--app-bg);
+    font-size:12.5px; font-weight:600;
+    padding:10px 16px;
+    border-radius:999px;
+    box-shadow:0 10px 24px var(--shadow);
+    z-index:20;
+    animation:toastIn .2s ease;
+    white-space:nowrap;
+  }
+  @keyframes toastIn{ from{opacity:0; transform:translate(-50%,8px);} to{opacity:1; transform:translate(-50%,0);} }
+
+  .profile-card{
+    margin:6px 18px 4px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+  }
+  .profile-avatar{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--ink); color:var(--app-bg);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:800;
+    margin:0 auto 10px;
+  }
+  .profile-name{font-size:16px; font-weight:800;}
+  .profile-tag{font-size:12px; color:var(--ink-faint); margin-top:2px;}
+  .stat-row{
+    display:flex; margin-top:16px;
+    border-top:1px solid var(--border);
+    padding-top:14px;
+  }
+  .stat{flex:1;}
+  .stat b{display:block; font-size:16px; font-variant-numeric:tabular-nums;}
+  .stat span{font-size:11px; color:var(--ink-faint);}
+
+  .tabs{display:flex; gap:6px; margin:20px 18px 12px; border-bottom:1px solid var(--border);}
+  .tab-btn{
+    border:none; background:transparent;
+    font-family:inherit; font-size:13px; font-weight:700;
+    color:var(--ink-faint);
+    padding:9px 4px; margin-right:14px;
+    cursor:pointer;
+    border-bottom:2px solid transparent;
+  }
+  .tab-btn.is-active{color:var(--ink); border-color:var(--accent);}
+
+  .notif-item{
+    display:flex; gap:10px; align-items:flex-start;
+    padding:12px 18px;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+  }
+  .notif-item svg{width:16px;height:16px; color:var(--accent); flex:none; margin-top:1px;}
+  .notif-time{font-size:11px; color:var(--ink-faint); margin-top:2px;}
+
+  .mylist-item{
+    padding:13px 18px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+    background:transparent;
+    border-left:none;border-right:none;border-top:none;
+    width:100%; text-align:left; font-family:inherit; color:var(--ink);
+  }
+  .mylist-item:hover{background:var(--surface);}
+  .mylist-q{font-size:11px; color:var(--ink-faint); margin-bottom:3px;}
+  .mylist-a{font-size:13px; line-height:1.55; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;}
+
+  .bottomnav{
+    display:flex;
+    border-top:1px solid var(--border);
+    background:var(--app-bg);
+    padding:8px 6px 14px;
+    flex:none;
+    position:relative;
+    z-index:3;
+  }
+  .bn-item{
+    flex:1;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    background:transparent; border:none;
+    color:var(--ink-faint);
+    font-family:inherit; font-size:10px; font-weight:700;
+    padding:4px 2px;
+    cursor:pointer;
+  }
+  .bn-item svg{width:20px;height:20px;}
+  .bn-item.is-active{color:var(--accent);}
+  .bn-item:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .bn-item.is-center{position:relative; top:-14px;}
+  .bn-item.is-center .bn-center-circle{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--accent); color:var(--accent-contrast);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 16px -4px var(--shadow);
+    margin-bottom:2px;
+  }
+  .bn-item.is-center .bn-center-circle svg{width:22px;height:22px;}
+
+  .role-grid{display:flex; flex-direction:column; gap:10px; margin-top:6px;}
+  .role-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:18px;
+    padding:16px; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .role-card:hover{border-color:var(--accent);}
+
+  .verify-banner{
+    margin:16px 18px 4px;
+    background:var(--accent-soft);
+    border:1px solid var(--accent);
+    border-radius:16px;
+    padding:14px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .verify-banner b{font-size:13px;}
+  .verify-banner-sub{font-size:11px; color:var(--ink-soft); margin-top:2px;}
+
+  .owner-badge{
+    display:inline-flex; align-items:center; gap:3px;
+    font-size:10.5px; font-weight:700;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:2px 7px; border-radius:999px;
+  }
+  .owner-badge svg{width:10px;height:10px;}
+
+  .filter-chips{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px; margin-top:14px;}
+  .filter-select-row{padding:10px 18px 0;}
+  .chip-toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:1px solid var(--border); background:var(--surface); color:var(--ink);
+    border-radius:999px; padding:8px 13px; font-size:12.5px; font-weight:700;
+    cursor:pointer; font-family:inherit;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .chip small{font-size:10px; font-weight:500; color:var(--ink-faint);}
+  .chip.is-active{border-color:var(--accent); background:var(--accent-soft); color:var(--accent);}
+  .chip.is-active small{color:var(--accent);}
+  .chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .card-author-row{
+    display:flex; align-items:center; gap:6px;
+    background:transparent; border:none; padding:0 0 8px; margin:0;
+    font-family:inherit; cursor:pointer; color:var(--ink-soft);
+    font-size:11.5px; font-weight:700;
+  }
+  .card-author-row:hover{color:var(--accent);}
+  .card-author-row:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  /* ===== 로그인 · 회원가입 ===== */
+  .auth-wrap{flex:1; display:flex; flex-direction:column; padding:52px 22px 30px;}
+  .auth-hero{display:flex; flex-direction:column; align-items:center; text-align:center; gap:24px;}
+  .logo-lockup{display:flex; align-items:flex-end; gap:5px; color:var(--ink);}
+  .logo-col{display:flex; flex-direction:column; align-items:flex-end;}
+  .logo-ko, .logo-zh{height:50px; display:flex; align-items:center; line-height:1;}
+  .logo-ko{font-family:"Jua",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; font-size:48px;}
+  .logo-zh{font-family:"ZCOOL KuaiLe","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif; font-size:45px;}
+  .logo-bubble{
+    position:relative;
+    display:flex; flex-direction:column; align-items:center;
+    padding:5px 8px 0;
+    background:var(--hl);
+    border-radius:15px;
+  }
+  .logo-check{
+    position:absolute; top:-18px; right:-19px;
+    width:34px; height:34px; border-radius:50%;
+    background:var(--accent); color:var(--accent-contrast);
+    border:4px solid var(--app-bg);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .logo-check svg{width:17px; height:17px; stroke-width:3.2;}
+  .logo-tail{position:absolute; right:13px; bottom:-15px; width:22px; height:17px; fill:var(--hl);}
+  .auth-tagline{font-size:15px; font-weight:800; line-height:1.4;}
+  .auth-tagline .zh{display:block; font-size:12.5px; font-weight:500; color:var(--ink-soft); margin-top:3px;}
+  .auth-form{margin-top:26px;}
+  label.field-label{display:block;}
+  .text-link{
+    background:none; border:none; padding:12px 8px;
+    font-family:inherit; font-size:12.5px; color:var(--ink-soft);
+    text-decoration:underline; cursor:pointer;
+  }
+  .text-link:focus-visible, .outline-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .auth-foot{margin-top:auto; padding-top:18px; border-top:1px solid var(--border); text-align:center;}
+  .auth-foot-label{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;}
+  .outline-btn{
+    width:100%;
+    border:1.5px solid var(--ink); border-radius:14px;
+    padding:13px;
+    background:transparent; color:var(--ink);
+    font-family:inherit; font-size:15px; font-weight:800;
+    cursor:pointer;
+  }
+  .step-count{font-size:12px; font-weight:700; color:var(--ink-faint); flex:none;}
+  .step-bar{display:flex; gap:6px; padding:12px 18px 0;}
+  .step-bar span{flex:1; height:4px; border-radius:2px; background:var(--border);}
+  .step-bar span.is-done{background:var(--accent);}
+  .auth-title{font-size:20px; font-weight:800; line-height:1.35; letter-spacing:-.02em; text-wrap:balance;}
+  .auth-sub{font-size:12.5px; color:var(--ink-soft); margin-top:5px; line-height:1.5;}
+  .field-help{font-size:11px; color:var(--ink-faint); margin-top:6px; line-height:1.5;}
+  .field-error{font-size:11.5px; color:var(--accent); font-weight:700; margin-top:6px;}
+  .field-error:empty{display:none;}
+  .info-note{background:var(--accent-soft); border-radius:12px; padding:12px 13px; margin-top:18px; font-size:12px; line-height:1.55;}
+  .info-note b{display:block; font-size:12.5px; margin-bottom:2px;}
+  .agree-row{display:flex; align-items:center; gap:6px; margin-top:16px;}
+  .agree-row label{flex:1; min-height:44px; display:flex; align-items:center; gap:9px; font-size:13px; font-weight:600; cursor:pointer;}
+  .agree-row input{width:20px; height:20px; margin:0; flex:none; accent-color:var(--accent);}
+  .agree-row .req{color:var(--accent); font-weight:800;}
+
+  /* ===== 새 디자인 적용 (기존 규칙을 덮어써요) ===== */
+  button, input, select, textarea{font-family:inherit;}
+  .logo-lockup.is-sm{gap:3px;}
+  .logo-lockup.is-sm .logo-ko, .logo-lockup.is-sm .logo-zh{height:24px;}
+  .logo-lockup.is-sm .logo-ko{font-size:23px;}
+  .logo-lockup.is-sm .logo-zh{font-size:21px;}
+  .logo-lockup.is-sm .logo-bubble{padding:2px 5px 0; border-radius:8px;}
+  .logo-lockup.is-sm .logo-check{top:-8px; right:-10px; width:18px; height:18px; border-width:2px;}
+  .logo-lockup.is-sm .logo-check svg{width:9px; height:9px; stroke-width:4;}
+  .logo-lockup.is-sm .logo-tail{right:7px; bottom:-7px; width:11px; height:9px;}
+
+  .home-hero{padding:22px 18px 4px;}
+  .home-hero .logo-lockup{margin-bottom:22px;}
+  .home-headline{margin:0; font-size:23px; font-weight:700; line-height:1.34; letter-spacing:-.02em;}
+  .hl{background:linear-gradient(transparent 58%, var(--hl) 58%);}
+  .tagline{font-size:13px; margin-top:6px;}
+
+  .pill-btn{min-height:40px; padding:9px 16px;}
+  .submit-btn{min-height:54px; font-weight:700;}
+  select.field, input.field, textarea.field{min-height:50px; padding:13px 14px; font-size:15px; border-color:var(--line-strong);}
+  textarea.field{min-height:110px;}
+  .field-label{font-size:13.5px; color:var(--ink);}
+
+  .chip{min-height:42px; padding:7px 15px; font-size:13px; font-weight:600; justify-content:center; border-color:var(--line-strong);}
+  .chip.is-active{border-color:var(--ink); background:var(--ink); color:var(--app-bg);}
+  .chip.is-active small{color:var(--app-bg); opacity:.8;}
+  .lvl{display:inline-flex; align-items:flex-end; gap:3px; flex:none;}
+  .lvl i{display:block; width:4px; border-radius:2px; background:currentColor; opacity:.28;}
+  .lvl i:nth-child(1){height:7px;} .lvl i:nth-child(2){height:10px;} .lvl i:nth-child(3){height:13px;}
+  .lvl i.on{opacity:1;}
+  .filter-title{font-size:13.5px; font-weight:600; padding:0 18px; margin-top:18px;}
+  .level-seg{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; padding:0 18px; margin-top:8px;}
+  .level-seg .chip{flex-direction:row; align-items:center; gap:8px; min-height:46px; border-radius:12px; font-size:14px;}
+  .screen > *{flex-shrink:0;}
+  .industry-scroll{flex:none; display:flex; gap:8px; overflow-x:auto; padding:12px 18px 6px; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
+  .industry-scroll::-webkit-scrollbar{display:none;}
+  .industry-scroll .chip{flex:none; white-space:nowrap; font-weight:500;}
+  .industry-scroll .chip.is-active{border-color:var(--accent); background:var(--accent); color:var(--accent-contrast); font-weight:600;}
+
+  .section-label{font-size:16px; color:var(--ink); letter-spacing:0; margin:24px 18px 12px;}
+  .qcard{padding:16px;}
+  .qcard-title{font-size:16px; line-height:1.4;}
+  .qcard-snippet{font-size:13px; margin-top:5px;}
+  .qcard-status{margin-bottom:8px;}
+  .badge-adopted{background:var(--accent); color:var(--accent-contrast); border-radius:6px; padding:3px 8px; font-size:11px;}
+  .badge-waiting{background:transparent; border:1px solid var(--ink-soft); color:var(--ink-soft); border-radius:6px; padding:2px 8px; font-size:11px;}
+  .tag{display:inline-block; padding:3px 8px; border-radius:6px; background:var(--chip-bg); font-size:11.5px; font-weight:600;}
+  .career-badge{display:inline-block; flex:none; padding:2px 9px; border:1px solid var(--accent); border-radius:999px; font-size:11px; font-weight:600; color:var(--accent); white-space:nowrap;}
+  .rcard-top{display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:11.5px; color:var(--ink-soft);}
+  .rcard-top .rcard-stats{margin-left:auto; display:inline-flex; align-items:center; gap:10px; color:var(--ink-faint);}
+  .rcard-top .rcard-stats span{display:inline-flex; align-items:center; gap:4px;}
+  .rcard-top svg{width:13px; height:13px;}
+  .rcard-body{font-size:13.5px; line-height:1.6; color:var(--ink-soft); margin-top:5px; text-wrap:pretty;}
+  .lvl-pill{display:inline-flex; align-items:center; gap:7px; margin-top:10px; padding:6px 10px; border-radius:8px; background:var(--accent-soft); font-size:12.5px; font-weight:600;}
+  .rcard-foot{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border);}
+  .rcard-foot .card-author-row{padding:0; min-height:28px;}
+
+  .q-detail-cat{background:var(--ink); color:var(--app-bg); border-radius:6px; font-size:11.5px; padding:3px 8px;}
+  .q-detail-title{font-size:21px; font-weight:700; letter-spacing:-.02em;}
+  .detail-chips{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:10px;}
+  .detail-chips .q-detail-cat{margin-bottom:0;}
+  .avatar, .profile-avatar{background:var(--chip-bg); color:var(--ink);}
+  .facts{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); margin:6px 18px 0; background:var(--surface); border:1px solid var(--border); border-radius:16px;}
+  .facts > div{padding:13px 8px; display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center;}
+  .facts > div + div{border-left:1px solid var(--border);}
+  .facts span{font-size:11.5px; color:var(--ink-soft);}
+  .facts b{font-size:13.5px; font-weight:700; line-height:1.35;}
+  .hl-block{background:var(--hl); border-radius:14px; padding:14px 16px;}
+  .hl-block b{display:block; font-size:13.5px;}
+  .hl-block p{margin:4px 0 0; font-size:14px; line-height:1.6;}
+  .detail-h{font-size:14.5px; font-weight:700; margin:20px 0 6px;}
+  .author-card{display:flex; align-items:center; gap:10px; margin-top:22px; padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:16px; cursor:pointer;}
+  .author-card > div:nth-child(2){flex:1; min-width:0;}
+  .author-card:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .answer-card.is-hot{border:1.5px solid var(--accent);}
+  .stamp{border:none; background:var(--accent); color:var(--accent-contrast); border-radius:8px; padding:5px 10px; font-size:11px; transform:none;}
+  .like-btn{min-height:40px; padding:0 13px;}
+  .resolve-btn{flex:1; min-height:40px; padding:0 14px; border:1.5px solid var(--accent); border-radius:12px; color:var(--accent); font-size:13px;}
+  .resolve-btn:hover{background:var(--accent-soft);}
+
+  .bottomnav{background:var(--surface);}
+  .bn-item{color:var(--ink-soft); font-size:10.5px; font-weight:500;}
+  .bn-item.is-active{color:var(--ink); font-weight:700;}
+  .bn-icon{width:46px; height:28px; border-radius:14px; display:flex; align-items:center; justify-content:center;}
+  .bn-item.is-active .bn-icon{background:var(--hl);}
+
+  /* ===== 언어 전환 (예시) ===== */
+  :root[lang="zh-CN"] body{font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","IBM Plex Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;}
+  .lang-btn{
+    flex:none; display:inline-flex; align-items:center; gap:6px;
+    min-height:40px; padding:0 13px;
+    border:1px solid var(--line-strong); border-radius:999px;
+    background:var(--surface); color:var(--ink);
+    font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .lang-btn svg{width:16px; height:16px;}
+  .lang-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .lang-row{display:flex; justify-content:flex-end; margin:-30px -4px 18px;}
+  .hero-top{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .home-hero .hero-top .logo-lockup{margin-bottom:0;}
+  .translated-note{display:block; margin-top:6px; font-size:11px; font-weight:400; color:var(--ink-faint);}
+
+  @media (max-width:560px){
+    body{padding:0; align-items:stretch;}
+    .stage{max-width:none; min-height:100vh;}
+    .backdrop-deco,.postmark,.brandmark{display:none;}
+    .phone{
+      width:100vw; height:100vh; height:100dvh;
+      border-radius:0; padding:0; box-shadow:none;
+    }
+    .phone-notch{display:none;}
+    .phone-screen{border-radius:0;}
+    .home-indicator{display:none;}
+  }
+
+  /* 태블릿 너비(561~899px): 휴대폰 모형 없이 가운데 한 줄로 보여요 */
+  @media (min-width:561px) and (max-width:899px){
+    body{padding:0; align-items:stretch;}
+    .stage{max-width:none; min-height:100vh;}
+    .backdrop-deco, .postmark, .brandmark, .phone-notch, .home-indicator{display:none;}
+    .phone{width:100vw; height:100vh; height:100dvh; border-radius:0; padding:0; box-shadow:none; background:var(--backdrop);}
+    .phone-screen{border-radius:0; max-width:560px; margin:0 auto; border-inline:1px solid var(--border);}
+  }
+
+  /* ===== PC 버전 (창 너비 900px 이상) =====
+     같은 파일이 창 너비에 따라 모양을 바꿔요. 좁으면 지금까지의 모바일 화면 그대로예요. */
+  .topnav{display:none;}
+  .filter-title-industry{display:none;}
+  .fact-desktop{display:none !important;}
+  .detail-aside{padding:0 18px 28px;}
+
+  @media (min-width:900px){
+    body{padding:0; align-items:stretch;}
+    .stage{max-width:none; min-height:100vh;}
+    .backdrop-deco, .postmark, .brandmark, .phone-notch, .home-indicator{display:none;}
+    .phone{width:100vw; height:100vh; border-radius:0; padding:0; box-shadow:none; background:var(--app-bg);}
+    .phone-screen{border-radius:0;}
+    .bottomnav{display:none;}
+    .toast{bottom:40px;}
+
+    /* 상단 메뉴 */
+    .topnav{display:block; flex:none; background:var(--surface); border-bottom:1px solid var(--border);}
+    .topnav-inner{max-width:1120px; margin:0 auto; padding:12px 18px 10px; display:flex; align-items:center; gap:28px;}
+    .topnav-logo{background:none; border:none; padding:6px 10px 6px 0; color:inherit; cursor:pointer;}
+    .topnav-logo:focus-visible, .tn-item:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+    .topnav .logo-check{border-color:var(--surface);}
+    .topnav-links{flex:1; display:flex; align-items:center; gap:4px;}
+    .tn-item{height:42px; padding:0 16px; border:none; border-radius:21px; background:transparent; color:var(--ink-soft); font-size:15px; font-weight:500; cursor:pointer;}
+    .tn-item:hover{background:var(--chip-bg);}
+    .tn-item.is-active{background:var(--hl); color:var(--ink); font-weight:700;}
+    .topnav-actions{display:flex; align-items:center; gap:10px;}
+    .tn-cta{min-height:42px; padding:0 18px; font-size:14px;}
+
+    /* 본문은 가운데 한 줄(기본 760px). 홈과 후기 상세는 넓게, 로그인·가입은 좁게 */
+    .screen{--col:760px; padding-inline:max(0px, calc((100% - var(--col)) / 2));}
+    .screen.view-feed, .screen.view-reviewDetail{--col:1120px;}
+    .screen.view-login, .screen.view-signup1, .screen.view-signup2, .screen.view-signup3, .screen.view-onboarding,
+    .screen.view-privacy, .screen.view-newPassword, .screen.view-loading, .screen.view-setup, .screen.view-loadError{--col:460px;}
+    .hero-top{display:none;}
+    .topbar .lang-btn{display:none;}
+    .topbar{padding-top:20px;}
+
+    /* 로그인: 가운데 카드 */
+    .auth-wrap{flex:none; margin:48px 0; padding:40px 36px 32px; background:var(--surface); border:1px solid var(--border); border-radius:20px;}
+    .auth-wrap .lang-row{margin:-18px -12px 18px;}
+    .auth-wrap .logo-check{border-color:var(--surface);}
+    .auth-foot{margin-top:24px;}
+
+    /* 홈: 왼쪽 필터 + 오른쪽 후기 카드 */
+    .view-feed .home-hero{padding:40px 18px 28px;}
+    .view-feed .home-headline{font-size:34px;}
+    .view-feed .home-headline br{display:none;}
+    :root:not([lang="zh-CN"]) .view-feed .home-headline .hl{margin-left:.28em;}
+    .view-feed .tagline{font-size:16px;}
+    .feed-layout{display:flex; align-items:flex-start; gap:32px; padding:0 18px 48px;}
+    .filter-panel{flex:0 0 280px; position:sticky; top:16px; padding:20px; background:var(--surface); border:1px solid var(--border); border-radius:16px;}
+    .filter-panel .filter-title{padding:0; margin-top:0;}
+    .filter-panel .level-seg{padding:0; gap:6px; margin-top:10px;}
+    .filter-panel .level-seg .chip{padding:7px 6px; gap:6px;}
+    .filter-panel .filter-title-industry{display:block; margin-top:24px;}
+    .filter-panel .industry-scroll{flex-wrap:wrap; overflow:visible; gap:6px; padding:10px 0 0;}
+    #feedBody{flex:1; min-width:0;}
+    .view-feed .section-label{margin:0 0 16px; font-size:18px;}
+    .view-feed .qlist{padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px;}
+    .view-feed .qcard{display:flex; flex-direction:column; padding:18px;}
+    .view-feed .lvl-pill{align-self:flex-start; margin-bottom:12px;}
+    .view-feed .rcard-foot{margin-top:auto;}
+    .view-feed .empty-state{grid-column:1 / -1; margin:0;}
+
+    /* 후기 상세: 가운데 본문 + 오른쪽 작성자 카드 */
+    .detail-layout{display:flex; align-items:flex-start; gap:14px; padding:16px 0 48px;}
+    .detail-main{flex:1; min-width:0;}
+    .detail-aside{flex:0 0 320px; position:sticky; top:84px; padding:0 18px 0 0;}
+    .detail-aside .author-card{margin-top:4px; flex-wrap:wrap;}
+    .detail-aside .submit-row{margin-top:12px;}
+    .view-reviewDetail .q-detail-title{font-size:30px;}
+    .view-reviewDetail .facts{grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));}
+    .fact-desktop{display:flex !important;}
+    .schedule-line{display:none;}
+    .view-reviewDetail .hl-block p{font-size:17px;}
+    .view-reviewDetail .answer-body{font-size:15px;}
+  }
+
+  /* ===== 실제 서비스용 추가 ===== */
+  .toast{white-space:normal; width:max-content; max-width:calc(100% - 36px); text-align:center; line-height:1.45; border-radius:18px;}
+  .field-error, .field-ok{line-height:1.5;}
+  .field-ok{font-size:11.5px; color:var(--ink); font-weight:700; margin-top:6px;}
+  .field-ok:empty{display:none;}
+  .like-btn.is-liked{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+  .like-btn.is-liked svg{fill:currentColor;}
+  .like-btn:focus-visible, .resolve-btn:focus-visible, .notif-item:focus-visible, .mini-link:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .notif-item[role="button"]{cursor:pointer;}
+  .mini-link{background:none; border:none; padding:8px 4px; font-family:inherit; font-size:12px; color:var(--ink-faint); text-decoration:underline; cursor:pointer;}
+  .account-links{display:flex; justify-content:center; gap:10px; padding:4px 18px 28px;}
+  .status-wrap{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 26px;}
+  .status-wrap .auth-title{margin-top:26px;}
+  .status-wrap .submit-row{width:100%; max-width:320px;}
+  .status-detail{margin-top:18px; font-size:11px; color:var(--ink-faint); word-break:break-all;}
+  /* 아이폰에서 입력창을 누를 때 화면이 확대되지 않게 */
+  @media (hover:none) and (pointer:coarse){ select.field, input.field, textarea.field{font-size:16px;} }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="backdrop-deco" aria-hidden="true"></div>
+  <div class="postmark" aria-hidden="true"></div>
+  <div class="brandmark" aria-hidden="true">
+    <div class="bm-word">무로바</div>
+  </div>
+
+  <div class="phone">
+    <div class="phone-notch" aria-hidden="true"></div>
+    <div class="phone-screen">
+      <div id="topNavHost"></div>
+      <div id="screen" class="screen"></div>
+      <div id="bottomNavHost"></div>
+      <div class="home-indicator" aria-hidden="true"></div>
+      <div id="toastHost"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =====================================================================
+   서버 연결 설정 — 아래 세 줄만 채우면 돼요
+   ---------------------------------------------------------------------
+   SUPABASE_URL  : Supabase 대시보드에서 복사한 Project URL  (https://xxxx.supabase.co)
+   SUPABASE_KEY  : Settings → API Keys 의 Publishable key   (sb_publishable_ 로 시작)
+                   이 키는 공개돼도 괜찮은 키예요. Secret key(sb_secret_...)는 절대 여기에 넣지 마세요.
+   CONTACT_EMAIL : 개인정보 안내에 보여 줄 문의 이메일
+   ===================================================================== */
+const SUPABASE_URL  = 'https://ylonurxpmkexiujrryvw.supabase.co';
+const SUPABASE_KEY  = 'sb_publishable_rF_cmXtCx7pgeff9FqJOHA_iyOZA-m1';
+const CONTACT_EMAIL = '';
+
+const OPENED_HASH = location.hash || '';   // 메일의 링크로 들어왔는지 확인하려고, 처음 주소를 기억해 둬요
+const SERVER_READY = /^https?:\/\/\S+$/.test(SUPABASE_URL) && SUPABASE_KEY.length > 20 && !/\s/.test(SUPABASE_KEY) && !SUPABASE_KEY.startsWith('여기에');
+const sb = (SERVER_READY && window.supabase && window.supabase.createClient)
+  ? window.supabase.createClient(SUPABASE_URL.replace(/\/+$/, ''), SUPABASE_KEY)
+  : null;
+
+const ICONS = {
+  briefcase:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>',
+  cross:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+  bank:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v9M10 10v9M14 10v9M19 10v9"/><path d="M3 21h18"/></svg>',
+  people:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14c2.8.3 5 2.3 5 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+  bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9.5-9C.8 7.5 2.7 4 6.2 4c2 0 3.5 1.1 4.3 2.5C11.3 5.1 12.8 4 14.8 4c3.5 0 5.4 3.5 3.7 7-2.5 4.6-9.5 9-9.5 9z"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>',
+  eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+  msg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M8 16h3a4 4 0 0 0 0-8H8a4 4 0 0 0 0 8z"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+  shop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v10h16V9"/><path d="M9 19v-6h6v6"/></svg>',
+  globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>',
+  ask:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v13H9l-6 4z"/><path d="M9.8 8.8a2.2 2.2 0 1 1 3.3 1.9c-.7.4-1.1.8-1.1 1.5"/><path d="M12 14.6h.01"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg>'
+};
+
+const CATEGORIES = [
+  {id:'alba', name:'아르바이트', zh:'兼职', icon:'briefcase', active:true},
+  {id:'hospital', name:'병원·의료', zh:'医院·医疗', icon:'cross', active:false},
+  {id:'bank', name:'은행·행정', zh:'银行·行政', icon:'bank', active:false},
+  {id:'friend', name:'교우관계', zh:'交友', icon:'people', active:false}
+];
+
+let QUESTIONS = [];  // 질문과 답변 (서버에서 불러와요)
+
+let LISTINGS = [];   // 사장님 모드용 공고 (지금은 화면에서 숨겨 둔 기능)
+
+// 알림은 따로 저장하지 않고, 불러온 질문·답변에서 만들어요 (buildNotifs)
+
+const KOREAN_LEVELS = ['거의 안 씀', '기본 인사 가능', '손님 응대 가능'];
+const KOREAN_TIERS = {'거의 안 씀':'초급', '기본 인사 가능':'중급', '손님 응대 가능':'고급'};
+function koreanTier(k){ return KOREAN_TIERS[k] || k; }
+const KOREAN_HINTS = {'거의 안 씀':'전화응대 없음', '기본 인사 가능':'간단 안내만', '손님 응대 가능':'자유로운 대화'};
+const INDUSTRIES = ['카페·음료', '식당·주방보조', '편의점', '물류·배송', '서빙·홀', '상하차', '전단지·판촉', '기타'];
+
+let STUDENTS = [];   // 화면에 나오는 회원들의 공개 프로필 (서버에서 불러와요)
+function studentOf(id){ return STUDENTS.find(s=>s.id===id); }
+
+let REVIEWS = [];    // 후기 (서버에서 불러와요)
+
+function careerMonthsOf(id){
+  return REVIEWS.filter(r=>r.authorId===id).reduce((sum,r)=>sum+(r.months||0), 0);
+}
+function formatCareer(totalMonths){
+  if(totalMonths < 12) return `${totalMonths}개월`;
+  const years = Math.floor(totalMonths/12);
+  const months = totalMonths % 12;
+  return `${years}년 ${months}개월`;
+}
+
+const ME_STUDENT = {id:null, email:''};   // 로그인한 회원 (id는 Supabase 계정 id)
+let signupDraft = null;  // 회원가입 중 입력값 (가입이 끝나면 비움)
+
+function bestAnswerCountOf(userId){
+  let count = 0;
+  QUESTIONS.forEach(q=>{
+    const maxLikes = Math.max(0, ...q.answers.map(a=>a.likes));
+    if(maxLikes > 0 && q.answers.some(a=>a.author.id===userId && a.likes===maxLikes)) count++;
+  });
+  return count;
+}
+
+/* ===== 서버에서 불러오기 =====
+   후기·질문·답변은 Supabase에 저장돼요. 화면은 아래 목록(REVIEWS, QUESTIONS, STUDENTS)을 보고 그리고,
+   글을 쓰거나 지울 때마다 서버에 저장한 뒤 목록을 다시 불러와요. */
+let LIKED_ANSWERS = new Set();   // 내가 좋아요 누른 답변 id
+let LIKED_REVIEWS = new Set();   // 내가 좋아요 누른 후기 id
+let lastLoadAt = 0;
+let lastLoadError = '';
+let busy = false;                // 저장 중에는 버튼을 두 번 누르지 못하게
+let refreshing = false;
+let mutations = 0;               // 좋아요처럼 화면에 먼저 반영한 변경 횟수 (불러온 내용이 그 사이 낡았는지 확인용)
+const viewedOnce = new Set();    // 조회수는 한 번 접속에 글마다 한 번만 올려요
+const likeBusy = new Set();
+const FAIL_MSG = '연결에 실패했어요. 잠시 후 다시 시도해 주세요.';
+
+function ago(iso){
+  const sec = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+  if(!(sec >= 60)) return '방금 전';
+  if(sec < 3600) return Math.floor(sec/60) + '분 전';
+  if(sec < 86400) return Math.floor(sec/3600) + '시간 전';
+  if(sec < 86400*7) return Math.floor(sec/86400) + '일 전';
+  if(sec < 86400*30) return Math.floor(sec/(86400*7)) + '주 전';
+  if(sec < 86400*365) return Math.floor(sec/(86400*30)) + '개월 전';
+  return Math.floor(sec/(86400*365)) + '년 전';
+}
+function personOf(row){
+  // 기존 화면이 학과 자리에 dept를 보여 주기 때문에, 그 자리에 대학교 이름을 넣어요
+  return {id:row.author_id, name:row.author_name, dept:row.author_univ, year:row.author_year, stay:row.author_stay};
+}
+
+async function loadAll(isRetry){
+  const uid = ME_STUDENT.id;
+  const startedAt = mutations;
+  try{
+    const res = await Promise.all([
+      sb.from('profiles').select('id,nickname,univ,year,stay').eq('id', uid).maybeSingle(),
+      sb.from('review_feed').select('*').order('created_at', {ascending:false}).limit(300),
+      sb.from('question_feed').select('*').order('created_at', {ascending:false}).limit(300),
+      sb.from('answer_likes').select('answer_id'),
+      sb.from('review_likes').select('review_id')
+    ]);
+    const failed = res.find(r=>r.error);
+    if(failed) throw failed.error;
+    if(ME_STUDENT.id !== uid) return false;                       // 불러오는 사이에 로그아웃함
+    if(startedAt !== mutations && !isRetry) return loadAll(true);  // 그 사이 좋아요를 눌렀으면 한 번 더
+    const [me, rv, qs, al, rl] = res.map(r=>r.data);
+    if(!me) throw new Error('profile-missing');
+
+    const people = new Map();
+    const keep = p => { if(!people.has(p.id)) people.set(p.id, p); return people.get(p.id); };
+    keep({id:me.id, name:me.nickname, dept:me.univ, year:me.year, stay:me.stay});
+
+    REVIEWS = rv.map(r=>{
+      keep(personOf(r));
+      return {id:r.id, industry:r.industry, shopName:r.shop_name || '', days:r.days || [], timeOfDay:r.time_of_day || '',
+              korean:r.korean, months:r.months, good:r.good, hard:r.hard, note:r.note || '', tip:r.tip,
+              authorId:r.author_id, createdAt:r.created_at, time:ago(r.created_at), views:r.views, likes:r.likes};
+    });
+    QUESTIONS = qs.map(q=>{
+      const answers = (q.answers || []).map(a=>({
+        id:a.id, author:keep(personOf(a)), body:a.body, likes:a.likes, createdAt:a.created_at, time:ago(a.created_at)
+      }));
+      const idx = q.resolved_answer_id ? answers.findIndex(a=>a.id===q.resolved_answer_id) : -1;
+      return {id:q.id, cat:q.cat, title:q.title, body:q.body, author:keep(personOf(q)),
+              createdAt:q.created_at, time:ago(q.created_at), views:q.views, answers,
+              resolved: idx >= 0, resolvedIdx: idx >= 0 ? idx : null, resolvedAt:q.resolved_at};
+    });
+    STUDENTS = Array.from(people.values());
+    LIKED_ANSWERS = new Set(al.map(x=>x.answer_id));
+    LIKED_REVIEWS = new Set(rl.map(x=>x.review_id));
+    lastLoadAt = Date.now();
+    lastLoadError = '';
+    return true;
+  }catch(e){
+    console.error('[무로바] 불러오기 실패', e);
+    lastLoadError = (e && (e.message || e.code)) || String(e);
+    return false;
+  }
+}
+
+// 다른 사람이 새로 쓴 글이 보이도록, 목록 화면에 들어올 때 조용히 다시 불러와요
+const LIVE_VIEWS = ['feed','qa','notifs','mypage','detail','reviewDetail','userProfile'];
+function softRefresh(){
+  if(!sb || !ME_STUDENT.id || refreshing || busy) return;
+  if(Date.now() - lastLoadAt < 15000) return;
+  refreshing = true;
+  loadAll().then(ok=>{
+    refreshing = false;
+    if(ok && !busy && ME_STUDENT.id && LIVE_VIEWS.includes(state.view)) render();
+  });
+}
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) softRefresh(); });
+
+function clearLocal(){
+  ME_STUDENT.id = null; ME_STUDENT.email = '';
+  REVIEWS = []; QUESTIONS = []; STUDENTS = [];
+  LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set();
+  viewedOnce.clear(); lastLoadAt = 0;
+}
+
+function myStats(){
+  const me = ME_STUDENT.id;
+  let answers = 0, likes = 0;
+  QUESTIONS.forEach(q=>q.answers.forEach(a=>{ if(a.author.id===me){ answers++; likes += a.likes; } }));
+  REVIEWS.forEach(r=>{ if(r.authorId===me) likes += r.likes; });
+  return {answers, likes};
+}
+
+function setLike(set, item, on){
+  if(on){ set.add(item.id); item.likes += 1; }
+  else { set.delete(item.id); item.likes = Math.max(0, item.likes - 1); }
+}
+
+async function withBusy(btnId, fn){
+  if(busy) return;
+  busy = true;
+  const btn = btnId ? document.getElementById(btnId) : null;
+  if(btn) btn.disabled = true;
+  try{ await fn(); }
+  catch(e){ console.error('[무로바]', e); showToast(t(FAIL_MSG)); }
+  finally{
+    busy = false;
+    if(btn && btn.isConnected) btn.disabled = false;
+    syncButtons();
+  }
+}
+const ME_OWNER = {name:'박준혁', shop:'신촌 컵밥집', category:'분식', role:'owner', verified:false, answers:0, adoptRate:0};
+
+const STUDENT_TABS = [
+  {key:'feed', label:'홈', icon:'home', onclick:"navigate('feed')"},
+  {key:'qa', label:'Q&A', icon:'ask', onclick:"navigate('qa')"},
+  {key:'reviewForm', label:'후기작성', icon:'plus', onclick:"navigate('reviewForm')", isCenter:true},
+  {key:'notifs', label:'알림', icon:'bell', onclick:"navigate('notifs')"},
+  {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
+];
+const OWNER_TABS = [
+  {key:'home', label:'홈', icon:'home', onclick:"navigate('home')"},
+  {key:'alba', label:'아르바이트', icon:'briefcase', onclick:"navigate('category','alba')"},
+  {key:'listingForm', label:'공고등록', icon:'plus', onclick:"navigate('listingForm')", isCenter:true},
+  {key:'notifs', label:'알림', icon:'bell', onclick:"navigate('notifs')"},
+  {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
+];
+
+const state = {view:'loading', param:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', filterIndustry:'전체', askPrefill:null, lang:'ko'};
+
+/* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
+   1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
+   2) 사용자가 쓴 글(후기·질문·답변): 쓴 언어 그대로 보여요. 자동 번역을 하려면 번역 API를 따로 붙여야 해요. */
+const I18N_ZH = {
+  // 로그인
+  '먼저 겪어본 선배에게 물어보세요':'问问已经经历过的学长学姐',
+  '이메일':'邮箱',
+  '비밀번호':'密码',
+  '로그인':'登录',
+  '비밀번호를 잊었어요':'忘记密码？',
+  '무로바가 처음이에요?':'第一次来问吧？',
+  '회원가입':'注册',
+  '{name}님, 다시 만나서 반가워요':'{name}，欢迎回来',
+  // 홈
+  '알바, 먼저 해 본 선배에게':'兼职的事，找做过的学长学姐',
+  '물어봐':'问吧',
+  '중앙대 유학생 선배들이 직접 쓴 후기와 답변':'中央大学留学生学长学姐亲自写的经验和回答',
+  '내 한국어 수준에 맞는 후기만 보기':'只看适合我韩语水平的经验',
+  '초급':'初级', '중급':'中级', '고급':'高级',
+  '전체':'全部',
+  '선배들의 후기 {n}개':'学长学姐的经验 {n}条',
+  '조건에 맞는 후기가 없어요. 필터를 바꿔보세요.':'没有符合条件的经验，换个筛选条件试试吧。',
+  '{career} 근무':'工作{career}',
+  '{industry} 알바':'{industry}兼职',
+  '한국어 {tier} · {desc}':'韩语{tier} · {desc}',
+  '알바 경력 {career}':'兼职经验 {career}',
+  '번역됨 (예시)':'已翻译（示例）',
+  // 한국어 수준 설명
+  '거의 안 씀':'几乎不用说韩语',
+  '기본 인사 가능':'会基本问候即可',
+  '손님 응대 가능':'需要能接待顾客',
+  // 업종
+  '카페·음료':'咖啡·饮品', '식당·주방보조':'餐厅·后厨', '편의점':'便利店', '물류·배송':'物流·配送',
+  '서빙·홀':'餐厅服务员', '상하차':'装卸货', '전단지·판촉':'发传单·促销', '기타':'其他',
+  // 하단 탭
+  '홈':'首页', 'Q&A':'问答', '후기작성':'写经验', '알림':'通知', '마이페이지':'我的',
+  // 공통
+  '뒤로':'返回', '다음':'下一步', '필수':'必填', '질문하기':'提问',
+  '사장님':'老板', '인증':'已认证', '인증대기':'待认证', '익명':'匿名',
+  '체류 {stay}':'在韩 {stay}',
+  '조회 {n}':'浏览 {n}', '답변 {n}':'回答 {n}',
+  // 회원가입
+  '계정을 만들어요':'创建账号',
+  '1분이면 끝나요. 이름 대신 닉네임으로 활동해요.':'一分钟就能完成。在这里用昵称代替真名。',
+  '8자 이상':'至少8位',
+  '닉네임':'昵称',
+  '예) 흑석동알바왕':'例）黑石洞打工王',
+  '2~12자. 후기와 답변에 이 이름으로 보여요.':'2~12个字。经验和回答里会显示这个昵称。',
+  '이미 쓰고 있는 닉네임이에요':'这个昵称已被使用',
+  '생년월일':'出生日期',
+  '다른 사람에게는 보이지 않아요.':'不会向其他人公开。',
+  '학교와 한국 생활을 알려 주세요':'说说你的学校和在韩生活',
+  '비슷한 상황의 선배 후기를 찾는 데 도움이 돼요.':'方便找到和你情况相似的学长学姐的经验。',
+  '대학교':'大学', '중앙대학교':'中央大学', '다른 학교 (준비 중)':'其他学校（准备中）',
+  '학년':'年级', '1학년':'大一', '2학년':'大二', '3학년':'大三', '4학년':'大四', '대학원':'研究生',
+  '한국어 수준':'韩语水平',
+  '한국에 온 지 얼마나 됐나요?':'来韩国多久了？',
+  '6개월 미만':'不到6个月', '6개월~1년':'6个月~1年', '1~2년':'1~2年', '2년 이상':'2年以上',
+  '어디에 살아요?':'住在哪里？',
+  '흑석동':'黑石洞', '상도동':'上道洞', '노량진':'鹭梁津', '사당':'舍堂', '기숙사':'宿舍', '다른 지역':'其他地区',
+  '동네 이름까지만 받아요.':'只需要选到街区。',
+  '한국에서 알바해 본 적 있어요?':'在韩国打过工吗？',
+  '없어도 괜찮아요.':'没有也没关系。',
+  '있어요':'有', '아직 없어요':'还没有',
+  '어떤 일을 해 봤어요? (여러 개 선택)':'做过哪些工作？（可多选）',
+  '모두 합쳐 얼마나 일했어요?':'一共做了多久？',
+  '3개월 미만':'不到3个月', '3~6개월':'3~6个月', '1년 이상':'1年以上',
+  '경력 배지는 후기로 만들어져요':'经验徽章由你写的经验生成',
+  '여기서 고른 내용은 프로필의 "경력"에 반영되지 않아요. 경력은 후기를 쓰면 근무 기간이 더해져서 표시돼요.':'这里选择的内容不会计入个人主页的“经验”。写下打工经验后，工作时长会自动累计并显示。',
+  '개인정보 수집·이용에 동의해요':'同意收集和使用个人信息',
+  '내용 보기':'查看内容',
+  '가입하고 시작하기':'注册并开始',
+  '{name}님, 가입을 환영해요':'{name}，欢迎加入',
+  '로그아웃했어요':'已退出登录',
+  // 모드 선택
+  '어떤 분으로 시작하시나요?':'你是哪一类用户？',
+  '학생이에요':'我是学生', '질문하고 답을 받고 싶어요':'想提问并得到回答',
+  '사장님이에요':'我是老板', '알바 공고를 올리고 답해주고 싶어요':'想发布招聘并回答问题',
+  // 후기 상세 · 프로필
+  '업종':'行业', '근무 기간':'工作时长', '필요한 한국어':'所需韩语', '근무 요일 · 시간':'工作日 · 时段',
+  '후배에게 한마디':'给学弟学妹的一句话',
+  '좋았던 점':'好的地方', '힘들었던 점':'辛苦的地方', '알아두면 좋을 점':'需要了解的事',
+  '이 후기 작성자에게 질문하기':'向这位作者提问',
+  '[{target} 후기 관련] ':'[关于 {target} 的经验] ',
+  '월':'周一', '화':'周二', '수':'周三', '목':'周四', '금':'周五', '토':'周六', '일':'周日',
+  '오전':'上午', '오후':'下午', '저녁':'晚上', '심야':'深夜', '새벽':'凌晨',
+  '작성 후기':'写过的经验', '총 알바 경력':'兼职总经验', '작성한 후기':'写过的经验',
+  '아직 작성한 후기가 없어요.':'还没有写过经验。',
+  // 후기 작성
+  '가게명 (선택)':'店名（选填）', '예) 홍대 OO카페':'例）弘大 OO咖啡店',
+  '총 몇 개월 일했나요?':'一共工作了几个月？', '예) 8':'例）8',
+  '근무 요일 (선택)':'工作日（选填）', '근무 시간대 (선택)':'工作时段（选填）', '선택 안 함':'不选择',
+  '필요했던 한국어 수준':'需要的韩语水平',
+  '전화응대 없음':'不用接电话', '간단 안내만':'只需简单引导', '자유로운 대화':'能自由对话',
+  '예) 사장님이 친절해서 물어보기 편했어요':'例）老板很亲切，有问题可以放心问',
+  '예) 주말엔 손님이 몰려서 정신없었어요':'例）周末客人很多，忙得不可开交',
+  '알아두면 좋을 점 (선택)':'需要了解的事（选填）',
+  '예) 유니폼은 직접 준비해야 해요':'例）工作服需要自己准备',
+  '예) 돈 필요하면 추천! 근데 주말엔 좀 힘들어요':'例）想赚钱的话推荐！不过周末有点累',
+  '후기 등록하기':'发布经验', '후기가 등록됐어요':'经验已发布',
+  // Q&A
+  '질문 {n}개':'{n}个问题',
+  '아직 질문이 없어요. 첫 질문을 남겨보세요.':'还没有问题，来提第一个问题吧。',
+  '답변완료':'已解决', '답변 대기중':'等待回答', '답변 있음':'已有回答', '인기 답변':'热门回答', '답변 기다리는 중':'等待回答中',
+  '카테고리':'分类', '제목':'标题', '내용':'内容',
+  '예) 이 알바 시급 정상인가요?':'例）这份兼职的时薪正常吗？',
+  '상황을 자세히 설명하면 더 정확한 답변을 받을 수 있어요':'把情况说得详细一些，能得到更准确的回答',
+  '질문 등록하기':'发布问题', '질문이 등록됐어요':'问题已发布',
+  '이미 비슷한 질문이 있어요':'已经有类似的问题',
+  '내가 올린 질문이에요':'这是我提的问题',
+  '도움이 된 답변에서 "이 답변으로 완료하기"를 눌러 주세요. 답변 완료는 질문한 사람만 정할 수 있어요.':'请在有帮助的回答下点击“用这个回答结束提问”。只有提问者才能决定问题是否已解决。',
+  '답변 {n}개':'{n}个回答',
+  '아직 답변이 없어요. 첫 답변을 남겨보세요.':'还没有回答，来写第一个回答吧。',
+  '아는 만큼 답해주세요. 큰 도움이 돼요.':'知道多少就回答多少，会很有帮助。',
+  '답변 남기기':'发表回答',
+  '이 답변으로 완료하기':'用这个回答结束提问',
+  '답변완료로 표시했어요':'已标记为已解决', '답변이 등록됐어요':'回答已发布',
+  // 알림 · 마이페이지
+  '답변':'回答', '베스트 답변':'最佳回答', '받은 좋아요':'获赞', '경력':'经验',
+  '내 후기':'我的经验', '진행중 Q&A':'进行中的问答',
+  '진행중인 질문이 없어요.':'没有进行中的问题。',
+  '로그아웃':'退出登录',
+  // 로그인 · 계정 (실제 서비스)
+  '이메일 또는 비밀번호가 맞지 않아요':'邮箱或密码不正确',
+  '이메일 인증을 먼저 끝내 주세요. 받은 메일의 링크를 누르면 돼요.':'请先完成邮箱验证，点击邮件里的链接即可。',
+  '이미 가입한 이메일이에요. 로그인해 주세요.':'这个邮箱已经注册过了，请直接登录。',
+  '비밀번호가 너무 쉬워요. 8자 이상으로 다르게 정해 주세요.':'密码太简单了，请换一个至少8位的密码。',
+  '새 비밀번호는 이전과 달라야 해요':'新密码不能和原来的一样',
+  '요청이 너무 많아요. 잠시 후 다시 시도해 주세요.':'操作太频繁了，请稍后再试。',
+  '연결에 실패했어요. 잠시 후 다시 시도해 주세요.':'连接失败，请稍后再试。',
+  '비밀번호를 다시 정하려면 위에 이메일을 먼저 입력해 주세요':'想重置密码的话，请先在上面输入邮箱',
+  '비밀번호를 다시 정할 수 있는 메일을 보냈어요. 메일함을 확인해 주세요.':'重置密码的邮件已发送，请查看邮箱。',
+  '인증 메일을 보냈어요. 메일의 링크를 누른 뒤 로그인해 주세요.':'验证邮件已发送。点击邮件里的链接后再登录吧。',
+  '링크가 만료됐거나 이미 사용됐어요. 다시 시도해 주세요.':'链接已过期或已被使用，请重新操作。',
+  '새 비밀번호를 정해 주세요':'请设置新密码',
+  '새 비밀번호':'新密码',
+  '비밀번호 바꾸기':'修改密码',
+  '비밀번호를 바꿨어요':'密码已修改',
+  '불러오는 중이에요':'加载中…',
+  '불러오지 못했어요':'加载失败',
+  '인터넷 연결을 확인하고 다시 시도해 주세요.':'请检查网络后重试。',
+  '다시 시도':'重试',
+  '회원 탈퇴':'注销账号',
+  '탈퇴하면 계정과 내가 쓴 후기·질문·답변이 모두 삭제되고 되돌릴 수 없어요. 정말 탈퇴할까요?':'注销后，账号以及你发布的经验、提问和回答会全部删除，且无法恢复。确定要注销吗？',
+  '탈퇴했어요. 그동안 이용해 주셔서 고마워요.':'账号已注销，感谢你一直以来的使用。',
+  // 후기 · Q&A · 알림 (실제 서비스)
+  '아직 후기가 없어요. 첫 후기를 남겨보세요.':'还没有经验，来写第一条吧。',
+  '좋아요':'点赞',
+  '삭제':'删除',
+  '이 후기 삭제하기':'删除这条经验',
+  '이 후기를 삭제할까요?':'确定要删除这条经验吗？',
+  '이 질문을 삭제할까요? 달린 답변도 함께 사라져요.':'确定要删除这个问题吗？下面的回答也会一起删除。',
+  '이 답변을 삭제할까요?':'确定要删除这个回答吗？',
+  '삭제했어요':'已删除',
+  '{name}님이 내 질문에 답변했어요':'{name}回答了你的提问',
+  '내 답변이 답변완료로 선택됐어요':'提问者采纳了你的回答',
+  '아직 알림이 없어요. 내 질문에 답변이 달리면 여기서 알려 드려요.':'还没有通知。有人回答你的提问时，会在这里提醒你。',
+  // 학과 (예전 샘플 데이터용)
+  '경영학과':'经营学系', '정치국제학과':'政治国际学系', '국어국문학과':'国语国文学系', '사회학과':'社会学系'
+};
+// 사용자가 쓴 글의 번역 자리. 지금은 비어 있어서 글은 쓴 언어 그대로 보여요. (번역 API를 붙이면 여기를 채우면 돼요)
+const CONTENT_ZH = {};
+
+function tc(s){ return (isZh() && CONTENT_ZH[s]) || s; }
+function translatedNote(){
+  // 넘겨받은 원문 중 하나라도 번역본을 보여 주고 있으면 표시해요
+  const shown = isZh() && Array.from(arguments).some(o=>CONTENT_ZH[o]);
+  return shown ? `<span class="translated-note">${t('번역됨 (예시)')}</span>` : '';
+}
+function titleHTML(ko, zh){ return isZh() ? zh : `${ko}<span class="zh">${zh}</span>`; }
+function displayName(name){ return name==='익명' ? t('익명') : name; }
+function catName(c){ return isZh() ? c.zh : c.name; }
+function timeText(s){
+  if(!isZh()) return s;
+  if(s==='방금 전') return '刚刚';
+  const m = String(s).match(/^(\d+)(분|시간|일|주|개월|년) 전$/);
+  return m ? m[1] + {'분':'分钟','시간':'小时','일':'天','주':'周','개월':'个月','년':'年'}[m[2]] + '前' : s;
+}
+function stayText(s){
+  if(!isZh() || !s) return s;
+  if(I18N_ZH[s]) return I18N_ZH[s];
+  let m = String(s).match(/^(\d+)개월$/); if(m) return m[1]+'个月';
+  m = String(s).match(/^(\d+)년 이상$/); if(m) return m[1]+'年以上';
+  return s;
+}
+function profileTag(s){
+  return `${esc(t(s.dept))} · ${esc(t(s.year))} · ${t('체류 {stay}', {stay:esc(stayText(s.stay))})}`;
+}
+function scheduleText(r){
+  const days = r.days.map(d=>t(d)).join(isZh() ? '、' : '');
+  const time = r.timeOfDay ? ' · ' + t(r.timeOfDay) : '';
+  return isZh() ? days + time : `${days}${time} 근무`;
+}
+
+function detectLang(){
+  try{
+    const saved = localStorage.getItem('muroba-lang');
+    if(saved==='ko' || saved==='zh') return saved;
+  }catch(e){}
+  // 휴대폰·브라우저 언어가 중국어면 처음부터 중국어로 열어요
+  return (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'ko';
+}
+function isZh(){ return state.lang==='zh'; }
+function t(ko, vars){
+  let s = (isZh() && I18N_ZH[ko]) || ko;
+  if(vars) Object.keys(vars).forEach(k=>{ s = s.replace('{'+k+'}', ()=>vars[k]); });
+  return s;
+}
+function careerText(totalMonths){
+  if(!isZh()) return formatCareer(totalMonths);
+  if(totalMonths < 12) return `${totalMonths}个月`;
+  const years = Math.floor(totalMonths/12), months = totalMonths % 12;
+  return months ? `${years}年${months}个月` : `${years}年`;
+}
+function applyLang(){
+  document.documentElement.lang = isZh() ? 'zh-CN' : 'ko';
+}
+function toggleLang(){
+  // 로그인 화면에서 입력하던 값은 언어를 바꿔도 남겨 둬요
+  const email = document.getElementById('loginEmail'), pw = document.getElementById('loginPw');
+  const keep = email && pw ? {email:email.value, pw:pw.value} : null;
+  state.lang = isZh() ? 'ko' : 'zh';
+  try{ localStorage.setItem('muroba-lang', state.lang); }catch(e){}
+  applyLang();
+  render();
+  if(keep && document.getElementById('loginEmail')){
+    document.getElementById('loginEmail').value = keep.email;
+    document.getElementById('loginPw').value = keep.pw;
+    toggleLoginSubmit();
+  }
+}
+function tr(ko, vars){ return t(ko, vars); } // 탭 목록 안에서는 변수 이름 t가 겹쳐서 따로 둔 이름
+function langToggleHTML(){
+  // 버튼에는 "바꿀 언어"를 보여 줘요
+  return `<button type="button" class="lang-btn" onclick="toggleLang()" aria-label="${isZh()?'한국어로 보기':'切换为中文'}" lang="${isZh()?'ko':'zh-CN'}">${icon('globe')}${isZh()?'한국어':'中文'}</button>`;
+}
+
+function esc(s){
+  // 사용자가 쓴 글이 화면 코드로 해석되지 않게 바꿔요 (따옴표까지)
+  return (s==null ? '' : String(s)).replace(/[&<>"']/g, c=>({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+}
+function icon(name){ return ICONS[name] || ''; }
+function catOf(id){ return CATEGORIES.find(c=>c.id===id); }
+function qOf(id){ return QUESTIONS.find(q=>q.id===id); }
+function lOf(id){ return LISTINGS.find(l=>l.id===id); }
+function initial(name){ return name ? esc(Array.from(String(name))[0]) : '?'; }
+
+function roleTag(author){
+  if(author.role==='owner'){
+    return ` <span class="owner-badge">${icon('shop')} ${t('사장님')} · ${author.verified?t('인증'):t('인증대기')}</span>`;
+  }
+  return author.dept ? ` <span class="author-tag">${esc(t(author.dept))} · ${esc(t(author.year))}</span>` : '';
+}
+function personSub(author){
+  if(author.role==='owner') return author.shop ? esc(tc(author.shop)) : '';
+  return author.stay ? t('체류 {stay}', {stay:esc(stayText(author.stay))}) : '';
+}
+
+function navigate(view, param, opts){
+  opts = opts || {};
+  state.view = view;
+  state.param = param || null;
+  if(view==='mypage') state.tab = state.role==='owner' ? 'listings' : 'reviews';
+  if(view==='category') state.catTab = 'questions';
+  if(!opts.fromHistory) writeRoute(!!opts.replace);
+  if(view==='reviewDetail') countView('review', state.param);
+  if(view==='detail') countView('question', state.param);
+  document.getElementById('screen').scrollTop = 0;
+  render();
+  if(LIVE_VIEWS.includes(view)) softRefresh();
+}
+
+function countView(kind, id){
+  const item = kind==='review' ? REVIEWS.find(r=>r.id===id) : qOf(id);
+  if(!sb || !item || viewedOnce.has(id)) return;
+  viewedOnce.add(id);
+  item.views += 1;
+  sb.rpc('add_view', {kind, target:id}).then(()=>{}, ()=>{});
+}
+
+/* ===== 주소와 뒤로 가기 =====
+   화면이 바뀔 때 주소 끝에 #/화면이름 을 붙여서, 브라우저 뒤로 가기와 링크 공유가 되게 해요. */
+const ROUTABLE = ['feed','qa','reviewForm','reviewDetail','userProfile','ask','detail','notifs','mypage'];
+function writeRoute(replace){
+  const hash = ROUTABLE.includes(state.view) ? '#/' + state.view + (state.param ? '/' + encodeURIComponent(state.param) : '') : '';
+  try{
+    history[replace ? 'replaceState' : 'pushState']({view:state.view, param:state.param}, '', location.pathname + location.search + hash);
+  }catch(e){}
+}
+function parseHash(){
+  const m = (location.hash || '').match(/^#\/([A-Za-z0-9]+)(?:\/(.+))?$/);
+  if(!m || !ROUTABLE.includes(m[1])) return null;
+  let param = null;
+  try{ param = m[2] ? decodeURIComponent(m[2]) : null; }catch(e){}
+  return {view:m[1], param};
+}
+function applyRoute(view, param, replace){
+  const opts = replace ? {replace:true} : {fromHistory:true};
+  if(!ME_STUDENT.id){
+    const allowed = view==='login' || ((/^signup[123]$/.test(view) || view==='privacy') && signupDraft);
+    navigate(allowed ? view : 'login', null, opts);
+    return;
+  }
+  if(state.recovering){ navigate('newPassword', null, opts); return; }
+  if(!ROUTABLE.includes(view)){ view = 'feed'; param = null; }
+  if(view==='ask') param = 'alba';
+  navigate(view, param, opts);
+}
+window.addEventListener('popstate', e=>{
+  if(['loading','setup','loadError'].includes(state.view)) return;
+  const r = (e.state && e.state.view) ? e.state : (parseHash() || {view: ME_STUDENT.id ? 'feed' : 'login', param:null});
+  applyRoute(r.view, r.param, false);
+});
+
+function showToast(msg){
+  const host = document.getElementById('toastHost');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  host.innerHTML = '';
+  host.appendChild(t);
+  setTimeout(()=>{ if(host.contains(t)) host.removeChild(t); }, 2200);
+}
+
+function render(){
+  const el = document.getElementById('screen');
+  // 지워졌거나 없는 글의 주소로 들어오면 목록으로 돌려보내요
+  if(state.view==='reviewDetail' && !REVIEWS.some(r=>r.id===state.param)){ state.view = 'feed'; state.param = null; }
+  if(state.view==='userProfile' && !studentOf(state.param)){ state.view = 'feed'; state.param = null; }
+  if(state.view==='detail' && !qOf(state.param)){ state.view = 'qa'; state.param = null; }
+  // 쓰고 있던 답변은 화면을 다시 그려도 남겨 둬요
+  const oldAnswer = document.getElementById('answerBody');
+  const draftAnswer = oldAnswer ? {qid:oldAnswer.dataset.qid, text:oldAnswer.value} : null;
+
+  el.className = 'screen view-' + state.view;   // PC 배치를 화면별로 다르게 하려고 붙이는 이름표
+  if(state.view==='loading') el.innerHTML = renderLoading();
+  else if(state.view==='setup') el.innerHTML = renderSetup();
+  else if(state.view==='loadError') el.innerHTML = renderLoadError();
+  else if(state.view==='login') el.innerHTML = renderLogin();
+  else if(state.view==='newPassword') el.innerHTML = renderNewPassword();
+  else if(state.view==='privacy') el.innerHTML = renderPrivacy();
+  else if(state.view==='signup1') el.innerHTML = renderSignup1();
+  else if(state.view==='signup2') el.innerHTML = renderSignup2();
+  else if(state.view==='signup3') el.innerHTML = renderSignup3();
+  else if(state.view==='onboarding') el.innerHTML = renderOnboarding();
+  else if(state.view==='feed') el.innerHTML = renderFeed();
+  else if(state.view==='qa') el.innerHTML = renderQA();
+  else if(state.view==='reviewForm') el.innerHTML = renderReviewForm();
+  else if(state.view==='reviewDetail') el.innerHTML = renderReviewDetail(state.param);
+  else if(state.view==='userProfile') el.innerHTML = renderUserProfile(state.param);
+  else if(state.view==='home') el.innerHTML = renderHome();
+  else if(state.view==='category') el.innerHTML = renderCategory(state.param);
+  else if(state.view==='ask') el.innerHTML = renderAsk(state.param);
+  else if(state.view==='detail') el.innerHTML = renderDetail(state.param);
+  else if(state.view==='listingForm') el.innerHTML = renderListingForm();
+  else if(state.view==='listingDetail') el.innerHTML = renderListingDetail(state.param);
+  else if(state.view==='notifs') el.innerHTML = renderNotifs();
+  else if(state.view==='mypage') el.innerHTML = renderMyPage();
+  const hideNav = NO_NAV_VIEWS.includes(state.view);
+  document.getElementById('bottomNavHost').innerHTML = hideNav ? '' : renderBottomNav();
+  document.getElementById('topNavHost').innerHTML = hideNav ? '' : renderTopNav();
+  if(draftAnswer && draftAnswer.text){
+    const ta = document.getElementById('answerBody');
+    if(ta && ta.dataset.qid===draftAnswer.qid) ta.value = draftAnswer.text;
+  }
+  syncButtons();
+}
+
+function syncButtons(){
+  if(state.view==='login') toggleLoginSubmit();
+  if(state.view==='signup1' || state.view==='signup2' || state.view==='signup3') toggleSignupStep();
+  if(state.view==='ask') toggleAskSubmit();
+  if(state.view==='listingForm') toggleListingSubmit();
+  if(state.view==='reviewForm') toggleReviewSubmit();
+  if(state.view==='newPassword') toggleNewPw();
+}
+
+function currentTabKey(){
+  if(state.role==='owner'){
+    if(state.view==='home') return 'home';
+    if(state.view==='category') return 'alba';
+    if(state.view==='listingForm') return 'listingForm';
+    if(state.view==='notifs') return 'notifs';
+    if(state.view==='mypage') return 'mypage';
+    return null;
+  }
+  if(state.view==='feed') return 'feed';
+  if(state.view==='qa' || state.view==='ask') return 'qa';
+  if(state.view==='reviewForm') return 'reviewForm';
+  if(state.view==='notifs') return 'notifs';
+  if(state.view==='mypage') return 'mypage';
+  return null;
+}
+
+function renderBottomNav(){
+  const tabs = state.role==='owner' ? OWNER_TABS : STUDENT_TABS;
+  const activeKey = currentTabKey();
+  return `<nav class="bottomnav">
+    ${tabs.map(t=>{
+      if(t.isCenter){
+        return `<button class="bn-item is-center" onclick="${t.onclick}" aria-label="${tr(t.label)}"><span class="bn-center-circle">${icon(t.icon)}</span></button>`;
+      }
+      return `<button class="bn-item ${t.key===activeKey?'is-active':''}" onclick="${t.onclick}"><span class="bn-icon">${icon(t.icon)}</span><span>${tr(t.label)}</span></button>`;
+    }).join('')}
+  </nav>`;
+}
+
+function renderTopNav(){
+  const tabs = state.role==='owner' ? OWNER_TABS : STUDENT_TABS;
+  const activeKey = currentTabKey();
+  const home = tabs[0];
+  const center = tabs.find(x=>x.isCenter);
+  return `<header class="topnav">
+    <div class="topnav-inner">
+      <button class="topnav-logo" onclick="${home.onclick}">${logoHTML('sm')}</button>
+      <nav class="topnav-links">
+        ${tabs.filter(x=>!x.isCenter).map(x=>`<button class="tn-item ${x.key===activeKey?'is-active':''}" onclick="${x.onclick}">${tr(x.label)}</button>`).join('')}
+      </nav>
+      <div class="topnav-actions">
+        ${langToggleHTML()}
+        ${center ? `<button class="pill-btn tn-cta" onclick="${center.onclick}">${icon(center.icon)} ${tr(center.label)}</button>` : ''}
+      </div>
+    </div>
+  </header>`;
+}
+
+/* ===== 로그인 · 회원가입 =====
+   Supabase Auth로 실제 계정을 만들고 로그인해요. 비밀번호는 Supabase가 암호화해서 보관하고, 이 화면에는 남기지 않아요. */
+const AUTH_VIEWS = ['login','signup1','signup2','signup3'];
+const NO_NAV_VIEWS = [...AUTH_VIEWS, 'onboarding', 'privacy', 'newPassword', 'loading', 'setup', 'loadError'];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SIGNUP_UNIVS = ['중앙대학교'];
+const SIGNUP_YEARS = ['1학년','2학년','3학년','4학년','대학원'];
+const SIGNUP_KOREAN = [
+  {value:'거의 안 씀', label:'거의 못 해요', zh:'几乎不会'},
+  {value:'기본 인사 가능', label:'기본 인사 가능', zh:'会基本问候'},
+  {value:'손님 응대 가능', label:'손님 응대 가능', zh:'能接待顾客'}
+];
+const SIGNUP_STAYS = ['6개월 미만','6개월~1년','1~2년','2년 이상'];
+const SIGNUP_AREAS = ['흑석동','상도동','노량진','사당','기숙사','다른 지역'];
+const SIGNUP_JOB_TOTALS = ['3개월 미만','3~6개월','6개월~1년','1년 이상'];
+
+function newSignupDraft(){
+  return {email:'', password:'', nickname:'', birth:'', univ:SIGNUP_UNIVS[0], year:'', korean:'', stay:'', area:'', hasJob:'', jobIndustries:[], jobTotal:'', agree:false,
+          nickFor:null, nickFree:null};   // nickFor: 서버에 중복 확인을 마친 닉네임, nickFree: 그 결과
+}
+
+function levelBars(korean){
+  const n = KOREAN_LEVELS.indexOf(korean) + 1;
+  return `<span class="lvl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
+}
+function careerBadge(studentId){
+  const months = studentId ? careerMonthsOf(studentId) : 0;
+  return months > 0 ? `<span class="career-badge">${t('알바 경력 {career}', {career:careerText(months)})}</span>` : '';
+}
+function logoHTML(size){
+  return `
+    <div class="logo-lockup ${size==='sm'?'is-sm':''}" role="img" aria-label="무로바 问吧">
+      <div class="logo-col" aria-hidden="true">
+        <span class="logo-ko">무로</span>
+        <span class="logo-zh">问</span>
+      </div>
+      <div class="logo-bubble" aria-hidden="true">
+        <span class="logo-ko">바</span>
+        <span class="logo-zh">吧</span>
+        <span class="logo-check">${icon('check')}</span>
+        <svg class="logo-tail" viewBox="0 0 44 34"><path d="M4 0h40L38 32z"/></svg>
+      </div>
+    </div>
+  `;
+}
+
+let authNotice = null;   // 로그인 화면에 보여 줄 안내 {key: 한국어 문구, ok: 성공 안내인지}
+function setAuthNotice(key, ok){
+  authNotice = key ? {key, ok:!!ok} : null;
+  const el = document.getElementById('authMsg');
+  if(el){
+    el.className = authNotice && authNotice.ok ? 'field-ok' : 'field-error';
+    el.textContent = authNotice ? t(authNotice.key) : '';
+  }
+}
+
+// Supabase가 돌려준 오류를 화면에 보여 줄 한국어 문구로 바꿔요
+function authErrorKey(error){
+  const code = (error && error.code) || '';
+  const msg = ((error && error.message) || '').toLowerCase();
+  if(code==='invalid_credentials' || msg.includes('invalid login')) return '이메일 또는 비밀번호가 맞지 않아요';
+  if(code==='email_not_confirmed' || msg.includes('not confirmed')) return '이메일 인증을 먼저 끝내 주세요. 받은 메일의 링크를 누르면 돼요.';
+  if(code==='user_already_exists' || code==='email_exists' || msg.includes('already registered')) return '이미 가입한 이메일이에요. 로그인해 주세요.';
+  if(code==='same_password') return '새 비밀번호는 이전과 달라야 해요';
+  if(code==='weak_password' || msg.includes('password should')) return '비밀번호가 너무 쉬워요. 8자 이상으로 다르게 정해 주세요.';
+  if(code.startsWith('over_') || (error && error.status===429)) return '요청이 너무 많아요. 잠시 후 다시 시도해 주세요.';
+  if(msg.includes('database error')) return '이미 쓰고 있는 닉네임이에요';
+  return FAIL_MSG;
+}
+
+function siteUrl(){ return location.origin + location.pathname; }
+
+function renderLogin(){
+  return `
+    <div class="auth-wrap">
+      <div class="lang-row">${langToggleHTML()}</div>
+      <div class="auth-hero">
+        ${logoHTML()}
+        <div class="auth-tagline">${t('먼저 겪어본 선배에게 물어보세요')}<span class="zh">${isZh() ? '먼저 겪어본 선배에게 물어보세요' : '问问已经经历过的学长学姐'}</span></div>
+      </div>
+      <div class="auth-form">
+        <label class="field-label" for="loginEmail" style="margin-top:0;">${t('이메일')}</label>
+        <input id="loginEmail" class="field" type="email" autocomplete="email" placeholder="name@example.com" oninput="toggleLoginSubmit()" onkeydown="if(event.key==='Enter') doLogin()">
+        <label class="field-label" for="loginPw">${t('비밀번호')}</label>
+        <input id="loginPw" class="field" type="password" autocomplete="current-password" placeholder="${t('비밀번호')}" oninput="toggleLoginSubmit()" onkeydown="if(event.key==='Enter') doLogin()">
+        <div id="authMsg" class="${authNotice && authNotice.ok ? 'field-ok' : 'field-error'}" role="alert">${authNotice ? esc(t(authNotice.key)) : ''}</div>
+        <div class="submit-row">
+          <button id="loginBtn" class="submit-btn" disabled onclick="doLogin()">${t('로그인')}</button>
+        </div>
+        <div style="text-align:center;">
+          <button type="button" class="text-link" onclick="forgotPassword()">${t('비밀번호를 잊었어요')}</button>
+        </div>
+      </div>
+      <div class="auth-foot">
+        <div class="auth-foot-label">${t('무로바가 처음이에요?')}</div>
+        <button type="button" class="outline-btn" onclick="startSignup()">${t('회원가입')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderLoading(){
+  return `
+    <div class="status-wrap">
+      ${logoHTML()}
+      <div class="auth-sub" style="margin-top:22px;">${t('불러오는 중이에요')}</div>
+    </div>
+  `;
+}
+
+// 서버 주소와 키를 아직 넣지 않았을 때 (운영자에게만 보이는 화면)
+function renderSetup(){
+  return `
+    <div class="status-wrap">
+      ${logoHTML()}
+      <div class="auth-title">서버 연결이 아직 안 됐어요</div>
+      <div class="auth-sub">index.html 파일에서 "서버 연결 설정"을 찾아 SUPABASE_URL과 SUPABASE_KEY를 채운 뒤 다시 올려 주세요.</div>
+    </div>
+  `;
+}
+
+function renderLoadError(){
+  return `
+    <div class="status-wrap">
+      ${logoHTML()}
+      <div class="auth-title">${t('불러오지 못했어요')}</div>
+      <div class="auth-sub">${t('인터넷 연결을 확인하고 다시 시도해 주세요.')}</div>
+      <div class="submit-row">
+        <button class="submit-btn" onclick="location.reload()">${t('다시 시도')}</button>
+      </div>
+      ${ME_STUDENT.id ? `<button type="button" class="text-link" onclick="logout()">${t('로그아웃')}</button>` : ''}
+      ${lastLoadError ? `<div class="status-detail">${esc(lastLoadError)}</div>` : ''}
+    </div>
+  `;
+}
+
+/* 비밀번호 재설정: 메일의 링크를 누르고 돌아오면 이 화면이 열려요 */
+function renderNewPassword(){
+  return `
+    <div class="auth-wrap">
+      <div class="lang-row">${langToggleHTML()}</div>
+      <div class="auth-hero">${logoHTML()}</div>
+      <div class="auth-form">
+        <div class="auth-title">${t('새 비밀번호를 정해 주세요')}</div>
+        <label class="field-label" for="npPw">${t('새 비밀번호')}</label>
+        <input id="npPw" class="field" type="password" autocomplete="new-password" placeholder="${t('8자 이상')}" oninput="toggleNewPw()" onkeydown="if(event.key==='Enter') saveNewPassword()">
+        <div id="npErr" class="field-error" role="alert"></div>
+        <div class="submit-row">
+          <button id="npBtn" class="submit-btn" disabled onclick="saveNewPassword()">${t('비밀번호 바꾸기')}</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function toggleNewPw(){
+  const pw = document.getElementById('npPw'), btn = document.getElementById('npBtn');
+  if(pw && btn) btn.disabled = pw.value.length < 8;
+}
+async function saveNewPassword(){
+  const pw = document.getElementById('npPw').value;
+  if(pw.length < 8) return;
+  await withBusy('npBtn', async ()=>{
+    const {data, error} = await sb.auth.updateUser({password:pw});
+    if(error){ document.getElementById('npErr').textContent = t(authErrorKey(error)); return; }
+    state.recovering = false;
+    await enterSession(data.user);
+    showToast(t('비밀번호를 바꿨어요'));
+  });
+}
+async function forgotPassword(){
+  const email = (document.getElementById('loginEmail').value || '').trim();
+  if(!EMAIL_RE.test(email)){ setAuthNotice('비밀번호를 다시 정하려면 위에 이메일을 먼저 입력해 주세요', false); return; }
+  await withBusy(null, async ()=>{
+    const {error} = await sb.auth.resetPasswordForEmail(email, {redirectTo: siteUrl()});
+    if(error) setAuthNotice(authErrorKey(error), false);
+    else setAuthNotice('비밀번호를 다시 정할 수 있는 메일을 보냈어요. 메일함을 확인해 주세요.', true);
+  });
+}
+
+/* 개인정보 수집·이용 안내 (회원가입 3단계의 "내용 보기") — 운영 전에 내용을 꼭 확인해 주세요 */
+const PRIVACY_TEXT = {
+  ko: {
+    intro: '무로바는 서비스에 꼭 필요한 정보만 받아요.',
+    items: [
+      ['수집하는 정보', '이메일, 비밀번호(암호화해서 저장), 닉네임, 생년월일, 대학교, 학년, 한국어 수준, 한국에 온 기간, 사는 동네, 아르바이트 경험(유무·업종·기간)'],
+      ['이용 목적', '회원 확인과 로그인, 후기·질문·답변의 작성자 표시, 서비스 개선'],
+      ['다른 회원에게 보이는 정보', '닉네임, 대학교, 학년, 한국에 온 기간만 보여요. 이메일, 생년월일, 한국어 수준, 사는 동네, 아르바이트 경험은 공개하지 않아요.'],
+      ['보관 기간', '회원 탈퇴할 때까지 보관해요. 탈퇴하면 계정 정보와 내가 쓴 글이 함께 삭제돼요.'],
+      ['동의하지 않을 권리', '동의하지 않을 수 있어요. 다만 동의하지 않으면 가입할 수 없어요.']
+    ],
+    contact: '문의'
+  },
+  zh: {
+    intro: '问吧只收集提供服务所必需的信息。',
+    items: [
+      ['收集的信息', '邮箱、密码（加密保存）、昵称、出生日期、大学、年级、韩语水平、来韩时间、居住街区、兼职经历（有无·行业·时长）'],
+      ['使用目的', '确认会员身份与登录、显示经验·提问·回答的作者、改进服务'],
+      ['对其他会员公开的信息', '只公开昵称、大学、年级和来韩时间。邮箱、出生日期、韩语水平、居住街区和兼职经历不会公开。'],
+      ['保存期限', '保存到你注销账号为止。注销后，账号信息和你发布的内容会一并删除。'],
+      ['不同意的权利', '你可以选择不同意，但不同意就无法注册。']
+    ],
+    contact: '联系方式'
+  }
+};
+function renderPrivacy(){
+  const p = PRIVACY_TEXT[isZh() ? 'zh' : 'ko'];
+  const back = signupDraft ? 'signup3' : 'login';
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('${back}')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('개인정보 수집·이용 안내','个人信息收集与使用说明')}</div>
+    </div>
+    <div class="content">
+      <div class="auth-sub" style="margin-top:0;">${esc(p.intro)}</div>
+      ${p.items.map(([h, body])=>`
+        <div class="detail-h">${esc(h)}</div>
+        <div class="answer-body" style="margin:0;">${esc(body)}</div>
+      `).join('')}
+      ${CONTACT_EMAIL ? `
+        <div class="detail-h">${esc(p.contact)}</div>
+        <div class="answer-body" style="margin:0;">${esc(CONTACT_EMAIL)}</div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function toggleLoginSubmit(){
+  const email = document.getElementById('loginEmail');
+  const pw = document.getElementById('loginPw');
+  const btn = document.getElementById('loginBtn');
+  if(!email || !pw || !btn) return;
+  btn.disabled = !(EMAIL_RE.test(email.value.trim()) && pw.value);
+}
+
+// 로그인에 성공했거나 이미 로그인된 상태일 때: 글을 불러오고 첫 화면으로 들어가요
+async function enterSession(user, greet){
+  ME_STUDENT.id = user.id;
+  ME_STUDENT.email = user.email || '';
+  state.role = 'student';
+  const ok = await loadAll();
+  if(ME_STUDENT.id !== user.id) return;
+  if(!ok){ state.view = 'loadError'; render(); return; }
+  if(state.recovering){ navigate('newPassword', null, {replace:true}); return; }
+  const route = greet ? null : parseHash();
+  if(route) applyRoute(route.view, route.param, true);
+  else navigate('feed', null, {replace: !greet});
+  const me = studentOf(user.id);
+  if(greet==='login') showToast(t('{name}님, 다시 만나서 반가워요', {name:me.name}));
+  if(greet==='signup') showToast(t('{name}님, 가입을 환영해요', {name:me.name}));
+}
+
+async function doLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw = document.getElementById('loginPw').value;
+  if(!EMAIL_RE.test(email) || !pw) return;
+  setAuthNotice(null);
+  await withBusy('loginBtn', async ()=>{
+    const {data, error} = await sb.auth.signInWithPassword({email, password:pw});
+    if(error){ setAuthNotice(authErrorKey(error), false); return; }
+    await enterSession(data.user, 'login');
+  });
+}
+
+async function logout(){
+  clearLocal();
+  state.role = 'student';
+  authNotice = null;
+  navigate('login');
+  showToast(t('로그아웃했어요'));
+  try{ await sb.auth.signOut(); }catch(e){}
+}
+
+async function deleteAccount(){
+  if(!confirm(t('탈퇴하면 계정과 내가 쓴 후기·질문·답변이 모두 삭제되고 되돌릴 수 없어요. 정말 탈퇴할까요?'))) return;
+  await withBusy(null, async ()=>{
+    const {error} = await sb.rpc('delete_my_account');
+    if(error) throw error;
+    clearLocal();
+    try{ await sb.auth.signOut({scope:'local'}); }catch(e){}
+    authNotice = null;
+    navigate('login');
+    showToast(t('탈퇴했어요. 그동안 이용해 주셔서 고마워요.'));
+  });
+}
+
+function startSignup(){
+  if(!signupDraft) signupDraft = newSignupDraft();
+  authNotice = null;
+  navigate('signup1');
+}
+
+function signupTopbar(step, backView){
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="goSignup('${backView}')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('회원가입','注册')}</div>
+      <span class="step-count">${step} / 3</span>
+    </div>
+    <div class="step-bar" aria-hidden="true">${[1,2,3].map(n=>`<span class="${n<=step?'is-done':''}"></span>`).join('')}</div>
+  `;
+}
+
+function signupChips(key, options){
+  return `<div class="chip-toggle-row" data-signup="${key}">
+    ${options.map(o=>{
+      const value = typeof o==='string' ? o : o.value;
+      const label = typeof o==='string' ? t(o) : (isZh() && o.zh ? o.zh : o.label);
+      return `<button type="button" class="chip ${signupDraft[key]===value?'is-active':''}" data-value="${esc(value)}" onclick="pickSignupChip(this)">${esc(label)}</button>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderSignup1(){
+  const d = signupDraft;
+  const today = new Date().toISOString().slice(0,10);
+  return `
+    ${signupTopbar(1, 'login')}
+    <div class="content">
+      <div class="auth-title">${t('계정을 만들어요')}</div>
+      <div class="auth-sub">${t('1분이면 끝나요. 이름 대신 닉네임으로 활동해요.')}</div>
+
+      <label class="field-label" for="suEmail">${t('이메일')}</label>
+      <input id="suEmail" class="field" type="email" autocomplete="email" placeholder="name@example.com" value="${esc(d.email)}" oninput="toggleSignupStep()">
+
+      <label class="field-label" for="suPw">${t('비밀번호')}</label>
+      <input id="suPw" class="field" type="password" autocomplete="new-password" placeholder="${t('8자 이상')}" value="${esc(d.password)}" oninput="toggleSignupStep()">
+
+      <label class="field-label" for="suNick">${t('닉네임')}</label>
+      <input id="suNick" class="field" type="text" maxlength="12" placeholder="${t('예) 흑석동알바왕')}" value="${esc(d.nickname)}" oninput="toggleSignupStep()">
+      <div id="suNickErr" class="field-error" role="alert"></div>
+      <div class="field-help">${t('2~12자. 후기와 답변에 이 이름으로 보여요.')}</div>
+
+      <label class="field-label" for="suBirth">${t('생년월일')}</label>
+      <input id="suBirth" class="field" type="date" max="${today}" value="${esc(d.birth)}" oninput="toggleSignupStep()">
+      <div class="field-help">${t('다른 사람에게는 보이지 않아요.')}</div>
+
+      <div class="submit-row">
+        <button id="su1Next" class="submit-btn" disabled onclick="goSignup('signup2')">${t('다음')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderSignup2(){
+  const d = signupDraft;
+  return `
+    ${signupTopbar(2, 'signup1')}
+    <div class="content">
+      <div class="auth-title">${t('학교와 한국 생활을 알려 주세요')}</div>
+      <div class="auth-sub">${t('비슷한 상황의 선배 후기를 찾는 데 도움이 돼요.')}</div>
+
+      <label class="field-label" for="suUniv">${t('대학교')}</label>
+      <select id="suUniv" class="field" onchange="signupDraft.univ=this.value; toggleSignupStep()">
+        ${SIGNUP_UNIVS.map(u=>`<option value="${u}" ${d.univ===u?'selected':''}>${t(u)}</option>`).join('')}
+        <option value="" disabled>${t('다른 학교 (준비 중)')}</option>
+      </select>
+
+      <div class="field-label">${t('학년')}</div>
+      ${signupChips('year', SIGNUP_YEARS)}
+
+      <div class="field-label">${t('한국어 수준')}</div>
+      ${signupChips('korean', SIGNUP_KOREAN)}
+
+      <div class="field-label">${t('한국에 온 지 얼마나 됐나요?')}</div>
+      ${signupChips('stay', SIGNUP_STAYS)}
+
+      <div class="field-label">${t('어디에 살아요?')}</div>
+      ${signupChips('area', SIGNUP_AREAS)}
+      <div class="field-help">${t('동네 이름까지만 받아요.')}</div>
+
+      <div class="submit-row">
+        <button id="su2Next" class="submit-btn" disabled onclick="goSignup('signup3')">${t('다음')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderSignup3(){
+  const d = signupDraft;
+  const hasJob = d.hasJob==='있어요';
+  return `
+    ${signupTopbar(3, 'signup2')}
+    <div class="content">
+      <div class="auth-title">${t('한국에서 알바해 본 적 있어요?')}</div>
+      <div class="auth-sub">${t('없어도 괜찮아요.')}</div>
+
+      <div style="margin-top:16px;">${signupChips('hasJob', ['있어요','아직 없어요'])}</div>
+
+      ${hasJob ? `
+        <div class="field-label">${t('어떤 일을 해 봤어요? (여러 개 선택)')}</div>
+        <div class="chip-toggle-row">
+          ${INDUSTRIES.map(i=>`<button type="button" class="chip ${d.jobIndustries.includes(i)?'is-active':''}" data-value="${esc(i)}" onclick="toggleSignupIndustry(this)">${esc(t(i))}</button>`).join('')}
+        </div>
+
+        <div class="field-label">${t('모두 합쳐 얼마나 일했어요?')}</div>
+        ${signupChips('jobTotal', SIGNUP_JOB_TOTALS)}
+
+        <div class="info-note">
+          <b>${t('경력 배지는 후기로 만들어져요')}</b>
+          ${t('여기서 고른 내용은 프로필의 "경력"에 반영되지 않아요. 경력은 후기를 쓰면 근무 기간이 더해져서 표시돼요.')}
+        </div>
+      ` : ''}
+
+      <div class="agree-row">
+        <label for="suAgree">
+          <input id="suAgree" type="checkbox" ${d.agree?'checked':''} onchange="signupDraft.agree=this.checked; toggleSignupStep()">
+          <span>${t('개인정보 수집·이용에 동의해요')} <span class="req">${t('필수')}</span></span>
+        </label>
+        <button type="button" class="text-link" onclick="navigate('privacy')">${t('내용 보기')}</button>
+      </div>
+
+      <div id="su3Err" class="field-error" role="alert" style="text-align:center;"></div>
+      <div class="submit-row" style="margin-top:10px;">
+        <button id="su3Done" class="submit-btn" disabled onclick="completeSignup()">${t('가입하고 시작하기')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function saveSignup1(){
+  const email = document.getElementById('suEmail');
+  if(!email || !signupDraft) return;
+  signupDraft.email = email.value.trim();
+  signupDraft.password = document.getElementById('suPw').value;
+  signupDraft.nickname = document.getElementById('suNick').value.trim();
+  signupDraft.birth = document.getElementById('suBirth').value;
+}
+
+// 닉네임이 이미 쓰이고 있는지 서버에 물어봐요 (입력을 멈추면 잠깐 뒤에 한 번)
+let nickTimer = null;
+function checkNickname(){
+  const d = signupDraft;
+  if(!d) return;
+  const name = d.nickname;
+  if(d.nickFor===name) return;   // 이미 확인한 이름
+  clearTimeout(nickTimer);
+  if(Array.from(name).length < 2 || name==='익명') return;
+  nickTimer = setTimeout(async ()=>{
+    let free = true;             // 확인에 실패하면 일단 통과시키고, 가입할 때 서버가 한 번 더 걸러요
+    try{
+      const {data, error} = await sb.rpc('nickname_available', {nick:name});
+      if(!error) free = data !== false;
+    }catch(e){}
+    if(!signupDraft || signupDraft.nickname !== name) return;
+    signupDraft.nickFor = name;
+    signupDraft.nickFree = free;
+    if(state.view==='signup1') toggleSignupStep();
+  }, 350);
+}
+
+function signup1Valid(){
+  const d = signupDraft;
+  return EMAIL_RE.test(d.email) && d.password.length>=8 && Array.from(d.nickname).length>=2
+    && d.nickFor===d.nickname && d.nickFree===true && !!d.birth;
+}
+function signup2Valid(){
+  const d = signupDraft;
+  return !!(d.univ && d.year && d.korean && d.stay && d.area);
+}
+function signup3Valid(){
+  const d = signupDraft;
+  if(!d.agree || !d.hasJob) return false;
+  if(d.hasJob==='있어요') return d.jobIndustries.length>0 && !!d.jobTotal;
+  return true;
+}
+
+function toggleSignupStep(){
+  if(!signupDraft) return;
+  if(state.view==='signup1'){
+    saveSignup1();
+    checkNickname();
+    const d = signupDraft;
+    const taken = d.nickname==='익명' || (d.nickFor===d.nickname && d.nickFree===false);
+    const err = document.getElementById('suNickErr');
+    if(err) err.textContent = taken ? t('이미 쓰고 있는 닉네임이에요') : '';
+    const btn = document.getElementById('su1Next');
+    if(btn) btn.disabled = !signup1Valid();
+  } else if(state.view==='signup2'){
+    const btn = document.getElementById('su2Next');
+    if(btn) btn.disabled = !signup2Valid();
+  } else if(state.view==='signup3'){
+    const btn = document.getElementById('su3Done');
+    if(btn) btn.disabled = !signup3Valid();
+  }
+}
+
+function pickSignupChip(el){
+  const row = el.parentElement;
+  const key = row.dataset.signup;
+  row.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
+  el.classList.add('is-active');
+  signupDraft[key] = el.dataset.value;
+  if(key==='hasJob'){ render(); return; }
+  toggleSignupStep();
+}
+
+function toggleSignupIndustry(el){
+  el.classList.toggle('is-active');
+  const list = signupDraft.jobIndustries;
+  const i = list.indexOf(el.dataset.value);
+  if(i>=0) list.splice(i,1); else list.push(el.dataset.value);
+  toggleSignupStep();
+}
+
+function goSignup(view){
+  if(state.view==='signup1'){
+    saveSignup1();
+    if(view==='signup2' && !signup1Valid()) return;
+  }
+  if(state.view==='signup2' && view==='signup3' && !signup2Valid()) return;
+  navigate(view);
+}
+
+async function completeSignup(){
+  if(!signupDraft || !signup3Valid()) return;
+  const d = signupDraft;
+  const hasJob = d.hasJob==='있어요';
+  const errEl = document.getElementById('su3Err');
+  if(errEl) errEl.textContent = '';
+  await withBusy('su3Done', async ()=>{
+    // 프로필은 서버가 이 내용으로 자동으로 만들어요 (supabase-setup.sql의 handle_new_user)
+    const {data, error} = await sb.auth.signUp({
+      email: d.email,
+      password: d.password,
+      options: {
+        emailRedirectTo: siteUrl(),
+        data: {
+          nickname:d.nickname, univ:d.univ, year:d.year, stay:d.stay, korean:d.korean,
+          birth:d.birth, area:d.area, has_job:hasJob,
+          job_industries: hasJob ? d.jobIndustries.slice() : [], job_total: hasJob ? d.jobTotal : ''
+        }
+      }
+    });
+    if(error){
+      const el = document.getElementById('su3Err');
+      if(el) el.textContent = t(authErrorKey(error));
+      return;
+    }
+    signupDraft = null; // 비밀번호를 포함한 입력값을 비워요
+    if(data.session){
+      await enterSession(data.user, 'signup');
+    } else {
+      // Supabase에서 "이메일 인증"을 켜 둔 경우: 메일의 링크를 눌러야 로그인할 수 있어요
+      authNotice = {key:'인증 메일을 보냈어요. 메일의 링크를 누른 뒤 로그인해 주세요.', ok:true};
+      navigate('login');
+    }
+  });
+}
+
+function renderOnboarding(){
+  return `
+    <div class="content" style="padding-top:64px; text-align:center;">
+      <div style="display:flex; justify-content:center; margin-bottom:26px;">${logoHTML()}</div>
+      <div class="tagline" style="margin-top:6px;">${isZh() ? '问问已经经历过的学长学姐' : '먼저 겪어본 선배에게 물어보세요 · 问问已经经历过的学长学姐'}</div>
+    </div>
+    <div class="content" style="padding-top:8px; text-align:left;">
+      <div class="field-label">${t('어떤 분으로 시작하시나요?')}</div>
+      <div class="role-grid">
+        <button class="role-card" onclick="selectRole('student')">
+          <div class="cat-icon">${icon('user')}</div>
+          <div class="cat-name">${t('학생이에요')}</div>
+          <div class="cat-sub">${t('질문하고 답을 받고 싶어요')}</div>
+        </button>
+        <button class="role-card" onclick="selectRole('owner')">
+          <div class="cat-icon">${icon('shop')}</div>
+          <div class="cat-name">${t('사장님이에요')}</div>
+          <div class="cat-sub">${t('알바 공고를 올리고 답해주고 싶어요')}</div>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function selectRole(role){
+  state.role = role;
+  navigate(role==='owner' ? 'home' : 'feed');
+}
+
+function verifyOwner(){
+  ME_OWNER.verified = true;
+  render();
+  showToast('인증이 완료됐어요. 신뢰 배지가 부여됐어요');
+}
+
+function renderHome(){
+  return renderHomeOwner();
+}
+
+function renderFeed(){
+  return `
+    <div class="home-hero">
+      <div class="hero-top">${logoHTML('sm')}${langToggleHTML()}</div>
+      <h1 class="home-headline">${t('알바, 먼저 해 본 선배에게')}<br><span class="hl">${t('물어봐')}</span></h1>
+      <div class="tagline">${t('중앙대 유학생 선배들이 직접 쓴 후기와 답변')}</div>
+    </div>
+    <div class="feed-layout">
+      <aside class="filter-panel">${renderFilterBar()}</aside>
+      <div id="feedBody">${renderFeedBody()}</div>
+    </div>
+  `;
+}
+
+function renderFilterBar(){
+  return `
+    <div class="filter-title">${t('내 한국어 수준에 맞는 후기만 보기')}</div>
+    <div class="level-seg">
+      ${KOREAN_LEVELS.map(k=>`<button class="chip ${state.filterKorean===k?'is-active':''}" aria-pressed="${state.filterKorean===k}" onclick="setFilter('korean','${k}')">${levelBars(k)}${t(koreanTier(k))}</button>`).join('')}
+    </div>
+    <div class="filter-title filter-title-industry">${t('업종')}</div>
+    <div class="industry-scroll" aria-label="${t('업종')}">
+      ${['전체', ...INDUSTRIES].map(i=>`<button class="chip ${state.filterIndustry===i?'is-active':''}" aria-pressed="${state.filterIndustry===i}" onclick="setFilter('industry','${i}')">${t(i)}</button>`).join('')}
+    </div>
+  `;
+}
+
+function setFilter(type, value){
+  if(type==='korean') state.filterKorean = state.filterKorean===value ? '전체' : value;
+  else state.filterIndustry = value;
+  render();
+  // 가로로 넘기는 업종 줄에서 고른 칩이 화면 밖으로 밀리지 않게
+  const active = document.querySelector('.industry-scroll .chip.is-active');
+  if(type==='industry' && active && active.scrollIntoView) active.scrollIntoView({block:'nearest', inline:'center'});
+}
+
+function renderFeedBody(){
+  let list = REVIEWS.slice();
+  if(state.filterKorean && state.filterKorean!=='전체') list = list.filter(r=>KOREAN_LEVELS.indexOf(r.korean) <= KOREAN_LEVELS.indexOf(state.filterKorean));
+  if(state.filterIndustry && state.filterIndustry!=='전체') list = list.filter(r=>r.industry===state.filterIndustry);
+  const emptyText = REVIEWS.length ? t('조건에 맞는 후기가 없어요. 필터를 바꿔보세요.') : t('아직 후기가 없어요. 첫 후기를 남겨보세요.');
+  return `
+    <div class="section-label">${t('선배들의 후기 {n}개', {n:list.length})}</div>
+    <div class="qlist">
+      ${list.length ? list.map(reviewCardHTML).join('') : `<div class="empty-state">${emptyText}</div>`}
+    </div>
+  `;
+}
+
+function reviewTitle(r){
+  return r.shopName ? esc(tc(r.shopName)) : esc(t('{industry} 알바', {industry:t(r.industry)}));
+}
+
+function reviewCardHTML(r){
+  const s = studentOf(r.authorId);
+  return `
+    <div class="qcard" role="button" tabindex="0" onclick="navigate('reviewDetail','${r.id}')" onkeydown="if(event.key==='Enter') navigate('reviewDetail','${r.id}')">
+      <div class="rcard-top">
+        <span class="tag">${esc(t(r.industry))}</span>
+        <span>${t('{career} 근무', {career:careerText(r.months)})}</span>
+        <span class="rcard-stats"><span>${icon('eye')} ${r.views}</span><span>${icon('heart')} ${r.likes}</span></span>
+      </div>
+      <div class="qcard-title">${reviewTitle(r)}</div>
+      <div class="rcard-body">"${esc(tc(r.tip))}"${translatedNote(r.tip)}</div>
+      <div class="lvl-pill">${levelBars(r.korean)}<span>${esc(t('한국어 {tier} · {desc}', {tier:t(koreanTier(r.korean)), desc:t(r.korean)}))}</span></div>
+      <div class="rcard-foot">
+        <button type="button" class="card-author-row" onclick="event.stopPropagation(); navigate('userProfile','${r.authorId}')">
+          <span class="avatar" style="width:20px;height:20px;font-size:9px;">${initial(s.name)}</span>
+          <span>${esc(s.name)}</span>
+        </button>
+        ${careerBadge(r.authorId)}
+      </div>
+    </div>
+  `;
+}
+
+function renderQA(){
+  const list = QUESTIONS.filter(q=>q.cat==='alba');
+  return `
+    <div class="topbar">
+      <div class="topbar-title" style="font-size:15px;">${t('Q&A')}</div>
+      <button class="pill-btn" onclick="navigate('ask','alba')">${icon('plus')} ${t('질문하기')}</button>
+    </div>
+    <div class="content" style="padding-top:14px;">
+      <div class="section-label" style="margin:0 0 10px;">${t('질문 {n}개', {n:list.length})}</div>
+      <div class="qlist" style="padding:0;">
+        ${list.length ? list.map(item=>qcardHTML(item,false)).join('') : `<div class="empty-state">${t('아직 질문이 없어요. 첫 질문을 남겨보세요.')}</div>`}
+      </div>
+    </div>
+  `;
+}
+
+function renderReviewDetail(id){
+  const r = REVIEWS.find(x=>x.id===id);
+  const s = studentOf(r.authorId);
+  const hasSchedule = r.days && r.days.length;
+  const scheduleShort = hasSchedule ? scheduleText(r).replace(/ 근무$/, '') : '';
+  const mine = r.authorId===ME_STUDENT.id;
+  const liked = LIKED_REVIEWS.has(r.id);
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('feed')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('후기 상세','经验分享')}</div>
+    </div>
+    <div class="detail-layout">
+      <div class="detail-main">
+        <div class="q-detail-head" style="border-bottom:none; padding-bottom:12px;">
+          <div class="q-detail-cat">${esc(t(r.industry))}</div>
+          <div class="q-detail-title">${reviewTitle(r)}</div>
+        </div>
+        <div class="facts">
+          <div><span>${t('업종')}</span><b>${esc(t(r.industry))}</b></div>
+          <div><span>${t('근무 기간')}</span><b>${careerText(r.months)}</b></div>
+          <div><span>${t('필요한 한국어')}</span><b>${t(koreanTier(r.korean))}</b><span>${esc(t(r.korean))}</span></div>
+          ${hasSchedule ? `<div class="fact-desktop"><span>${t('근무 요일 · 시간')}</span><b>${esc(scheduleShort)}</b></div>` : ''}
+        </div>
+        <div class="content" style="padding-top:16px; padding-bottom:0;">
+          <div class="hl-block">
+            <b>${t('후배에게 한마디')}</b>
+            <p>"${esc(tc(r.tip))}"</p>
+          </div>
+          ${translatedNote(r.tip, r.good, r.hard, r.note)}
+
+          ${hasSchedule ? `
+            <div class="qcard-meta schedule-line" style="font-size:13px; margin-top:14px;">
+              <span>${icon('pin')} ${esc(scheduleText(r))}</span>
+            </div>
+          ` : ''}
+
+          <div class="detail-h">${t('좋았던 점')}</div>
+          <div class="answer-body" style="margin:0;">${esc(tc(r.good))}</div>
+
+          <div class="detail-h">${t('힘들었던 점')}</div>
+          <div class="answer-body" style="margin:0;">${esc(tc(r.hard))}</div>
+
+          ${r.note ? `
+            <div class="detail-h">${t('알아두면 좋을 점')}</div>
+            <div class="answer-body" style="margin:0;">${esc(tc(r.note))}</div>
+          ` : ''}
+
+          <div class="q-detail-stats" style="margin:16px 0 0; align-items:center;">
+            <span>${timeText(r.time)}</span>
+            <span>${icon('eye')} ${t('조회 {n}', {n:r.views})}</span>
+            <button type="button" class="like-btn ${liked?'is-liked':''}" aria-pressed="${liked}" aria-label="${t('좋아요')} ${r.likes}" onclick="toggleReviewLike('${r.id}')">${icon('heart')} ${r.likes}</button>
+          </div>
+        </div>
+      </div>
+      <aside class="detail-aside">
+        <div class="author-card" role="button" tabindex="0" onclick="navigate('userProfile','${r.authorId}')" onkeydown="if(event.key==='Enter') navigate('userProfile','${r.authorId}')">
+          <div class="avatar">${initial(s.name)}</div>
+          <div>
+            <div class="author-name">${esc(s.name)}${roleTag(s)}</div>
+            <div class="author-time">${personSub(s)}</div>
+          </div>
+          ${careerBadge(r.authorId)}
+        </div>
+        ${mine ? `
+          <div style="text-align:center;">
+            <button type="button" class="text-link" onclick="deleteReview('${r.id}')">${t('이 후기 삭제하기')}</button>
+          </div>
+        ` : `
+          <div class="submit-row">
+            <button class="submit-btn" onclick="askAboutReview('${r.id}')">${t('이 후기 작성자에게 질문하기')}</button>
+          </div>
+        `}
+      </aside>
+    </div>
+  `;
+}
+
+async function toggleReviewLike(id){
+  const r = REVIEWS.find(x=>x.id===id);
+  if(!r || likeBusy.has(id)) return;
+  likeBusy.add(id);
+  const was = LIKED_REVIEWS.has(id);
+  mutations++;
+  setLike(LIKED_REVIEWS, r, !was);   // 먼저 화면에 반영하고, 저장에 실패하면 되돌려요
+  render();
+  let error = null;
+  try{
+    const res = was
+      ? await sb.from('review_likes').delete().eq('review_id', id).eq('user_id', ME_STUDENT.id)
+      : await sb.from('review_likes').insert({review_id:id});
+    error = res.error;
+  }catch(e){ error = e; }
+  mutations++;
+  likeBusy.delete(id);
+  if(error && error.code!=='23505'){
+    const cur = REVIEWS.find(x=>x.id===id);
+    if(cur && LIKED_REVIEWS.has(id)!==was) setLike(LIKED_REVIEWS, cur, was);
+    render();
+    showToast(t(FAIL_MSG));
+  }
+}
+
+async function deleteReview(id){
+  if(!confirm(t('이 후기를 삭제할까요?'))) return;
+  await withBusy(null, async ()=>{
+    const {error} = await sb.from('reviews').delete().eq('id', id);
+    if(error) throw error;
+    await loadAll();
+    navigate('feed', null, {replace:true});
+    showToast(t('삭제했어요'));
+  });
+}
+
+function askAboutReview(reviewId){
+  const r = REVIEWS.find(x=>x.id===reviewId);
+  const target = t(r.industry) + (r.shopName ? ' · ' + tc(r.shopName) : '');
+  state.askPrefill = t('[{target} 후기 관련] ', {target});
+  navigate('ask','alba');
+}
+
+function renderUserProfile(id){
+  const s = studentOf(id);
+  const mine = REVIEWS.filter(r=>r.authorId===id);
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('feed')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('프로필','个人主页')}</div>
+    </div>
+    <div class="profile-card">
+      <div class="profile-avatar">${initial(s.name)}</div>
+      <div class="profile-name">${esc(s.name)}</div>
+      <div class="profile-tag">${profileTag(s)}</div>
+      <div class="stat-row">
+        <div class="stat"><b>${mine.length}</b><span>${t('작성 후기')}</span></div>
+        <div class="stat"><b>${careerText(careerMonthsOf(id))}</b><span>${t('총 알바 경력')}</span></div>
+      </div>
+    </div>
+    <div class="section-label">${t('작성한 후기')}</div>
+    <div class="qlist">
+      ${mine.length ? mine.map(reviewCardHTML).join('') : `<div class="empty-state">${t('아직 작성한 후기가 없어요.')}</div>`}
+    </div>
+  `;
+}
+
+function renderReviewForm(){
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('feed')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('후기 작성','写经验')}</div>
+    </div>
+    <div class="content">
+      <div class="field-label">${t('업종')}</div>
+      <select id="rIndustry" class="field">${INDUSTRIES.map(i=>`<option value="${i}">${t(i)}</option>`).join('')}</select>
+
+      <div class="field-label">${t('가게명 (선택)')}</div>
+      <input id="rShop" class="field" type="text" maxlength="40" placeholder="${t('예) 홍대 OO카페')}">
+
+      <div class="field-label">${t('총 몇 개월 일했나요?')}</div>
+      <input id="rMonths" class="field" type="number" inputmode="numeric" min="1" max="60" step="1" placeholder="${t('예) 8')}" oninput="toggleReviewSubmit()">
+
+      <div class="field-label">${t('근무 요일 (선택)')}</div>
+      <div class="chip-toggle-row" id="rDays">
+        ${['월','화','수','목','금','토','일'].map(d=>`<button type="button" class="chip" data-day="${d}" onclick="toggleDayChip(this)">${t(d)}</button>`).join('')}
+      </div>
+
+      <div class="field-label">${t('근무 시간대 (선택)')}</div>
+      <select id="rTimeOfDay" class="field">
+        <option value="">${t('선택 안 함')}</option>
+        ${['오전','오후','저녁','심야'].map(x=>`<option value="${x}">${t(x)}</option>`).join('')}
+      </select>
+
+      <div class="field-label">${t('필요했던 한국어 수준')}</div>
+      <div class="chip-toggle-row" id="rKorean">
+        ${KOREAN_LEVELS.map(k=>`<button type="button" class="chip" data-korean="${k}" onclick="selectKoreanChip(this)">${t(k)}<small>${t(KOREAN_HINTS[k])}</small></button>`).join('')}
+      </div>
+
+      <div class="field-label">${t('좋았던 점')}</div>
+      <textarea id="rGood" class="field" maxlength="1000" placeholder="${t('예) 사장님이 친절해서 물어보기 편했어요')}" oninput="toggleReviewSubmit()"></textarea>
+
+      <div class="field-label">${t('힘들었던 점')}</div>
+      <textarea id="rHard" class="field" maxlength="1000" placeholder="${t('예) 주말엔 손님이 몰려서 정신없었어요')}" oninput="toggleReviewSubmit()"></textarea>
+
+      <div class="field-label">${t('알아두면 좋을 점 (선택)')}</div>
+      <textarea id="rNote" class="field" maxlength="1000" placeholder="${t('예) 유니폼은 직접 준비해야 해요')}"></textarea>
+
+      <div class="field-label">${t('후배에게 한마디')}</div>
+      <input id="rTip" class="field" type="text" maxlength="200" placeholder="${t('예) 돈 필요하면 추천! 근데 주말엔 좀 힘들어요')}" oninput="toggleReviewSubmit()">
+
+      <div class="submit-row">
+        <button id="rSubmitBtn" class="submit-btn" disabled onclick="submitReview()">${t('후기 등록하기')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function toggleDayChip(el){
+  el.classList.toggle('is-active');
+}
+
+function selectKoreanChip(el){
+  const row = document.getElementById('rKorean');
+  row.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
+  el.classList.add('is-active');
+  toggleReviewSubmit();
+}
+
+function toggleReviewSubmit(){
+  const good = document.getElementById('rGood');
+  const hard = document.getElementById('rHard');
+  const tip = document.getElementById('rTip');
+  const months = document.getElementById('rMonths');
+  const btn = document.getElementById('rSubmitBtn');
+  if(!good || !btn) return;
+  const koreanSelected = document.querySelector('#rKorean .chip.is-active');
+  const m = Number(months.value);
+  const monthsValid = months.value && Number.isInteger(m) && m >= 1 && m <= 60;
+  btn.disabled = !(good.value.trim() && hard.value.trim() && tip.value.trim() && koreanSelected && monthsValid);
+}
+
+async function submitReview(){
+  const industry = document.getElementById('rIndustry').value;
+  const shopName = document.getElementById('rShop').value.trim();
+  const months = Number(document.getElementById('rMonths').value);
+  const days = Array.from(document.querySelectorAll('#rDays .chip.is-active')).map(c=>c.dataset.day);
+  const timeOfDay = document.getElementById('rTimeOfDay').value;
+  const koreanEl = document.querySelector('#rKorean .chip.is-active');
+  const korean = koreanEl ? koreanEl.dataset.korean : '';
+  const good = document.getElementById('rGood').value.trim();
+  const hard = document.getElementById('rHard').value.trim();
+  const note = document.getElementById('rNote').value.trim();
+  const tip = document.getElementById('rTip').value.trim();
+  if(!good || !hard || !tip || !korean || !Number.isInteger(months) || months < 1 || months > 60) return;
+  await withBusy('rSubmitBtn', async ()=>{
+    // 작성자·조회수·좋아요 수는 서버가 정해요
+    const {data, error} = await sb.from('reviews')
+      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, korean, good, hard, note, tip})
+      .select('id').single();
+    if(error) throw error;
+    await loadAll();
+    navigate('reviewDetail', data.id, {replace:true});
+    showToast(t('후기가 등록됐어요'));
+  });
+}
+
+function renderHomeOwner(){
+  const myListings = LISTINGS.filter(l=>l.owner.name===ME_OWNER.name);
+  const albaQs = QUESTIONS.filter(q=>q.cat==='alba').slice(0,3);
+  return `
+    <div class="topbar">
+      <div class="topbar-title" style="font-size:15px;">홈 · 사장님 모드</div>
+    </div>
+    <div class="home-hero">
+      <div class="wordmark">무로바<span class="dot">.</span></div>
+      <div class="tagline">학생들의 질문에 답하고, 알바 공고를 올려보세요</div>
+    </div>
+    ${!ME_OWNER.verified ? `
+      <div class="verify-banner">
+        <div>
+          <b>사업자 인증을 완료해보세요</b>
+          <div class="verify-banner-sub">인증 배지가 있으면 학생들이 더 신뢰해요</div>
+        </div>
+        <button class="pill-btn" onclick="verifyOwner()">인증하기</button>
+      </div>
+    ` : ''}
+    <div class="section-label">내 공고 현황</div>
+    <div class="qlist">
+      ${myListings.length ? myListings.map(l=>listingCardHTML(l)).join('') : `<div class="empty-state">아직 등록한 공고가 없어요.</div>`}
+    </div>
+    <div class="section-label">아르바이트 카테고리 최근 질문</div>
+    <div class="qlist">${albaQs.map(q=>qcardHTML(q,false)).join('')}</div>
+  `;
+}
+
+function qcardHTML(item, showCat){
+  const c = catOf(item.cat);
+  const maxLikes = Math.max(0, ...item.answers.map(a=>a.likes));
+  let statusBadge;
+  if(item.resolved) statusBadge = `<span class="badge-adopted">${icon('check')} ${t('답변완료')}</span>`;
+  else if(item.answers.length === 0) statusBadge = `<span class="badge-waiting">${t('답변 대기중')}</span>`;
+  else if(maxLikes === 0) statusBadge = `<span class="badge-waiting">${t('답변 있음')}</span>`;
+  else statusBadge = `<span class="badge-adopted">${icon('heart')} ${t('인기 답변')}</span>`;
+  return `
+    <button class="qcard" onclick="navigate('detail','${item.id}')">
+      <div class="qcard-status">${statusBadge}</div>
+      <div class="qcard-title">${esc(tc(item.title))}</div>
+      <div class="qcard-snippet">${esc(tc(item.body))}</div>
+      <div class="qcard-meta">
+        ${showCat ? `<span>${icon(c.icon)} ${catName(c)}</span>` : ''}
+        <span>${icon('msg')} ${t('답변 {n}', {n:item.answers.length})}</span>
+        <span>${icon('eye')} ${item.views}</span>
+      </div>
+    </button>
+  `;
+}
+
+function renderCategory(catId){
+  if(catId==='alba') return renderAlbaCategory();
+  const c = catOf(catId);
+  const list = QUESTIONS.filter(q=>q.cat===catId);
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('feed')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${c.name}<span class="zh">${c.zh}</span></div>
+      <button class="pill-btn" onclick="navigate('ask','${c.id}')">${icon('plus')} 질문하기</button>
+    </div>
+    <div class="content" style="padding-top:14px;">
+      <div class="section-label" style="margin:0 0 10px;">질문 ${list.length}개</div>
+      <div class="qlist" style="padding:0;">
+        ${list.length ? list.map(item=>qcardHTML(item,false)).join('') : `<div class="empty-state">아직 질문이 없어요. 첫 질문을 남겨보세요.</div>`}
+      </div>
+    </div>
+  `;
+}
+
+function renderAlbaCategory(){
+  const c = catOf('alba');
+  const tab = state.catTab || 'questions';
+  const backTarget = state.role==='owner' ? 'home' : 'feed';
+  const list = QUESTIONS.filter(q=>q.cat==='alba');
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('${backTarget}')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${c.name}<span class="zh">${c.zh}</span></div>
+      ${tab==='questions'
+        ? `<button class="pill-btn" onclick="navigate('ask','alba')">${icon('plus')} 질문하기</button>`
+        : (state.role==='owner' ? `<button class="pill-btn" onclick="navigate('listingForm')">${icon('plus')} 공고등록</button>` : '')}
+    </div>
+    <div class="tabs" style="margin-top:10px;">
+      <button class="tab-btn ${tab==='questions'?'is-active':''}" onclick="setCatTab('questions')">질문</button>
+      <button class="tab-btn ${tab==='listings'?'is-active':''}" onclick="setCatTab('listings')">알바 공고</button>
+    </div>
+    <div id="catTabBody">
+      ${tab==='questions'
+        ? `<div class="qlist" style="padding:0 18px;">${list.length ? list.map(item=>qcardHTML(item,false)).join('') : `<div class="empty-state">아직 질문이 없어요. 첫 질문을 남겨보세요.</div>`}</div>`
+        : `<div class="qlist" style="padding:0 18px;">${LISTINGS.length ? LISTINGS.map(listingCardHTML).join('') : `<div class="empty-state">아직 등록된 공고가 없어요.</div>`}</div>`}
+    </div>
+  `;
+}
+
+function setCatTab(tab){
+  state.catTab = tab;
+  render();
+}
+
+function listingCardHTML(l){
+  return `
+    <button class="qcard" onclick="navigate('listingDetail','${l.id}')">
+      <div class="qcard-title">${esc(l.title)}</div>
+      <div class="qcard-meta" style="margin-top:6px;">
+        <span>${icon('pin')} ${esc(l.area)}</span>
+        <span>₩${esc(l.wage)} · ${esc(l.korean)}</span>
+      </div>
+      <div class="qcard-meta">
+        <span>${icon('eye')} ${l.views}</span>
+        ${l.owner.verified ? `<span class="badge-adopted">${icon('check')} 인증사장님</span>` : `<span class="badge-waiting">인증대기</span>`}
+      </div>
+    </button>
+  `;
+}
+
+function renderAsk(catId){
+  const active = CATEGORIES.filter(c=>c.active);
+  const options = active.map(c=>`<option value="${c.id}" ${c.id===catId?'selected':''}>${isZh() ? c.zh : c.name + ' · ' + c.zh}</option>`).join('');
+  const backTarget = state.role==='owner' ? `navigate('category','${catId}')` : `navigate('qa')`;
+  const prefill = state.askPrefill || '';
+  state.askPrefill = null;
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="${backTarget}" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('질문 작성','提问')}</div>
+    </div>
+    <div class="content">
+      <div class="field-label">${t('카테고리')}</div>
+      <select id="askCat" class="field">${options}</select>
+
+      <div class="field-label">${t('제목')}</div>
+      <input id="askTitle" class="field" type="text" maxlength="100" value="${esc(prefill)}" placeholder="${t('예) 이 알바 시급 정상인가요?')}" oninput="onAskTitleInput(this.value)">
+      <div id="suggestArea"></div>
+
+      <div class="field-label">${t('내용')}</div>
+      <textarea id="askBody" class="field" maxlength="2000" placeholder="${t('상황을 자세히 설명하면 더 정확한 답변을 받을 수 있어요')}" oninput="toggleAskSubmit()"></textarea>
+
+      <div class="submit-row">
+        <button id="askSubmitBtn" class="submit-btn" disabled onclick="submitQuestion()">${t('질문 등록하기')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function onAskTitleInput(v){
+  const area = document.getElementById('suggestArea');
+  const q = v.trim().toLowerCase();
+  if(q.length < 2){ area.innerHTML=''; return; }
+  const catSel = document.getElementById('askCat').value;
+  // 한국어 원문과 중국어 번역 양쪽에서 비슷한 질문을 찾아요
+  const matches = QUESTIONS.filter(item => item.cat===catSel && (item.title.toLowerCase().includes(q) || tc(item.title).toLowerCase().includes(q))).slice(0,2);
+  if(!matches.length){ area.innerHTML=''; return; }
+  area.innerHTML = `
+    <div class="suggest-label">${t('이미 비슷한 질문이 있어요')}</div>
+    <div class="suggest-box">
+      ${matches.map(item=>`<button class="suggest-item" onclick="navigate('detail','${item.id}')">${icon('link')} ${esc(tc(item.title))}</button>`).join('')}
+    </div>
+  `;
+}
+
+function toggleAskSubmit(){
+  const t = document.getElementById('askTitle');
+  const b = document.getElementById('askBody');
+  const btn = document.getElementById('askSubmitBtn');
+  if(!t || !b || !btn) return;
+  btn.disabled = !(t.value.trim() && b.value.trim());
+}
+
+function currentPersonAuthor(){
+  if(state.role==='owner') return {name:ME_OWNER.name, role:'owner', shop:ME_OWNER.shop, verified:ME_OWNER.verified};
+  const s = studentOf(ME_STUDENT.id);
+  return {name:s.name, dept:s.dept, year:s.year, stay:s.stay};
+}
+
+async function submitQuestion(){
+  const cat = document.getElementById('askCat').value;
+  const title = document.getElementById('askTitle').value.trim();
+  const body = document.getElementById('askBody').value.trim();
+  if(!title || !body) return;
+  await withBusy('askSubmitBtn', async ()=>{
+    const {data, error} = await sb.from('questions').insert({cat, title, body}).select('id').single();
+    if(error) throw error;
+    await loadAll();
+    navigate('detail', data.id, {replace:true});
+    showToast(t('질문이 등록됐어요'));
+  });
+}
+
+async function deleteQuestion(id){
+  if(!confirm(t('이 질문을 삭제할까요? 달린 답변도 함께 사라져요.'))) return;
+  await withBusy(null, async ()=>{
+    const {error} = await sb.from('questions').delete().eq('id', id);
+    if(error) throw error;
+    await loadAll();
+    navigate('qa', null, {replace:true});
+    showToast(t('삭제했어요'));
+  });
+}
+
+function isHot(a, allAnswers){
+  return allAnswers.length > 1 && a.likes > 0 && a.likes === Math.max(...allAnswers.map(x=>x.likes));
+}
+
+function renderDetail(id){
+  const item = qOf(id);
+  const c = catOf(item.cat);
+  const backTarget = state.role==='owner' ? `navigate('category','${item.cat}')` : `navigate('qa')`;
+  const sortedAnswers = item.answers.map((a, originalIdx)=>({a, originalIdx})).sort((x,y)=>y.a.likes - x.a.likes);
+  const isAsker = state.role!=='owner' && item.author.id===ME_STUDENT.id;
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="${backTarget}" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML(c.name, c.zh)}</div>
+    </div>
+    <div class="q-detail-head">
+      <div class="detail-chips">
+        ${item.resolved ? `<span class="badge-adopted">${icon('check')} ${t('답변완료')}</span>` : `<span class="badge-waiting">${t('답변 기다리는 중')}</span>`}
+        <span class="q-detail-cat">${catName(c)}</span>
+      </div>
+      <div class="q-detail-title">${esc(tc(item.title))}</div>
+      <div class="author-row">
+        <div class="avatar">${initial(displayName(item.author.name))}</div>
+        <div>
+          <div class="author-name">${esc(displayName(item.author.name))}${roleTag(item.author)}</div>
+          <div class="author-time">${timeText(item.time)}${personSub(item.author) ? ' · '+personSub(item.author) : ''}</div>
+        </div>
+      </div>
+    </div>
+    <div class="q-detail-body">${esc(tc(item.body))}</div>
+    <div class="q-detail-stats" style="align-items:center;">
+      <span>${icon('eye')} ${t('조회 {n}', {n:item.views})}</span>
+      <span>${icon('msg')} ${t('답변 {n}', {n:item.answers.length})}</span>
+      ${translatedNote(item.title, item.body)}
+      ${isAsker ? `<button type="button" class="mini-link" style="margin-left:auto;" onclick="deleteQuestion('${item.id}')">${t('삭제')}</button>` : ''}
+    </div>
+    ${isAsker && !item.resolved && item.answers.length ? `
+      <div class="hl-block" style="margin:16px 18px 0;">
+        <b>${t('내가 올린 질문이에요')}</b>
+        <p>${t('도움이 된 답변에서 "이 답변으로 완료하기"를 눌러 주세요. 답변 완료는 질문한 사람만 정할 수 있어요.')}</p>
+      </div>
+    ` : ''}
+    <div class="answers-head">
+      <div class="answers-count">${t('답변 {n}개', {n:item.answers.length})}</div>
+    </div>
+    ${item.answers.length ? sortedAnswers.map(({a, originalIdx})=>answerHTML(item.id, a, originalIdx, item.answers, item, isAsker)).join('') : `<div class="empty-state">${t('아직 답변이 없어요. 첫 답변을 남겨보세요.')}</div>`}
+    <div class="composer">
+      <textarea id="answerBody" class="field" data-qid="${item.id}" maxlength="2000" placeholder="${t('아는 만큼 답해주세요. 큰 도움이 돼요.')}"></textarea>
+      <button id="answerBtn" class="submit-btn" onclick="submitAnswer('${item.id}')">${t('답변 남기기')}</button>
+    </div>
+  `;
+}
+
+function answerHTML(qid, a, idx, allAnswers, item, isAsker){
+  const isResolver = item.resolved && item.resolvedIdx===idx;
+  const hot = !item.resolved && isHot(a, allAnswers);
+  const liked = LIKED_ANSWERS.has(a.id);
+  const mine = a.author.id===ME_STUDENT.id;
+  let stamp = '';
+  if(isResolver) stamp = `<div class="stamp">${icon('check')} ${t('답변완료')}</div>`;
+  else if(hot) stamp = `<div class="stamp">${icon('heart')} ${t('인기 답변')}</div>`;
+  return `
+    <div class="answer-card ${isResolver||hot ? 'is-hot' : ''}">
+      <div class="answer-top">
+        <div class="answer-who">
+          <div class="avatar">${initial(displayName(a.author.name))}</div>
+          <div>
+            <div class="author-name">${esc(displayName(a.author.name))}${roleTag(a.author)}</div>
+            <div class="author-time">${timeText(a.time)}${personSub(a.author) ? ' · '+personSub(a.author) : ''}</div>
+            ${careerBadge(a.author.id) ? `<div style="margin-top:6px;">${careerBadge(a.author.id)}</div>` : ''}
+          </div>
+        </div>
+        ${stamp}
+      </div>
+      <div class="answer-body">${esc(tc(a.body))}</div>
+      <div class="answer-actions">
+        <button type="button" class="like-btn ${liked?'is-liked':''}" aria-pressed="${liked}" aria-label="${t('좋아요')} ${a.likes}" onclick="toggleLike('${qid}','${a.id}')">${icon('heart')} ${a.likes}</button>
+        ${isAsker && !item.resolved ? `<button class="resolve-btn" onclick="resolveQuestion('${qid}','${a.id}')">${t('이 답변으로 완료하기')}</button>` : ''}
+        ${mine ? `<button type="button" class="mini-link" style="margin-left:auto;" onclick="deleteAnswer('${a.id}')">${t('삭제')}</button>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+async function toggleLike(qid, answerId){
+  const find = ()=>{ const q = qOf(qid); return q && q.answers.find(x=>x.id===answerId); };
+  const a = find();
+  if(!a || likeBusy.has(answerId)) return;
+  likeBusy.add(answerId);
+  const was = LIKED_ANSWERS.has(answerId);
+  mutations++;
+  setLike(LIKED_ANSWERS, a, !was);   // 먼저 화면에 반영하고, 저장에 실패하면 되돌려요
+  render();
+  let error = null;
+  try{
+    const res = was
+      ? await sb.from('answer_likes').delete().eq('answer_id', answerId).eq('user_id', ME_STUDENT.id)
+      : await sb.from('answer_likes').insert({answer_id:answerId});
+    error = res.error;
+  }catch(e){ error = e; }
+  mutations++;
+  likeBusy.delete(answerId);
+  if(error && error.code!=='23505'){
+    const cur = find();
+    if(cur && LIKED_ANSWERS.has(answerId)!==was) setLike(LIKED_ANSWERS, cur, was);
+    render();
+    showToast(t(FAIL_MSG));
+  }
+}
+
+async function resolveQuestion(qid, answerId){
+  await withBusy(null, async ()=>{
+    // 질문한 사람인지는 서버가 다시 확인해요
+    const {error} = await sb.rpc('resolve_question', {q:qid, a:answerId});
+    if(error) throw error;
+    await loadAll();
+    render();
+    showToast(t('답변완료로 표시했어요'));
+  });
+}
+
+async function submitAnswer(qid){
+  const body = document.getElementById('answerBody').value.trim();
+  if(!body) return;
+  await withBusy('answerBtn', async ()=>{
+    const {error} = await sb.from('answers').insert({question_id:qid, body});
+    if(error) throw error;
+    const ta = document.getElementById('answerBody');
+    if(ta) ta.value = '';
+    await loadAll();
+    render();
+    showToast(t('답변이 등록됐어요'));
+  });
+}
+
+async function deleteAnswer(answerId){
+  if(!confirm(t('이 답변을 삭제할까요?'))) return;
+  await withBusy(null, async ()=>{
+    const {error} = await sb.from('answers').delete().eq('id', answerId);
+    if(error) throw error;
+    await loadAll();
+    render();
+    showToast(t('삭제했어요'));
+  });
+}
+
+function renderListingForm(){
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('category','alba')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">공고 등록<span class="zh">发布招聘</span></div>
+    </div>
+    <div class="content">
+      <div class="field-label">제목</div>
+      <input id="lTitle" class="field" type="text" placeholder="예) 주말 홀서빙 알바 구해요" oninput="toggleListingSubmit()">
+
+      <div class="field-label">지역</div>
+      <input id="lArea" class="field" type="text" placeholder="예) 신촌" oninput="toggleListingSubmit()">
+
+      <div class="field-label">시급 (원)</div>
+      <input id="lWage" class="field" type="text" placeholder="예) 10,500" oninput="toggleListingSubmit()">
+
+      <div class="field-label">필요 한국어 수준</div>
+      <select id="lKorean" class="field">
+        <option>초급 가능</option>
+        <option>일상 대화 가능</option>
+        <option>능숙 필요</option>
+      </select>
+
+      <div class="field-label">연락 방법</div>
+      <input id="lContact" class="field" type="text" placeholder="예) 카카오톡 ID: xxxx" oninput="toggleListingSubmit()">
+
+      <div class="proto-note" style="margin-top:10px;">* 등록하면 상세페이지에 "체류자격외활동허가 확인" 안내 문구가 자동으로 표시돼요.</div>
+
+      <div class="submit-row">
+        <button id="lSubmitBtn" class="submit-btn" disabled onclick="submitListing()">공고 등록하기</button>
+      </div>
+    </div>
+  `;
+}
+
+function toggleListingSubmit(){
+  const t=document.getElementById('lTitle'), a=document.getElementById('lArea'), w=document.getElementById('lWage'), c=document.getElementById('lContact');
+  const btn=document.getElementById('lSubmitBtn');
+  if(!t || !btn) return;
+  btn.disabled = !(t.value.trim() && a.value.trim() && w.value.trim() && c.value.trim());
+}
+
+function submitListing(){
+  const title = document.getElementById('lTitle').value.trim();
+  const area = document.getElementById('lArea').value.trim();
+  const wage = document.getElementById('lWage').value.trim();
+  const korean = document.getElementById('lKorean').value;
+  const contact = document.getElementById('lContact').value.trim();
+  if(!title || !area || !wage || !contact) return;
+  const id = 'l' + (LISTINGS.length + 1) + '_' + Math.random().toString(36).slice(2,6);
+  LISTINGS.unshift({id, title, area, wage, korean, contact, owner:{name:ME_OWNER.name, shop:ME_OWNER.shop, verified:ME_OWNER.verified}, time:'방금 전', views:1});
+  navigate('listingDetail', id);
+  showToast('공고가 등록됐어요');
+}
+
+function renderListingDetail(id){
+  const l = lOf(id);
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('category','alba')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">공고 상세<span class="zh">招聘详情</span></div>
+    </div>
+    <div class="q-detail-head">
+      <div class="q-detail-cat">아르바이트 공고</div>
+      <div class="q-detail-title">${esc(l.title)}</div>
+      <div class="author-row">
+        <div class="avatar">${initial(l.owner.shop)}</div>
+        <div>
+          <div class="author-name">${esc(l.owner.shop)} <span class="owner-badge">${icon(l.owner.verified?'check':'shop')} ${l.owner.verified?'인증':'인증대기'}</span></div>
+          <div class="author-time">${esc(l.owner.name)} 사장님 · ${l.time}</div>
+        </div>
+      </div>
+    </div>
+    <div class="content" style="padding-top:14px;">
+      <div class="qcard-meta" style="font-size:13px; gap:16px;">
+        <span>${icon('pin')} ${esc(l.area)}</span>
+        <span>₩${esc(l.wage)} / 시급</span>
+      </div>
+      <div class="qcard-meta" style="font-size:13px; margin-top:8px;">
+        <span>필요 한국어: ${esc(l.korean)}</span>
+      </div>
+      <div class="field-label">연락 방법</div>
+      <div class="empty-state" style="text-align:left; margin:0;">${esc(l.contact)}</div>
+      <div class="proto-note" style="margin-top:14px;">지원 전, 체류자격외활동허가를 확인하셨는지 꼭 확인해주세요.</div>
+    </div>
+  `;
+}
+
+// 알림: 내 질문에 달린 답변, 답변완료로 뽑힌 내 답변
+function buildNotifs(){
+  const me = ME_STUDENT.id;
+  const list = [];
+  QUESTIONS.forEach(q=>{
+    if(q.author.id===me){
+      q.answers.forEach(a=>{
+        if(a.author.id!==me) list.push({type:'answer', name:a.author.name, title:q.title, qid:q.id, at:a.createdAt});
+      });
+    } else if(q.resolved){
+      const a = q.answers[q.resolvedIdx];
+      if(a && a.author.id===me) list.push({type:'resolved', title:q.title, qid:q.id, at:q.resolvedAt || a.createdAt});
+    }
+  });
+  return list.sort((x,y)=>new Date(y.at) - new Date(x.at)).slice(0, 50);
+}
+
+function renderNotifs(){
+  const list = buildNotifs();
+  return `
+    <div class="topbar">
+      <div class="topbar-title">${titleHTML('알림','通知')}</div>
+    </div>
+    <div>
+      ${list.length ? list.map(n=>`
+        <div class="notif-item" role="button" tabindex="0" onclick="navigate('detail','${n.qid}')" onkeydown="if(event.key==='Enter') navigate('detail','${n.qid}')">
+          ${icon(n.type==='resolved' ? 'check' : 'bell')}
+          <div>
+            <div>${n.type==='resolved' ? t('내 답변이 답변완료로 선택됐어요') : t('{name}님이 내 질문에 답변했어요', {name:esc(n.name)})}</div>
+            <div class="notif-time">${esc(n.title)} · ${timeText(ago(n.at))}</div>
+          </div>
+        </div>
+      `).join('') : `<div class="empty-state">${t('아직 알림이 없어요. 내 질문에 답변이 달리면 여기서 알려 드려요.')}</div>`}
+    </div>
+  `;
+}
+
+function renderMyPage(){
+  return state.role==='owner' ? renderMyPageOwner() : renderMyPageStudent();
+}
+
+function renderMyPageStudent(){
+  const s = studentOf(ME_STUDENT.id);
+  const stats = myStats();
+  return `
+    <div class="topbar">
+      <div class="topbar-title">${titleHTML('마이페이지','我的')}</div>
+      ${langToggleHTML()}
+    </div>
+    <div class="profile-card">
+      <div class="profile-avatar">${initial(s.name)}</div>
+      <div class="profile-name">${esc(s.name)}</div>
+      <div class="profile-tag">${profileTag(s)}</div>
+      <div class="stat-row">
+        <div class="stat"><b>${stats.answers}</b><span>${t('답변')}</span></div>
+        <div class="stat"><b>${bestAnswerCountOf(s.id)}</b><span>${t('베스트 답변')}</span></div>
+        <div class="stat"><b>${stats.likes}</b><span>${t('받은 좋아요')}</span></div>
+        <div class="stat"><b>${careerText(careerMonthsOf(ME_STUDENT.id))}</b><span>${t('경력')}</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn ${state.tab==='reviews'?'is-active':''}" onclick="setMyTab('reviews')">${t('내 후기')}</button>
+      <button class="tab-btn ${state.tab==='openQuestions'?'is-active':''}" onclick="setMyTab('openQuestions')">${t('진행중 Q&A')}</button>
+    </div>
+    <div id="myTabBody">${renderMyTabBody()}</div>
+    <div class="account-links">
+      <button type="button" class="text-link" onclick="logout()">${t('로그아웃')}</button>
+      <button type="button" class="text-link" onclick="deleteAccount()">${t('회원 탈퇴')}</button>
+    </div>
+  `;
+}
+
+function renderMyPageOwner(){
+  const myListingCount = LISTINGS.filter(l=>l.owner.name===ME_OWNER.name).length;
+  return `
+    <div class="topbar">
+      <div class="topbar-title">마이페이지<span class="zh">我的</span></div>
+    </div>
+    <div class="profile-card">
+      <div class="profile-avatar">${initial(ME_OWNER.shop)}</div>
+      <div class="profile-name">${ME_OWNER.shop}</div>
+      <div class="profile-tag">${ME_OWNER.name} 사장님 · ${ME_OWNER.category}</div>
+      <div style="margin-top:10px;">
+        ${ME_OWNER.verified
+          ? `<span class="badge-adopted">${icon('check')} 인증완료</span>`
+          : `<button class="pill-btn" onclick="verifyOwner()">${icon('shop')} 인증 신청하기</button>`}
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>${ME_OWNER.answers}</b><span>답변</span></div>
+        <div class="stat"><b>${ME_OWNER.adoptRate}%</b><span>채택률</span></div>
+        <div class="stat"><b>${myListingCount}</b><span>등록 공고</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn ${state.tab==='listings'?'is-active':''}" onclick="setMyTab('listings')">내 공고</button>
+      <button class="tab-btn ${state.tab==='answers'?'is-active':''}" onclick="setMyTab('answers')">내 답변</button>
+    </div>
+    <div id="myTabBody">${renderMyTabBody()}</div>
+    <div class="content" style="padding-top:8px;">
+      <div style="text-align:center; margin-top:6px;"><button type="button" class="text-link" onclick="logout()">로그아웃</button></div>
+    </div>
+  `;
+}
+
+function setMyTab(tab){
+  state.tab = tab;
+  render();
+}
+
+function renderMyTabBody(){
+  if(state.tab==='listings'){
+    const mine = LISTINGS.filter(l=>l.owner.name===ME_OWNER.name);
+    if(!mine.length) return `<div class="empty-state">아직 등록한 공고가 없어요.</div>`;
+    return `<div class="qlist" style="padding:0 18px;">${mine.map(listingCardHTML).join('')}</div>`;
+  }
+  if(state.tab==='reviews'){
+    const mine = REVIEWS.filter(r=>r.authorId===ME_STUDENT.id);
+    if(!mine.length) return `<div class="empty-state">${t('아직 작성한 후기가 없어요.')}</div>`;
+    return `<div class="qlist" style="padding:0 18px;">${mine.map(reviewCardHTML).join('')}</div>`;
+  }
+  if(state.tab==='openQuestions'){
+    const mine = QUESTIONS.filter(q=>q.author.id===ME_STUDENT.id && !q.resolved);
+    if(!mine.length) return `<div class="empty-state">${t('진행중인 질문이 없어요.')}</div>`;
+    return `<div class="qlist" style="padding:0 18px;">${mine.map(item=>qcardHTML(item,false)).join('')}</div>`;
+  }
+  return myAnswersList(ME_OWNER.name);
+}
+
+function myAnswersList(name){
+  const mine = [];
+  QUESTIONS.forEach(item=>{
+    item.answers.forEach(a=>{
+      if(a.author.name===name) mine.push({q:item, a});
+    });
+  });
+  if(!mine.length) return `<div class="empty-state">아직 남긴 답변이 없어요.</div>`;
+  return mine.map(m=>`
+    <button class="mylist-item" onclick="navigate('detail','${m.q.id}')">
+      <div class="mylist-q">${esc(m.q.title)}</div>
+      <div class="mylist-a">${esc(m.a.body)}</div>
+    </button>
+  `).join('');
+}
+
+/* ===== 시작 =====
+   이미 로그인돼 있으면 바로 홈으로, 아니면 로그인 화면으로 가요. */
+state.recovering = /[#&]type=recovery/.test(OPENED_HASH);                 // 비밀번호 재설정 메일의 링크로 들어온 경우
+const openedWithLinkError = /[#&]error(_code)?=/.test(OPENED_HASH);       // 만료된 메일 링크로 들어온 경우
+
+async function boot(){
+  state.lang = detectLang();
+  applyLang();
+  if(!SERVER_READY){ state.view = 'setup'; render(); return; }
+  if(!sb){ lastLoadError = 'supabase-js를 불러오지 못했어요'; state.view = 'loadError'; render(); return; }
+  state.view = 'loading';
+  render();
+
+  // 이 안에서는 서버에 다시 요청하지 않고, 화면 상태만 바꿔요
+  sb.auth.onAuthStateChange(event=>{
+    if(event==='PASSWORD_RECOVERY'){
+      state.recovering = true;
+      if(ME_STUDENT.id && state.view!=='loading') navigate('newPassword', null, {replace:true});
+    }
+    if(event==='SIGNED_OUT' && ME_STUDENT.id){   // 다른 탭에서 로그아웃했거나 로그인 기간이 끝난 경우
+      clearLocal();
+      navigate('login');
+    }
+  });
+
+  let session = null;
+  try{ session = (await sb.auth.getSession()).data.session; }catch(e){}
+  if(session){
+    await enterSession(session.user);
+  } else {
+    state.recovering = false;
+    navigate('login', null, {replace:true});
+    if(openedWithLinkError) setAuthNotice('링크가 만료됐거나 이미 사용됐어요. 다시 시도해 주세요.', false);
+  }
+}
+boot();
+</script>
+</body>
+</html>
