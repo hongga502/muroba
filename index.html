@@ -977,6 +977,105 @@
   .status-detail{margin-top:18px; font-size:11px; color:var(--ink-faint); word-break:break-all;}
   /* 아이폰에서 입력창을 누를 때 화면이 확대되지 않게 */
   @media (hover:none) and (pointer:coarse){ select.field, input.field, textarea.field{font-size:16px;} }
+
+  /* ===== 알바 시작 가이드 ===== */
+  .guide-banner{display:flex; flex-direction:column; gap:6px; width:calc(100% - 36px); margin:14px 18px 2px; padding:18px; border:none; border-radius:18px; background:var(--accent); color:var(--accent-contrast); text-align:left; font-family:inherit; cursor:pointer;}
+  .guide-banner:hover{filter:brightness(1.05);}
+  .guide-banner:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
+  .gb-kicker{font-size:12.5px; font-weight:600; opacity:.92;}
+  .gb-title{font-size:19px; font-weight:700; line-height:1.38; letter-spacing:-.01em;}
+  .gb-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px;}
+  .gb-dots{display:flex; gap:5px;}
+  .gb-dots i{width:20px; height:5px; border-radius:3px; background:currentColor; opacity:.4;}
+  .gb-dots i:first-child{opacity:1;}
+  .gb-cta{flex:none; min-height:36px; display:inline-flex; align-items:center; padding:0 14px; border-radius:18px; background:var(--accent-contrast); color:var(--accent); font-size:13.5px; font-weight:700;}
+
+  .ghost-btn{min-height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer;}
+  .ghost-btn:hover{border-color:var(--accent);}
+  .guide{padding-bottom:36px; word-break:keep-all;}
+  .guide-banner, .ask-step{word-break:keep-all;}
+  .guide-badge{display:inline-block; padding:4px 10px; border-radius:6px; background:var(--accent-soft); color:var(--accent); font-size:11.5px; font-weight:700;}
+  .guide-h1{margin:10px 0 0; font-size:23px; font-weight:700; line-height:1.36; letter-spacing:-.02em;}
+  .guide-h2{margin:26px 0 10px; font-size:15.5px; font-weight:700;}
+  .guide-lead{margin:8px 0 0; font-size:14px; line-height:1.65; color:var(--ink-soft);}
+  .guide-warn{display:flex; gap:12px; margin-top:18px; padding:14px 16px; border-radius:14px; background:var(--accent-soft); color:var(--accent);}
+  .guide-warn svg{flex:none; width:22px; height:22px; margin-top:1px;}
+  .guide-warn b{display:block; font-size:14.5px;}
+  .guide-warn p{margin:3px 0 0; font-size:13.5px; line-height:1.6; color:var(--ink);}
+  .guide-steps{list-style:none; margin:24px 0 0; padding:0;}
+  .guide-steps li{display:flex; gap:14px;}
+  .gs-rail{flex:none; display:flex; flex-direction:column; align-items:center;}
+  .gs-num{width:30px; height:30px; border-radius:50%; background:var(--ink); color:var(--app-bg); font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .gs-line{flex:1; width:2px; margin:4px 0; background:var(--border);}
+  .guide-steps li:last-child .gs-line{display:none;}
+  .gs-body{flex:1; min-width:0; padding-bottom:22px;}
+  .gs-title{font-size:15.5px; font-weight:700; line-height:30px;}
+  .gs-short{font-size:13.5px; line-height:1.6; color:var(--ink-soft);}
+  .gs-count{margin-top:6px; font-size:12px; color:var(--ink-faint);}
+  .gs-actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .gs-more, .gs-ask{min-height:40px; padding:0 12px; border-radius:10px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer;}
+  .gs-more{border:none; background:var(--chip-bg); color:var(--ink);}
+  .gs-ask{border:1px solid var(--accent); background:var(--surface); color:var(--accent);}
+  .gs-more:focus-visible, .gs-ask:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .guide-askcard{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; padding:16px; border:1px solid var(--border); border-radius:14px;}
+  .guide-askcard b{display:block; font-size:14.5px;}
+  .guide-askcard span{display:block; margin-top:2px; font-size:12.5px; color:var(--ink-soft);}
+  .guide-askcard .pill-btn{flex:none;}
+  .guide-source{margin-top:22px; font-size:11.5px; line-height:1.65; color:var(--ink-faint);}
+  .guide-progress{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:4px; padding:0 18px;}
+  .guide-progress i{height:4px; border-radius:2px; background:var(--border);}
+  .guide-progress i.is-on{background:var(--accent);}
+  .guide-choice{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px;}
+  .guide-result{margin-top:22px; padding:18px; border-radius:16px; background:var(--accent); color:var(--accent-contrast);}
+  .gr-sub{font-size:12.5px; font-weight:600; opacity:.92;}
+  .gr-main{margin-top:6px; font-size:14px; font-weight:600;}
+  .gr-main b{font-size:28px; font-weight:700; letter-spacing:-.02em;}
+  .gr-weekend{margin-top:10px; padding-top:10px; border-top:1px solid currentColor; border-top-color:color-mix(in srgb, currentColor 35%, transparent); font-size:13.5px; line-height:1.5;}
+  .guide-table{border:1px solid var(--border); border-radius:14px; overflow:hidden; font-size:12.5px;}
+  .gt-row{display:grid; grid-template-columns:minmax(0, 1.35fr) repeat(3, minmax(0, 1fr));}
+  .gt-row + .gt-row{border-top:1px solid var(--border);}
+  .gt-row span{padding:10px 8px;}
+  .gt-head{background:var(--chip-bg); font-weight:700;}
+  .guide-list{margin:0; padding-left:20px; font-size:14px; line-height:1.75;}
+  .guide-list.is-banned li::marker{color:var(--accent);}
+  .guide-wide{width:100%; margin-top:16px;}
+  .guide-sub{list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:14px;}
+  .guide-sub li{display:flex; align-items:center; gap:10px; line-height:1.5;}
+  .guide-sub span{flex:none; width:24px; height:24px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .guide-office{margin-top:20px; padding:16px; border:1px solid var(--border); border-radius:14px;}
+  .guide-office dl{display:grid; grid-template-columns:72px minmax(0, 1fr); row-gap:10px; margin:0; font-size:13.5px; line-height:1.55;}
+  .guide-office dt{color:var(--ink-faint);}
+  .guide-office dd{margin:0;}
+  .guide-office small{font-size:11.5px; color:var(--ink-faint);}
+  .guide-office a[href^="tel"]{display:inline-flex; align-items:center; min-height:40px; color:var(--accent); font-weight:700;}
+  .guide-link{display:inline-flex; align-items:center; min-height:44px; margin-top:4px; color:var(--accent); font-size:13.5px; font-weight:600;}
+  .guide-check{display:flex; flex-direction:column; border:1px solid var(--border); border-radius:14px;}
+  .guide-check label{display:flex; align-items:center; gap:12px; min-height:50px; padding:8px 14px; font-size:14px; line-height:1.45; cursor:pointer;}
+  .guide-check label + label{border-top:1px solid var(--border);}
+  .guide-check input{flex:none; width:20px; height:20px; margin:0; accent-color:var(--accent);}
+  .guide-check small{font-size:11.5px; color:var(--ink-faint);}
+  .guide-options{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
+  .guide-option{padding:14px 16px; border:1px solid var(--border); border-radius:14px;}
+  .guide-option b{display:block; font-size:14.5px;}
+  .guide-option span{display:block; margin-top:3px; font-size:13px; line-height:1.55; color:var(--ink-soft);}
+  .guide-nav{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin-top:10px;}
+  .guide-tag{padding:2px 7px; border-radius:6px; background:var(--accent-soft); color:var(--accent); font-weight:600;}
+  .ask-step{margin-bottom:6px;}
+  .ask-step-note{font-size:12px; color:var(--ink-faint);}
+  .ask-step-chip{display:inline-flex; align-items:center; gap:4px; margin-top:8px; padding:0 4px 0 12px; min-height:36px; border-radius:18px; background:var(--accent-soft); color:var(--accent); font-size:13.5px; font-weight:700;}
+  .ask-step-chip button{width:32px; height:32px; border:none; border-radius:50%; background:transparent; color:inherit; font-size:18px; line-height:1; cursor:pointer;}
+  .ask-step-chip button:focus-visible{outline:2px solid var(--accent);}
+  .ask-step-similar{margin-top:14px; padding:14px; border-radius:14px; background:var(--chip-bg); display:flex; flex-direction:column; gap:6px;}
+  .ask-step-similar-title{font-size:14px; font-weight:700;}
+  .ask-step-similar .suggest-item{background:var(--surface); min-height:44px;}
+  @media (min-width:900px){
+    .view-feed .guide-banner{width:calc(100% - 36px); margin:0 18px 28px; flex-direction:row; align-items:center; gap:24px; padding:22px 26px;}
+    .view-feed .gb-title{flex:1; font-size:21px;}
+    .view-feed .gb-foot{margin-top:0;}
+    .view-feed .gb-kicker{flex:none;}
+    .guide-h1{font-size:30px;}
+    .guide-progress{padding:0;}
+  }
 </style>
 </head>
 <body>
@@ -1079,7 +1178,10 @@ const LEVEL_QUESTIONS = [
 // 회원가입 때 고른 내 한국어 수준 → 홈 필터 기본값
 const PERSON_LEVEL = {'거의 안 씀':'beginner', '기본 인사 가능':'beginner', '손님 응대 가능':'intermediate'};
 let MY_LEVEL = null;
-const INDUSTRIES = ['카페·음료', '식당·주방보조', '편의점', '물류·배송', '서빙·홀', '상하차', '전단지·판촉', '기타'];
+// 업종: 중앙대 국제처 안내의 허용 분야 기준 (편의점·카페는 안내에 직접 적혀 있지 않지만 넣어 둬요)
+const INDUSTRIES = ['음식점·식당 점원', '편의점', '카페', '사무보조', '행사보조', '관광안내 보조', '면세점 판매보조', '기타'];
+// 예전 업종 이름으로 쓴 후기도 새 업종 탭에서 보이게 연결해요
+const LEGACY_INDUSTRY = {'카페·음료':'카페', '식당·주방보조':'음식점·식당 점원', '서빙·홀':'음식점·식당 점원'};
 
 let STUDENTS = [];   // 화면에 나오는 회원들의 공개 프로필 (서버에서 불러와요)
 function studentOf(id){ return STUDENTS.find(s=>s.id===id); }
@@ -1144,7 +1246,10 @@ function personOf(row){
   return {id:row.author_id, name:row.author_name, dept:row.author_univ, year:row.author_year, stay:row.author_stay};
 }
 // '기타'를 고르고 직접 적은 업종도 '기타'로 묶어서 걸러요
-function industryGroup(industry){ return INDUSTRIES.includes(industry) ? industry : '기타'; }
+function industryGroup(industry){
+  const name = LEGACY_INDUSTRY[industry] || industry;
+  return INDUSTRIES.includes(name) ? name : '기타';
+}
 
 async function loadAll(isRetry){
   const uid = ME_STUDENT.id;
@@ -1194,7 +1299,8 @@ async function loadAll(isRetry){
       const idx = q.resolved_answer_id ? answers.findIndex(a=>a.id===q.resolved_answer_id) : -1;
       return {id:q.id, cat:q.cat, title:q.title, body:q.body, author:keep(personOf(q)), isMine:!!q.is_mine,
               createdAt:q.created_at, time:ago(q.created_at), views:q.views, answers,
-              resolved: idx >= 0, resolvedIdx: idx >= 0 ? idx : null, resolvedAt:q.resolved_at};
+              resolved: idx >= 0, resolvedIdx: idx >= 0 ? idx : null, resolvedAt:q.resolved_at,
+              guideStep: q.guide_step || null};
     });
     STUDENTS = Array.from(people.values());
     LIKED_ANSWERS = new Set(al.map(x=>x.answer_id));
@@ -1210,7 +1316,7 @@ async function loadAll(isRetry){
 }
 
 // 다른 사람이 새로 쓴 글이 보이도록, 목록 화면에 들어올 때 조용히 다시 불러와요
-const LIVE_VIEWS = ['feed','qa','notifs','mypage','detail','reviewDetail','userProfile'];
+const LIVE_VIEWS = ['feed','qa','notifs','mypage','detail','reviewDetail','userProfile','guide','guideStep'];
 function softRefresh(){
   if(!sb || refreshing || busy) return;
   if(Date.now() - lastLoadAt < 15000) return;
@@ -1273,7 +1379,7 @@ const OWNER_TABS = [
   {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
 ];
 
-const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, lang:'ko'};
+const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, askStep:null, guideCourse:'u12', guideTopik:true, lang:'ko'};
 
 /* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
    1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
@@ -1458,6 +1564,119 @@ const I18N_ZH = {
   '{name}님이 내 질문에 답변했어요':'{name}回答了你的提问',
   '내 답변이 답변완료로 선택됐어요':'提问者采纳了你的回答',
   '아직 알림이 없어요. 내 질문에 답변이 달리면 여기서 알려 드려요.':'还没有通知。有人回答你的提问时，会在这里提醒你。',
+  // 업종 (중앙대 허용 분야 기준)
+  '음식점·식당 점원':'餐厅·饭店店员', '카페':'咖啡店', '사무보조':'办公辅助', '행사보조':'活动辅助',
+  '관광안내 보조':'旅游向导辅助', '면세점 판매보조':'免税店销售辅助',
+  // 알바 시작 가이드 — 배너·목록
+  '알바 처음이에요?':'第一次打工？',
+  '허가부터 첫 출근까지 5단계로 알려줄게요':'从申请许可到第一天上班，5步讲清楚',
+  '가이드 보기':'查看指南',
+  '중앙대학교 유학생(D-2) 기준':'以中央大学留学生（D-2）为准',
+  '중앙대학교 기준':'以中央大学为准',
+  '중앙대 유학생 알바,':'中央大学留学生打工，',
+  '이 순서대로 하면 돼요':'按这个顺序来就行',
+  '모르는 부분이 있으면 “이 부분이 헷갈려요”를 눌러 선배에게 바로 물어보세요.':'有不懂的地方，点「这里没看懂」直接问学长学姐。',
+  '허가 먼저, 일은 나중':'先拿许可，再上班',
+  '출입국 허가가 나온 뒤부터 일할 수 있어요. 심사 중에 먼저 일하면 무허가 취업이 될 수 있어요.':'出入境许可下来之后才能开始工作。审查期间先去上班，可能会被认定为无许可就业。',
+  '신청할 수 있는지 확인':'确认自己能不能申请',
+  '일할 곳 먼저 정하기':'先定好打工的地方',
+  '국제교육지원팀 확인 받기':'找国际教育支援组确认',
+  '출입국 허가 신청':'申请出入境许可',
+  '허가 후 첫 출근':'拿到许可后开始上班',
+  '학년(과정)과 TOPIK 급수에 따라 평일에 일할 수 있는 시간이 달라요 (주 10~35시간).':'根据年级（课程）和TOPIK等级，工作日可打工的时间不同（每周10～35小时）。',
+  '알바를 구하고 표준근로계약서를 써요 (시급·근무내용·시간 기재). 아직 출근은 안 돼요.':'找到兼职后签标准劳动合同（写明时薪、工作内容和时间）。这时还不能去上班。',
+  '확인서 작성 → 사장님 확인 → 310관 210호 국제교육지원팀에서 담당자 확인을 받아요.':'填写确认书 → 老板确认 → 到310馆210室国际教育支援组找负责老师确认。',
+  '출입국사무소 방문(온라인 예약 필수) 또는 하이코리아 전자민원. 처리 기간이 있으니 여유 있게 신청해요.':'去出入境管理事务所办理（必须网上预约），或在HiKorea网上申请。审批需要时间，请尽早申请。',
+  '허가된 가게·시간 안에서만 일해요. 할 수 없는 일도 꼭 확인하세요.':'只能在许可的店和时间内工作。也一定要看看哪些工作不能做。',
+  '내 조건 체크하기':'查查我的条件', '자세히 보기':'查看详情', '필요 서류 보기':'查看所需材料',
+  '신청 방법 보기':'查看申请方法', '주의사항 보기':'查看注意事项',
+  '이 부분이 헷갈려요':'这里没看懂',
+  '이 단계 질문 {n}개 · 답변완료 {m}개':'这一步的提问 {n}个 · 已解决 {m}个',
+  '가이드에 없는 내용이에요?':'指南里没有你想问的？',
+  '비슷한 상황을 겪은 선배가 답해줘요':'经历过类似情况的学长学姐会回答你',
+  '출처: 중앙대 국제처 국제교육지원팀 안내 · 최종 확인 {date}':'来源：中央大学国际处国际教育支援组说明 · 最后核对 {date}',
+  '규정은 자주 바뀌어요. 정확한 기준은 꼭 국제교육지원팀에서 확인하세요.':'规定经常变化，具体标准请一定向国际教育支援组确认。',
+  // 가이드 — 단계 공통
+  '{n} / 5단계':'第{n}步 / 共5步',
+  '{n}단계':'第{n}步',
+  '선배들이 많이 물어본 질문':'学长学姐常问的问题',
+  '아직 이 단계 질문이 없어요. 첫 질문을 남겨보세요.':'这一步还没有人提问，来问第一个问题吧。',
+  '이 단계에 대해 질문하기':'就这一步提问',
+  '가이드 처음으로':'回到指南',
+  '가이드 {n}단계':'指南第{n}步',
+  // 가이드 1단계 — 허용시간
+  '나는 몇 시간 일할 수 있을까?':'我每周能打工几个小时？',
+  '① 나의 과정':'① 我的课程',
+  '② TOPIK {lv} 이상이 있나요?':'② 有TOPIK {lv}以上吗？',
+  '있어요':'有', '없어요':'没有',
+  '학부 1~2학년':'本科1～2年级', '학부 3~4학년':'本科3～4年级', '대학원 재학':'研究生在读', '대학원 수료':'研究生结业',
+  '3급':'3级', '4급':'4级',
+  '{course} · TOPIK {lv} 이상':'{course} · TOPIK {lv}以上',
+  '{course} · TOPIK {lv} 미만':'{course} · 未达到TOPIK {lv}',
+  '평일(월~금)':'工作日（周一至周五）',
+  '주 {h}시간까지':'每周最多{h}小时',
+  '주말·방학: {w}':'周末·假期：{w}',
+  '제한 없음 (사전허가 필수)':'不限时（必须事先获得许可）',
+  '안내 페이지에 따로 적혀 있지 않아요. 국제교육지원팀에 확인하세요.':'学校说明页面没有单独写明，请向国际教育支援组确认。',
+  '전체 허용시간 표':'可打工时间一览表',
+  '과정':'课程', 'TOPIK 기준':'TOPIK标准', '미충족':'未达到', '충족':'达到',
+  '주 {h}시간':'每周{h}小时',
+  '평일 기준이에요. 학부·대학원 재학생은 주말·방학에 시간 제한이 없지만 미리 허가를 받아야 해요.':'以上为工作日标准。本科生和在读研究生周末、假期不限时，但必须事先获得许可。',
+  // 가이드 2단계
+  '허가는 일할 가게를 기준으로 나와요. 그래서 일할 곳을 먼저 정하고 계약서를 써요.':'许可是按具体打工的店发的，所以要先定好地方、签好合同。',
+  '근로계약서에 꼭 적을 것':'劳动合同里一定要写明',
+  '시급':'时薪', '근무 내용':'工作内容', '근무 시간 (요일·시간)':'工作时间（星期几、几点到几点）',
+  '중앙대 안내의 허용 분야 예시':'中央大学说明中的可从事领域（举例）',
+  '음식업 보조·식당 점원':'餐饮辅助·餐厅店员', '일반 사무보조':'一般办公辅助', '행사보조요원':'活动辅助人员',
+  '면세점 판매 보조':'免税店销售辅助',
+  '목록은 예시예요. 다른 업종은 국제교육지원팀에 확인하세요.':'以上只是举例，其他行业请向国际教育支援组确认。',
+  '선배 후기 보기':'看看学长学姐的经验',
+  // 가이드 3단계
+  '담당자 확인을 받은 ‘시간제취업 확인서’가 있어야 4단계 출입국 신청을 할 수 있어요. 이 순서로 해요.':'要有负责老师确认过的「兼职确认书」，才能进行第4步出入境申请。按下面的顺序办理。',
+  '시간제취업 확인서 작성 (서식/양식 페이지)':'填写兼职确认书（在学校表格下载页）',
+  '근무처(사장님) 확인 받기':'请打工的店（老板）确认',
+  '서류 들고 국제교육지원팀 방문 → 담당자 확인':'带齐材料去国际教育支援组 → 负责老师确认',
+  '중앙대 국제교육지원팀':'中央大学国际教育支援组',
+  '위치':'位置', '310관 210호 국제처':'310馆210室 国际处', '(동작구 흑석로 84)':'（铜雀区黑石路84号）',
+  '운영시간':'办公时间', '평일 9:00~18:00 (점심 12:00~13:00)':'工作日 9:00～18:00（午休 12:00～13:00）',
+  '주말·공휴일 휴무':'周末及法定节假日休息', '방학에는 단축 근무할 수 있어요':'假期可能缩短办公时间',
+  '신청 방식':'办理方式', '서류를 모두 챙겨 직접 방문':'带齐材料本人前往',
+  '문의':'咨询', '국제처 업무 총괄':'国际处总咨询',
+  '중앙대 시간제 취업 안내 페이지 열기':'打开中央大学兼职说明页面',
+  '준비 서류 체크리스트':'材料清单',
+  '중앙대 국제교육지원팀 안내 기준 · 출입국 신청 때도 그대로 가져가요':'按中央大学国际教育支援组的说明 · 去出入境申请时也要带上',
+  '신청서':'申请表', '(출입국사무소에 비치)':'（出入境管理事务所提供）',
+  '여권':'护照', '외국인등록증':'外国人登录证',
+  '외국인유학생 시간제취업 확인서':'外国留学生兼职确认书', '(국제처 담당자 확인)':'（需国际处负责老师确认）',
+  '한국어능력 증빙서류':'韩语能力证明材料', '(TOPIK 등)':'（TOPIK等）',
+  '성적증명서':'成绩证明',
+  '사업자등록증 사본 + 고용주 신분증 사본':'营业执照复印件 + 雇主身份证复印件', '(사장님께 요청)':'（找老板要）',
+  '표준근로계약서 사본':'标准劳动合同复印件', '(시급·근무내용·시간 기재)':'（写明时薪、工作内容和时间）',
+  // 가이드 4단계
+  '서류를 모두 챙겨서 둘 중 한 가지로 신청해요.':'带齐材料，选下面一种方式申请。',
+  '출입국·외국인관서 방문':'去出入境·外国人管理机构办理',
+  '온라인 방문 예약이 필수예요.':'必须先在网上预约。',
+  '하이코리아 전자민원':'HiKorea网上申请',
+  '하이코리아(hikorea.go.kr)에서 온라인으로 접수해요.':'在HiKorea（hikorea.go.kr）网上提交申请。',
+  '하이코리아 열기':'打开HiKorea',
+  '처리 기간이 있으니 여유 있게 신청하세요. 허가가 나오기 전에는 일하면 안 돼요.':'审批需要时间，请尽早申请。许可下来之前不能上班。',
+  // 가이드 5단계
+  '허가가 나오면 근무를 시작해요. 허가된 근무처와 허용 시간 안에서만 일할 수 있어요.':'许可下来后就可以开始上班了。只能在许可的工作地点和时间内工作。',
+  '허가를 받아도 할 수 없는 일':'即使有许可也不能做的工作',
+  '배달대행 라이더, 택배기사, 대리기사':'外卖配送骑手、快递员、代驾',
+  '보험설계사, 학습지 교사, 방문 판매원':'保险推销员、学习资料上门教师、上门推销员',
+  '미성년 대상 외국어 교육 시설 (영어키즈카페, 영어캠프, 외국어 학원 등)':'面向未成年人的外语教育机构（英语儿童咖啡厅、英语营、外语补习班等）',
+  '제조업·건설업 등 비전문취업(E-9)·선원취업(E-10) 업종':'制造业、建筑业等非专业就业（E-9）·船员就业（E-10）行业',
+  '전문분야(E-1~E-7) 활동':'专业领域（E-1～E-7）的工作',
+  '파견·도급·알선 형태의 취업':'派遣、承包、中介形式的工作',
+  '원거리 근무':'远程（异地）工作',
+  '불법고용 처벌 이력으로 제한된 업체·사업장':'因非法雇佣受过处罚而被限制的企业或店铺',
+  // 가이드 → 질문 작성
+  '가이드에서 왔어요 · 단계가 자동으로 붙었어요':'来自指南 · 已自动加上步骤标签',
+  '태그 지우기':'删除标签',
+  '혹시 이 질문인가요?':'是不是这个问题？',
+  '같은 단계에서 이미 답변 완료된 질문이에요':'同一步骤中已经解决的问题',
+  '이렇게 쓰면 답변이 빨라요\n① 지금 상황\n② 어디까지 해봤는지\n③ 어디서 막혔는지':'这样写能更快得到回答\n① 现在的情况\n② 已经做到哪一步\n③ 卡在哪里',
   // 학과 (예전 샘플 데이터용)
   '경영학과':'经营学系', '정치국제학과':'政治国际学系', '국어국문학과':'国语国文学系', '사회학과':'社会学系'
 };
@@ -1569,7 +1788,7 @@ function personSub(author){
 
 // 로그인해야 쓸 수 있는 화면: 글쓰기, 알림, 마이페이지
 const LOGIN_REQUIRED = ['reviewForm','ask','notifs','mypage','listingForm'];
-const GUEST_VIEWS = ['feed','qa','reviewDetail','detail','userProfile'];
+const GUEST_VIEWS = ['feed','qa','reviewDetail','detail','userProfile','guide','guideStep'];
 function isGuest(){ return !ME_STUDENT.id; }
 function requireLogin(view, param, msg){
   state.afterLogin = {view, param: param || null};
@@ -1605,7 +1824,7 @@ function countView(kind, id){
 
 /* ===== 주소와 뒤로 가기 =====
    화면이 바뀔 때 주소 끝에 #/화면이름 을 붙여서, 브라우저 뒤로 가기와 링크 공유가 되게 해요. */
-const ROUTABLE = ['feed','qa','reviewForm','reviewDetail','userProfile','ask','detail','notifs','mypage'];
+const ROUTABLE = ['feed','qa','reviewForm','reviewDetail','userProfile','ask','detail','notifs','mypage','guide','guideStep'];
 function writeRoute(replace){
   const hash = ROUTABLE.includes(state.view) ? '#/' + state.view + (state.param ? '/' + encodeURIComponent(state.param) : '') : '';
   try{
@@ -1630,7 +1849,7 @@ function applyRoute(view, param, replace){
   }
   if(state.recovering){ navigate('newPassword', null, opts); return; }
   if(!ROUTABLE.includes(view)){ view = 'feed'; param = null; }
-  if(view==='ask') param = 'alba';
+  if(view==='ask') param = /^alba:[1-5]$/.test(param || '') ? param : 'alba';
   navigate(view, param, opts);
 }
 window.addEventListener('popstate', e=>{
@@ -1655,6 +1874,7 @@ function render(){
   if(state.view==='reviewDetail' && !REVIEWS.some(r=>r.id===state.param)){ state.view = 'feed'; state.param = null; }
   if(state.view==='userProfile' && !studentOf(state.param)){ state.view = 'feed'; state.param = null; }
   if(state.view==='detail' && !qOf(state.param)){ state.view = 'qa'; state.param = null; }
+  if(state.view==='guideStep' && !guideStepOf(state.param)){ state.view = 'guide'; state.param = null; }
   // 쓰고 있던 답변은 화면을 다시 그려도 남겨 둬요
   const oldAnswer = document.getElementById('answerBody');
   const oldAnon = document.getElementById('answerAnon');
@@ -1673,6 +1893,8 @@ function render(){
   else if(state.view==='onboarding') el.innerHTML = renderOnboarding();
   else if(state.view==='feed') el.innerHTML = renderFeed();
   else if(state.view==='qa') el.innerHTML = renderQA();
+  else if(state.view==='guide') el.innerHTML = renderGuide();
+  else if(state.view==='guideStep') el.innerHTML = renderGuideStep(state.param);
   else if(state.view==='reviewForm') el.innerHTML = renderReviewForm();
   else if(state.view==='reviewDetail') el.innerHTML = renderReviewDetail(state.param);
   else if(state.view==='userProfile') el.innerHTML = renderUserProfile(state.param);
@@ -1716,7 +1938,7 @@ function currentTabKey(){
     if(state.view==='mypage') return 'mypage';
     return null;
   }
-  if(state.view==='feed') return 'feed';
+  if(state.view==='feed' || state.view==='guide' || state.view==='guideStep') return 'feed';
   if(state.view==='qa' || state.view==='ask') return 'qa';
   if(state.view==='reviewForm') return 'reviewForm';
   if(state.view==='notifs') return 'notifs';
@@ -2388,6 +2610,7 @@ function renderFeed(){
       <h1 class="home-headline">${t('알바, 먼저 해 본 선배에게')}<br><span class="hl">${t('물어봐')}</span></h1>
       <div class="tagline">${t('중앙대 유학생 선배들이 직접 쓴 후기와 답변')}</div>
     </div>
+    ${guideBannerHTML()}
     <div class="feed-layout">
       <aside class="filter-panel">${renderFilterBar()}</aside>
       <div id="feedBody">${renderFeedBody()}</div>
@@ -2487,6 +2710,268 @@ function renderQA(){
       <div class="qlist" style="padding:0;">
         ${list.length ? list.map(item=>qcardHTML(item,false)).join('') : `<div class="empty-state">${t('아직 질문이 없어요. 첫 질문을 남겨보세요.')}</div>`}
       </div>
+    </div>
+  `;
+}
+
+/* ===== 알바 시작 가이드 (중앙대 국제처 국제교육지원팀 안내 기준) =====
+   메인 배너 → 5단계 목록 → 단계별 자세히 보기. 각 단계에서 "이 부분이 헷갈려요"를 누르면
+   그 단계 번호가 붙은 질문 작성 화면으로 가요 (questions.guide_step). */
+const GUIDE_CHECKED = '2026.10.17';   // 중앙대 안내 페이지와 마지막으로 맞춰 본 날
+const CAU_PARTTIME_URL = 'https://oias.cau.ac.kr/cauoie/life/visa-part-time.do';
+const GUIDE_STEPS = [
+  {n:1, title:'신청할 수 있는지 확인', short:'학년(과정)과 TOPIK 급수에 따라 평일에 일할 수 있는 시간이 달라요 (주 10~35시간).', more:'내 조건 체크하기'},
+  {n:2, title:'일할 곳 먼저 정하기', short:'알바를 구하고 표준근로계약서를 써요 (시급·근무내용·시간 기재). 아직 출근은 안 돼요.', more:'자세히 보기'},
+  {n:3, title:'국제교육지원팀 확인 받기', short:'확인서 작성 → 사장님 확인 → 310관 210호 국제교육지원팀에서 담당자 확인을 받아요.', more:'필요 서류 보기'},
+  {n:4, title:'출입국 허가 신청', short:'출입국사무소 방문(온라인 예약 필수) 또는 하이코리아 전자민원. 처리 기간이 있으니 여유 있게 신청해요.', more:'신청 방법 보기'},
+  {n:5, title:'허가 후 첫 출근', short:'허가된 가게·시간 안에서만 일해요. 할 수 없는 일도 꼭 확인하세요.', more:'주의사항 보기'}
+];
+// 1단계 허용시간 (평일 기준, 주말·방학은 따로)
+const GUIDE_HOURS = [
+  {id:'u12', label:'학부 1~2학년', topik:'3급', no:10, yes:30, weekend:'제한 없음 (사전허가 필수)'},
+  {id:'u34', label:'학부 3~4학년', topik:'4급', no:10, yes:30, weekend:'제한 없음 (사전허가 필수)'},
+  {id:'g',   label:'대학원 재학',  topik:'4급', no:15, yes:35, weekend:'제한 없음 (사전허가 필수)'},
+  {id:'gc',  label:'대학원 수료',  topik:'4급', no:15, yes:30, weekend:'안내 페이지에 따로 적혀 있지 않아요. 국제교육지원팀에 확인하세요.'}
+];
+const GUIDE_DOCS = [
+  ['신청서', '(출입국사무소에 비치)'],
+  ['여권', ''],
+  ['외국인등록증', ''],
+  ['외국인유학생 시간제취업 확인서', '(국제처 담당자 확인)'],
+  ['한국어능력 증빙서류', '(TOPIK 등)'],
+  ['성적증명서', ''],
+  ['사업자등록증 사본 + 고용주 신분증 사본', '(사장님께 요청)'],
+  ['표준근로계약서 사본', '(시급·근무내용·시간 기재)']
+];
+const GUIDE_ALLOWED = ['음식업 보조·식당 점원', '일반 사무보조', '행사보조요원', '관광안내 보조', '면세점 판매 보조'];
+const GUIDE_BANNED = [
+  '배달대행 라이더, 택배기사, 대리기사',
+  '보험설계사, 학습지 교사, 방문 판매원',
+  '미성년 대상 외국어 교육 시설 (영어키즈카페, 영어캠프, 외국어 학원 등)',
+  '제조업·건설업 등 비전문취업(E-9)·선원취업(E-10) 업종',
+  '전문분야(E-1~E-7) 활동',
+  '파견·도급·알선 형태의 취업',
+  '원거리 근무',
+  '불법고용 처벌 이력으로 제한된 업체·사업장'
+];
+function guideStepOf(n){ return GUIDE_STEPS.find(s=>String(s.n)===String(n)); }
+function guideQuestions(n){
+  // 답변완료를 먼저, 그다음 조회수 순
+  return QUESTIONS.filter(q=>q.cat==='alba' && q.guideStep===n)
+    .sort((a,b)=>(b.resolved - a.resolved) || (b.views - a.views));
+}
+function askFromGuide(n){ navigate('ask', n ? 'alba:' + n : 'alba'); }
+function removeAskStep(btn){
+  // 입력하던 내용은 그대로 두고 태그만 떼요
+  state.askStep = null;
+  const box = btn.closest('.ask-step');
+  if(box) box.remove();
+}
+function askStepHTML(step){
+  const done = guideQuestions(step.n).filter(q=>q.resolved).slice(0, 3);
+  return `
+    <div class="ask-step">
+      <div class="ask-step-note">${t('가이드에서 왔어요 · 단계가 자동으로 붙었어요')}</div>
+      <span class="ask-step-chip">#${t('{n}단계', {n:step.n})} ${esc(t(step.title))}
+        <button type="button" onclick="removeAskStep(this)" aria-label="${t('태그 지우기')}">×</button>
+      </span>
+      ${done.length ? `
+        <div class="ask-step-similar">
+          <div class="ask-step-similar-title">${t('혹시 이 질문인가요?')}</div>
+          <div class="field-help" style="margin-top:2px;">${t('같은 단계에서 이미 답변 완료된 질문이에요')}</div>
+          ${done.map(q=>`<button type="button" class="suggest-item" onclick="navigate('detail','${q.id}')">${icon('link')} ${esc(tc(q.title))}</button>`).join('')}
+        </div>` : ''}
+    </div>
+  `;
+}
+
+function guideBannerHTML(){
+  const kicker = isZh() ? t('알바 처음이에요?') : `알바 처음이에요? <span lang="zh-CN">· 第一次打工？</span>`;
+  return `
+    <button type="button" class="guide-banner" onclick="navigate('guide')">
+      <span class="gb-kicker">${kicker}</span>
+      <span class="gb-title">${t('허가부터 첫 출근까지 5단계로 알려줄게요')}</span>
+      <span class="gb-foot">
+        <span class="gb-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="gb-cta">${t('가이드 보기')} →</span>
+      </span>
+    </button>
+  `;
+}
+
+function guideSourceHTML(){
+  return `<div class="guide-source">${t('출처: 중앙대 국제처 국제교육지원팀 안내 · 최종 확인 {date}', {date:GUIDE_CHECKED})}<br>${t('규정은 자주 바뀌어요. 정확한 기준은 꼭 국제교육지원팀에서 확인하세요.')}</div>`;
+}
+
+function renderGuide(){
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('feed')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title">${titleHTML('알바 시작 가이드','打工入门指南')}</div>
+      ${langToggleHTML()}
+    </div>
+    <div class="content guide">
+      <span class="guide-badge">${t('중앙대학교 유학생(D-2) 기준')}</span>
+      <h1 class="guide-h1">${t('중앙대 유학생 알바,')}<br>${t('이 순서대로 하면 돼요')}</h1>
+      <p class="guide-lead">${t('모르는 부분이 있으면 “이 부분이 헷갈려요”를 눌러 선배에게 바로 물어보세요.')}</p>
+
+      <div class="guide-warn" role="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/></svg>
+        <div>
+          <b>${t('허가 먼저, 일은 나중')}</b>
+          <p>${t('출입국 허가가 나온 뒤부터 일할 수 있어요. 심사 중에 먼저 일하면 무허가 취업이 될 수 있어요.')}</p>
+        </div>
+      </div>
+
+      <ol class="guide-steps">
+        ${GUIDE_STEPS.map(s=>{
+          const qs = guideQuestions(s.n);
+          const done = qs.filter(q=>q.resolved).length;
+          return `
+          <li>
+            <div class="gs-rail"><span class="gs-num">${s.n}</span><span class="gs-line"></span></div>
+            <div class="gs-body">
+              <div class="gs-title">${t(s.title)}</div>
+              <div class="gs-short">${t(s.short)}</div>
+              ${qs.length ? `<div class="gs-count">${t('이 단계 질문 {n}개 · 답변완료 {m}개', {n:qs.length, m:done})}</div>` : ''}
+              <div class="gs-actions">
+                <button type="button" class="gs-more" onclick="navigate('guideStep','${s.n}')">${t(s.more)}</button>
+                <button type="button" class="gs-ask" onclick="askFromGuide(${s.n})">${t('이 부분이 헷갈려요')}</button>
+              </div>
+            </div>
+          </li>`;
+        }).join('')}
+      </ol>
+
+      <div class="guide-askcard">
+        <div>
+          <b>${t('가이드에 없는 내용이에요?')}</b>
+          <span>${t('비슷한 상황을 겪은 선배가 답해줘요')}</span>
+        </div>
+        <button type="button" class="pill-btn" onclick="askFromGuide(null)">${t('질문하기')}</button>
+      </div>
+      ${guideSourceHTML()}
+    </div>
+  `;
+}
+
+function setGuideOpt(key, value){
+  state[key] = value;
+  render();
+}
+
+function guideHoursHTML(){
+  const cur = GUIDE_HOURS.find(h=>h.id===state.guideCourse) || GUIDE_HOURS[0];
+  const ok = state.guideTopik;
+  return `
+    <h2 class="guide-h2">${t('① 나의 과정')}</h2>
+    <div class="guide-choice">
+      ${GUIDE_HOURS.map(h=>`<button type="button" class="chip ${h.id===cur.id?'is-active':''}" aria-pressed="${h.id===cur.id}" onclick="setGuideOpt('guideCourse','${h.id}')">${t(h.label)}</button>`).join('')}
+    </div>
+    <h2 class="guide-h2">${t('② TOPIK {lv} 이상이 있나요?', {lv:t(cur.topik)})}</h2>
+    <div class="guide-choice">
+      <button type="button" class="chip ${ok?'is-active':''}" aria-pressed="${ok}" onclick="setGuideOpt('guideTopik',true)">${t('있어요')}</button>
+      <button type="button" class="chip ${!ok?'is-active':''}" aria-pressed="${!ok}" onclick="setGuideOpt('guideTopik',false)">${t('없어요')}</button>
+    </div>
+    <div class="guide-result" aria-live="polite">
+      <div class="gr-sub">${t(ok ? '{course} · TOPIK {lv} 이상' : '{course} · TOPIK {lv} 미만', {course:t(cur.label), lv:t(cur.topik)})}</div>
+      <div class="gr-main"><span>${t('평일(월~금)')}</span> <b>${t('주 {h}시간까지', {h: ok ? cur.yes : cur.no})}</b></div>
+      <div class="gr-weekend">${t('주말·방학: {w}', {w:t(cur.weekend)})}</div>
+    </div>
+    <h2 class="guide-h2">${t('전체 허용시간 표')}</h2>
+    <div class="guide-table" role="table">
+      <div class="gt-row gt-head" role="row"><span role="columnheader">${t('과정')}</span><span role="columnheader">${t('TOPIK 기준')}</span><span role="columnheader">${t('미충족')}</span><span role="columnheader">${t('충족')}</span></div>
+      ${GUIDE_HOURS.map(h=>`<div class="gt-row" role="row"><span role="cell">${t(h.label)}</span><span role="cell">${t(h.topik)}</span><span role="cell">${t('주 {h}시간', {h:h.no})}</span><span role="cell"><b>${t('주 {h}시간', {h:h.yes})}</b></span></div>`).join('')}
+    </div>
+    <p class="field-help">${t('평일 기준이에요. 학부·대학원 재학생은 주말·방학에 시간 제한이 없지만 미리 허가를 받아야 해요.')}</p>
+  `;
+}
+
+function guideStepBodyHTML(n){
+  if(n===1) return guideHoursHTML();
+  if(n===2) return `
+    <p class="guide-lead">${t('허가는 일할 가게를 기준으로 나와요. 그래서 일할 곳을 먼저 정하고 계약서를 써요.')}</p>
+    <h2 class="guide-h2">${t('근로계약서에 꼭 적을 것')}</h2>
+    <ul class="guide-list">
+      <li>${t('시급')}</li><li>${t('근무 내용')}</li><li>${t('근무 시간 (요일·시간)')}</li>
+    </ul>
+    <h2 class="guide-h2">${t('중앙대 안내의 허용 분야 예시')}</h2>
+    <ul class="guide-list">${GUIDE_ALLOWED.map(x=>`<li>${t(x)}</li>`).join('')}</ul>
+    <p class="field-help">${t('목록은 예시예요. 다른 업종은 국제교육지원팀에 확인하세요.')}</p>
+    <button type="button" class="ghost-btn guide-wide" onclick="navigate('feed')">${t('선배 후기 보기')}</button>
+  `;
+  if(n===3) return `
+    <p class="guide-lead">${t('담당자 확인을 받은 ‘시간제취업 확인서’가 있어야 4단계 출입국 신청을 할 수 있어요. 이 순서로 해요.')}</p>
+    <ol class="guide-sub">
+      <li><span>a</span>${t('시간제취업 확인서 작성 (서식/양식 페이지)')}</li>
+      <li><span>b</span>${t('근무처(사장님) 확인 받기')}</li>
+      <li><span>c</span>${t('서류 들고 국제교육지원팀 방문 → 담당자 확인')}</li>
+    </ol>
+    <section class="guide-office">
+      <h2 class="guide-h2" style="margin-top:0;">${t('중앙대 국제교육지원팀')}</h2>
+      <dl>
+        <dt>${t('위치')}</dt><dd>${t('310관 210호 국제처')}<br>${t('(동작구 흑석로 84)')}</dd>
+        <dt>${t('운영시간')}</dt><dd>${t('평일 9:00~18:00 (점심 12:00~13:00)')}<br>${t('주말·공휴일 휴무')}<br><small>${t('방학에는 단축 근무할 수 있어요')}</small></dd>
+        <dt>${t('신청 방식')}</dt><dd>${t('서류를 모두 챙겨 직접 방문')}</dd>
+        <dt>${t('문의')}</dt><dd>${t('국제처 업무 총괄')}<br><a href="tel:028206115">02-820-6115</a></dd>
+      </dl>
+      <a class="guide-link" href="${CAU_PARTTIME_URL}" target="_blank" rel="noopener">${t('중앙대 시간제 취업 안내 페이지 열기')} ↗</a>
+    </section>
+    <h2 class="guide-h2">${t('준비 서류 체크리스트')}</h2>
+    <div class="field-help" style="margin:-4px 0 10px;">${t('중앙대 국제교육지원팀 안내 기준 · 출입국 신청 때도 그대로 가져가요')}</div>
+    <div class="guide-check">
+      ${GUIDE_DOCS.map(([name, note], i)=>`<label for="gdoc${i}"><input id="gdoc${i}" type="checkbox"><span>${t(name)}${note ? ` <small>${t(note)}</small>` : ''}</span></label>`).join('')}
+    </div>
+  `;
+  if(n===4) return `
+    <p class="guide-lead">${t('서류를 모두 챙겨서 둘 중 한 가지로 신청해요.')}</p>
+    <div class="guide-options">
+      <div class="guide-option"><b>${t('출입국·외국인관서 방문')}</b><span>${t('온라인 방문 예약이 필수예요.')}</span></div>
+      <div class="guide-option"><b>${t('하이코리아 전자민원')}</b><span>${t('하이코리아(hikorea.go.kr)에서 온라인으로 접수해요.')}</span>
+        <a class="guide-link" href="https://www.hikorea.go.kr" target="_blank" rel="noopener">${t('하이코리아 열기')} ↗</a></div>
+    </div>
+    <div class="guide-warn" role="note">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/></svg>
+      <div><p>${t('처리 기간이 있으니 여유 있게 신청하세요. 허가가 나오기 전에는 일하면 안 돼요.')}</p></div>
+    </div>
+  `;
+  return `
+    <p class="guide-lead">${t('허가가 나오면 근무를 시작해요. 허가된 근무처와 허용 시간 안에서만 일할 수 있어요.')}</p>
+    <h2 class="guide-h2">${t('허가를 받아도 할 수 없는 일')}</h2>
+    <ul class="guide-list is-banned">${GUIDE_BANNED.map(x=>`<li>${t(x)}</li>`).join('')}</ul>
+  `;
+}
+
+function renderGuideStep(param){
+  const s = guideStepOf(param);
+  const n = s.n;
+  const qs = guideQuestions(n).slice(0, 3);
+  const prev = guideStepOf(n - 1), next = guideStepOf(n + 1);
+  return `
+    <div class="topbar">
+      <button class="iconbtn" onclick="navigate('guide')" aria-label="${t('뒤로')}">${icon('back')}</button>
+      <div class="topbar-title" style="font-size:14px; font-weight:600;">${t('{n} / 5단계', {n})}</div>
+      ${langToggleHTML()}
+    </div>
+    <div class="guide-progress" aria-hidden="true">${GUIDE_STEPS.map(x=>`<i class="${x.n<=n?'is-on':''}"></i>`).join('')}</div>
+    <div class="content guide">
+      <span class="guide-badge">${t('중앙대학교 기준')}</span>
+      <h1 class="guide-h1">${t(s.title)}</h1>
+      ${guideStepBodyHTML(n)}
+
+      <h2 class="guide-h2" style="margin-top:30px;">${t('선배들이 많이 물어본 질문')}</h2>
+      <div class="qlist" style="padding:0;">
+        ${qs.length ? qs.map(q=>qcardHTML(q,false)).join('') : `<div class="empty-state">${t('아직 이 단계 질문이 없어요. 첫 질문을 남겨보세요.')}</div>`}
+      </div>
+
+      <div class="submit-row">
+        <button type="button" class="submit-btn" onclick="askFromGuide(${n})">${t('이 단계에 대해 질문하기')}</button>
+      </div>
+      <div class="guide-nav">
+        ${prev ? `<button type="button" class="ghost-btn" onclick="navigate('guideStep','${prev.n}')">← ${t('{n}단계', {n:prev.n})}</button>` : `<button type="button" class="ghost-btn" onclick="navigate('guide')">${t('가이드 처음으로')}</button>`}
+        ${next ? `<button type="button" class="ghost-btn" onclick="navigate('guideStep','${next.n}')">${t('{n}단계', {n:next.n})} →</button>` : `<button type="button" class="ghost-btn" onclick="navigate('guide')">${t('가이드 처음으로')}</button>`}
+      </div>
+      ${guideSourceHTML()}
     </div>
   `;
 }
@@ -2837,6 +3322,7 @@ function qcardHTML(item, showCat){
       <div class="qcard-snippet">${esc(tc(item.body))}</div>
       <div class="qcard-meta">
         ${showCat ? `<span>${icon(c.icon)} ${catName(c)}</span>` : ''}
+        ${item.guideStep ? `<span class="guide-tag">${t('가이드 {n}단계', {n:item.guideStep})}</span>` : ''}
         <span>${icon('msg')} ${t('답변 {n}', {n:item.answers.length})}</span>
         <span>${icon('eye')} ${item.views}</span>
       </div>
@@ -2909,10 +3395,15 @@ function listingCardHTML(l){
   `;
 }
 
-function renderAsk(catId){
+function renderAsk(param){
+  // 가이드에서 들어오면 주소가 'alba:3'처럼 단계 번호를 함께 가져와요
+  const parts = String(param || 'alba').split(':');
+  const catId = parts[0];
+  const step = guideStepOf(parts[1]);
+  state.askStep = step ? step.n : null;
   const active = CATEGORIES.filter(c=>c.active);
   const options = active.map(c=>`<option value="${c.id}" ${c.id===catId?'selected':''}>${isZh() ? c.zh : c.name + ' · ' + c.zh}</option>`).join('');
-  const backTarget = state.role==='owner' ? `navigate('category','${catId}')` : `navigate('qa')`;
+  const backTarget = state.role==='owner' ? `navigate('category','${catId}')` : (step ? `navigate('guideStep','${step.n}')` : `navigate('qa')`);
   const prefill = state.askPrefill || '';
   state.askPrefill = null;
   return `
@@ -2921,6 +3412,7 @@ function renderAsk(catId){
       <div class="topbar-title">${titleHTML('질문 작성','提问')}</div>
     </div>
     <div class="content">
+      ${step ? askStepHTML(step) : ''}
       <div class="field-label">${t('카테고리')}</div>
       <select id="askCat" class="field">${options}</select>
 
@@ -2929,7 +3421,7 @@ function renderAsk(catId){
       <div id="suggestArea"></div>
 
       <div class="field-label">${t('내용')}</div>
-      <textarea id="askBody" class="field" maxlength="2000" placeholder="${t('상황을 자세히 설명하면 더 정확한 답변을 받을 수 있어요')}" oninput="toggleAskSubmit()"></textarea>
+      <textarea id="askBody" class="field" maxlength="2000" placeholder="${step ? esc(t('이렇게 쓰면 답변이 빨라요\n① 지금 상황\n② 어디까지 해봤는지\n③ 어디서 막혔는지')) : t('상황을 자세히 설명하면 더 정확한 답변을 받을 수 있어요')}" oninput="toggleAskSubmit()"></textarea>
 
       ${anonCheckHTML('askAnon')}
       <div class="field-help" style="margin-top:0;">${t('닉네임과 프로필이 다른 사람에게 보이지 않아요.')}</div>
@@ -2977,7 +3469,9 @@ async function submitQuestion(){
   const body = document.getElementById('askBody').value.trim();
   if(!title || !body) return;
   await withBusy('askSubmitBtn', async ()=>{
-    const {data, error} = await sb.from('questions').insert({cat, title, body, anonymous:anonChecked('askAnon')}).select('id').single();
+    const row = {cat, title, body, anonymous:anonChecked('askAnon')};
+    if(state.askStep) row.guide_step = state.askStep;   // 가이드 단계 태그 (지우면 안 붙여요)
+    const {data, error} = await sb.from('questions').insert(row).select('id').single();
     if(error) throw error;
     await loadAll();
     navigate('detail', data.id, {replace:true});
