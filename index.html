@@ -739,6 +739,14 @@
   .agree-row label{flex:1; min-height:44px; display:flex; align-items:center; gap:9px; font-size:13px; font-weight:600; cursor:pointer;}
   .agree-row input{width:20px; height:20px; margin:0; flex:none; accent-color:var(--accent);}
   .agree-row .req{color:var(--accent); font-weight:800;}
+  .anon-row{margin-top:14px;}
+  .anon-row label{min-height:40px;}
+  .composer .anon-row{margin-top:0; margin-bottom:4px;}
+  .composer .anon-row label{min-height:32px; font-size:12.5px;}
+  .other-input{margin-top:8px;}
+  .other-input[hidden]{display:none;}
+  .me-tag{font-size:10.5px; font-weight:800; color:var(--accent); margin-left:4px;}
+  .guest-cta{display:flex; align-items:center; justify-content:center; gap:6px; width:100%;}
 
   /* ===== 새 디자인 적용 (기존 규칙을 덮어써요) ===== */
   button, input, select, textarea{font-family:inherit;}
@@ -1052,7 +1060,12 @@ function studentOf(id){ return STUDENTS.find(s=>s.id===id); }
 let REVIEWS = [];    // 후기 (서버에서 불러와요)
 
 function careerMonthsOf(id){
+  if(!id) return 0;
   return REVIEWS.filter(r=>r.authorId===id).reduce((sum,r)=>sum+(r.months||0), 0);
+}
+// 마이페이지용: 익명으로 쓴 내 후기까지 더해요 (나에게만 보여요)
+function myCareerMonths(){
+  return REVIEWS.filter(r=>r.isMine).reduce((sum,r)=>sum+(r.months||0), 0);
 }
 function formatCareer(totalMonths){
   if(totalMonths < 12) return `${totalMonths}개월`;
@@ -1068,7 +1081,7 @@ function bestAnswerCountOf(userId){
   let count = 0;
   QUESTIONS.forEach(q=>{
     const maxLikes = Math.max(0, ...q.answers.map(a=>a.likes));
-    if(maxLikes > 0 && q.answers.some(a=>a.author.id===userId && a.likes===maxLikes)) count++;
+    if(maxLikes > 0 && q.answers.some(a=>(userId===ME_STUDENT.id ? a.isMine : a.author.id===userId) && a.likes===maxLikes)) count++;
   });
   return count;
 }
@@ -1098,44 +1111,55 @@ function ago(iso){
   return Math.floor(sec/(86400*365)) + '년 전';
 }
 function personOf(row){
+  // 익명 글은 서버가 작성자 정보를 비워서 보내요 (id 없음, 이름은 '익명')
+  if(row.anonymous || !row.author_id) return {id:null, name:'익명', anon:true};
   // 기존 화면이 학과 자리에 dept를 보여 주기 때문에, 그 자리에 대학교 이름을 넣어요
   return {id:row.author_id, name:row.author_name, dept:row.author_univ, year:row.author_year, stay:row.author_stay};
 }
+// '기타'를 고르고 직접 적은 업종도 '기타'로 묶어서 걸러요
+function industryGroup(industry){ return INDUSTRIES.includes(industry) ? industry : '기타'; }
 
 async function loadAll(isRetry){
   const uid = ME_STUDENT.id;
   const startedAt = mutations;
   try{
+    // 로그인하지 않았으면 글 목록만 불러와요 (내 프로필·좋아요는 건너뛰어요)
+    const none = Promise.resolve({data:null, error:null});
     const res = await Promise.all([
-      sb.from('profiles').select('id,nickname,univ,year,stay').eq('id', uid).maybeSingle(),
+      uid ? sb.from('profiles').select('id,nickname,univ,year,stay').eq('id', uid).maybeSingle() : none,
       sb.from('review_feed').select('*').order('created_at', {ascending:false}).limit(300),
       sb.from('question_feed').select('*').order('created_at', {ascending:false}).limit(300),
-      sb.from('answer_likes').select('answer_id'),
-      sb.from('review_likes').select('review_id')
+      uid ? sb.from('answer_likes').select('answer_id') : Promise.resolve({data:[], error:null}),
+      uid ? sb.from('review_likes').select('review_id') : Promise.resolve({data:[], error:null})
     ]);
     const failed = res.find(r=>r.error);
     if(failed) throw failed.error;
     if(ME_STUDENT.id !== uid) return false;                       // 불러오는 사이에 로그아웃함
     if(startedAt !== mutations && !isRetry) return loadAll(true);  // 그 사이 좋아요를 눌렀으면 한 번 더
     const [me, rv, qs, al, rl] = res.map(r=>r.data);
-    if(!me) throw new Error('profile-missing');
+    if(uid && !me) throw new Error('profile-missing');
 
     const people = new Map();
-    const keep = p => { if(!people.has(p.id)) people.set(p.id, p); return people.get(p.id); };
-    keep({id:me.id, name:me.nickname, dept:me.univ, year:me.year, stay:me.stay});
+    const keep = p => {
+      if(p.anon) return p;   // 익명 작성자는 프로필 목록에 넣지 않아요
+      if(!people.has(p.id)) people.set(p.id, p);
+      return people.get(p.id);
+    };
+    if(me) keep({id:me.id, name:me.nickname, dept:me.univ, year:me.year, stay:me.stay});
 
     REVIEWS = rv.map(r=>{
-      keep(personOf(r));
+      const author = keep(personOf(r));
       return {id:r.id, industry:r.industry, shopName:r.shop_name || '', days:r.days || [], timeOfDay:r.time_of_day || '',
               korean:r.korean, months:r.months, good:r.good, hard:r.hard, note:r.note || '', tip:r.tip,
-              authorId:r.author_id, createdAt:r.created_at, time:ago(r.created_at), views:r.views, likes:r.likes};
+              author, authorId:author.id, anonymous:!!author.anon, isMine:!!r.is_mine,
+              createdAt:r.created_at, time:ago(r.created_at), views:r.views, likes:r.likes};
     });
     QUESTIONS = qs.map(q=>{
       const answers = (q.answers || []).map(a=>({
-        id:a.id, author:keep(personOf(a)), body:a.body, likes:a.likes, createdAt:a.created_at, time:ago(a.created_at)
+        id:a.id, author:keep(personOf(a)), isMine:!!a.is_mine, body:a.body, likes:a.likes, createdAt:a.created_at, time:ago(a.created_at)
       }));
       const idx = q.resolved_answer_id ? answers.findIndex(a=>a.id===q.resolved_answer_id) : -1;
-      return {id:q.id, cat:q.cat, title:q.title, body:q.body, author:keep(personOf(q)),
+      return {id:q.id, cat:q.cat, title:q.title, body:q.body, author:keep(personOf(q)), isMine:!!q.is_mine,
               createdAt:q.created_at, time:ago(q.created_at), views:q.views, answers,
               resolved: idx >= 0, resolvedIdx: idx >= 0 ? idx : null, resolvedAt:q.resolved_at};
     });
@@ -1155,12 +1179,12 @@ async function loadAll(isRetry){
 // 다른 사람이 새로 쓴 글이 보이도록, 목록 화면에 들어올 때 조용히 다시 불러와요
 const LIVE_VIEWS = ['feed','qa','notifs','mypage','detail','reviewDetail','userProfile'];
 function softRefresh(){
-  if(!sb || !ME_STUDENT.id || refreshing || busy) return;
+  if(!sb || refreshing || busy) return;
   if(Date.now() - lastLoadAt < 15000) return;
   refreshing = true;
   loadAll().then(ok=>{
     refreshing = false;
-    if(ok && !busy && ME_STUDENT.id && LIVE_VIEWS.includes(state.view)) render();
+    if(ok && !busy && LIVE_VIEWS.includes(state.view)) render();
   });
 }
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) softRefresh(); });
@@ -1175,8 +1199,8 @@ function clearLocal(){
 function myStats(){
   const me = ME_STUDENT.id;
   let answers = 0, likes = 0;
-  QUESTIONS.forEach(q=>q.answers.forEach(a=>{ if(a.author.id===me){ answers++; likes += a.likes; } }));
-  REVIEWS.forEach(r=>{ if(r.authorId===me) likes += r.likes; });
+  QUESTIONS.forEach(q=>q.answers.forEach(a=>{ if(a.isMine){ answers++; likes += a.likes; } }));
+  REVIEWS.forEach(r=>{ if(r.isMine) likes += r.likes; });
   return {answers, likes};
 }
 
@@ -1215,7 +1239,7 @@ const OWNER_TABS = [
   {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
 ];
 
-const state = {view:'loading', param:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', filterIndustry:'전체', askPrefill:null, lang:'ko'};
+const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', filterIndustry:'전체', askPrefill:null, lang:'ko'};
 
 /* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
    1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
@@ -1256,6 +1280,17 @@ const I18N_ZH = {
   // 공통
   '뒤로':'返回', '다음':'下一步', '필수':'必填', '질문하기':'提问',
   '사장님':'老板', '인증':'已认证', '인증대기':'待认证', '익명':'匿名',
+  // 익명 · 직접 입력 · 둘러보기
+  '익명으로 올리기':'匿名发布',
+  '닉네임과 프로필이 다른 사람에게 보이지 않아요.':'其他人看不到你的昵称和个人资料。',
+  '내 글':'我的',
+  '직접 입력 (선택)':'自己填写（选填）',
+  '예) 꽃집, 학원 보조':'例）花店、补习班助教',
+  '예) 신림동':'例）新林洞',
+  '글을 쓰려면 로그인이 필요해요':'发帖需要先登录',
+  '로그인이 필요해요':'需要先登录',
+  '로그인하고 답변 남기기':'登录后回答',
+  '로그인 없이 둘러보기':'不登录，先看看',
   '체류 {stay}':'在韩 {stay}',
   '조회 {n}':'浏览 {n}', '답변 {n}':'回答 {n}',
   // 회원가입
@@ -1388,6 +1423,14 @@ function translatedNote(){
 }
 function titleHTML(ko, zh){ return isZh() ? zh : `${ko}<span class="zh">${zh}</span>`; }
 function displayName(name){ return name==='익명' ? t('익명') : name; }
+function meTag(isMine){ return isMine ? `<span class="me-tag">${t('내 글')}</span>` : ''; }
+function anonCheckHTML(id){
+  return `<div class="agree-row anon-row"><label for="${id}">
+    <input id="${id}" type="checkbox" checked>
+    <span>${t('익명으로 올리기')}</span>
+  </label></div>`;
+}
+function anonChecked(id){ const el = document.getElementById(id); return !!(el && el.checked); }
 function catName(c){ return isZh() ? c.zh : c.name; }
 function timeText(s){
   if(!isZh()) return s;
@@ -1475,8 +1518,22 @@ function personSub(author){
   return author.stay ? t('체류 {stay}', {stay:esc(stayText(author.stay))}) : '';
 }
 
+// 로그인해야 쓸 수 있는 화면: 글쓰기, 알림, 마이페이지
+const LOGIN_REQUIRED = ['reviewForm','ask','notifs','mypage','listingForm'];
+const GUEST_VIEWS = ['feed','qa','reviewDetail','detail','userProfile'];
+function isGuest(){ return !ME_STUDENT.id; }
+function requireLogin(view, param, msg){
+  state.afterLogin = {view, param: param || null};
+  authNotice = {key: msg || '글을 쓰려면 로그인이 필요해요', ok:true};
+  navigate('login');
+}
+
 function navigate(view, param, opts){
   opts = opts || {};
+  if(isGuest() && LOGIN_REQUIRED.includes(view)){
+    requireLogin(view, param, (view==='mypage' || view==='notifs') ? '로그인이 필요해요' : null);
+    return;
+  }
   state.view = view;
   state.param = param || null;
   if(view==='mypage') state.tab = state.role==='owner' ? 'listings' : 'reviews';
@@ -1516,8 +1573,10 @@ function parseHash(){
 function applyRoute(view, param, replace){
   const opts = replace ? {replace:true} : {fromHistory:true};
   if(!ME_STUDENT.id){
+    if(GUEST_VIEWS.includes(view)){ navigate(view, param, opts); return; }
+    if(LOGIN_REQUIRED.includes(view)){ navigate(view, param, opts); return; }   // navigate가 로그인 화면으로 보내요
     const allowed = view==='login' || ((/^signup[123]$/.test(view) || view==='privacy') && signupDraft);
-    navigate(allowed ? view : 'login', null, opts);
+    navigate(allowed ? view : 'feed', null, opts);
     return;
   }
   if(state.recovering){ navigate('newPassword', null, opts); return; }
@@ -1527,7 +1586,7 @@ function applyRoute(view, param, replace){
 }
 window.addEventListener('popstate', e=>{
   if(['loading','setup','loadError'].includes(state.view)) return;
-  const r = (e.state && e.state.view) ? e.state : (parseHash() || {view: ME_STUDENT.id ? 'feed' : 'login', param:null});
+  const r = (e.state && e.state.view) ? e.state : (parseHash() || {view:'feed', param:null});
   applyRoute(r.view, r.param, false);
 });
 
@@ -1549,7 +1608,8 @@ function render(){
   if(state.view==='detail' && !qOf(state.param)){ state.view = 'qa'; state.param = null; }
   // 쓰고 있던 답변은 화면을 다시 그려도 남겨 둬요
   const oldAnswer = document.getElementById('answerBody');
-  const draftAnswer = oldAnswer ? {qid:oldAnswer.dataset.qid, text:oldAnswer.value} : null;
+  const oldAnon = document.getElementById('answerAnon');
+  const draftAnswer = oldAnswer ? {qid:oldAnswer.dataset.qid, text:oldAnswer.value, anon: oldAnon ? oldAnon.checked : true} : null;
 
   el.className = 'screen view-' + state.view;   // PC 배치를 화면별로 다르게 하려고 붙이는 이름표
   if(state.view==='loading') el.innerHTML = renderLoading();
@@ -1580,7 +1640,11 @@ function render(){
   document.getElementById('topNavHost').innerHTML = hideNav ? '' : renderTopNav();
   if(draftAnswer && draftAnswer.text){
     const ta = document.getElementById('answerBody');
-    if(ta && ta.dataset.qid===draftAnswer.qid) ta.value = draftAnswer.text;
+    if(ta && ta.dataset.qid===draftAnswer.qid){
+      ta.value = draftAnswer.text;
+      const an = document.getElementById('answerAnon');
+      if(an) an.checked = draftAnswer.anon;
+    }
   }
   syncButtons();
 }
@@ -1619,7 +1683,8 @@ function renderBottomNav(){
       if(t.isCenter){
         return `<button class="bn-item is-center" onclick="${t.onclick}" aria-label="${tr(t.label)}"><span class="bn-center-circle">${icon(t.icon)}</span></button>`;
       }
-      return `<button class="bn-item ${t.key===activeKey?'is-active':''}" onclick="${t.onclick}"><span class="bn-icon">${icon(t.icon)}</span><span>${tr(t.label)}</span></button>`;
+      const label = (t.key==='mypage' && isGuest()) ? '로그인' : t.label;
+      return `<button class="bn-item ${t.key===activeKey?'is-active':''}" onclick="${t.onclick}"><span class="bn-icon">${icon(t.icon)}</span><span>${tr(label)}</span></button>`;
     }).join('')}
   </nav>`;
 }
@@ -1633,7 +1698,7 @@ function renderTopNav(){
     <div class="topnav-inner">
       <button class="topnav-logo" onclick="${home.onclick}">${logoHTML('sm')}</button>
       <nav class="topnav-links">
-        ${tabs.filter(x=>!x.isCenter).map(x=>`<button class="tn-item ${x.key===activeKey?'is-active':''}" onclick="${x.onclick}">${tr(x.label)}</button>`).join('')}
+        ${tabs.filter(x=>!x.isCenter).map(x=>`<button class="tn-item ${x.key===activeKey?'is-active':''}" onclick="${x.onclick}">${tr((x.key==='mypage' && isGuest()) ? '로그인' : x.label)}</button>`).join('')}
       </nav>
       <div class="topnav-actions">
         ${langToggleHTML()}
@@ -1660,7 +1725,7 @@ const SIGNUP_AREAS = ['흑석동','상도동','노량진','사당','기숙사','
 const SIGNUP_JOB_TOTALS = ['3개월 미만','3~6개월','6개월~1년','1년 이상'];
 
 function newSignupDraft(){
-  return {email:'', password:'', nickname:'', birth:'', univ:SIGNUP_UNIVS[0], year:'', korean:'', stay:'', area:'', hasJob:'', jobIndustries:[], jobTotal:'', agree:false,
+  return {email:'', password:'', nickname:'', birth:'', univ:SIGNUP_UNIVS[0], year:'', korean:'', stay:'', area:'', areaOther:'', hasJob:'', jobIndustries:[], jobOther:'', jobTotal:'', agree:false,
           nickFor:null, nickFree:null};   // nickFor: 서버에 중복 확인을 마친 닉네임, nickFree: 그 결과
 }
 
@@ -1739,6 +1804,7 @@ function renderLogin(){
       <div class="auth-foot">
         <div class="auth-foot-label">${t('무로바가 처음이에요?')}</div>
         <button type="button" class="outline-btn" onclick="startSignup()">${t('회원가입')}</button>
+        <button type="button" class="text-link" onclick="backToBrowse()">${t('로그인 없이 둘러보기')}</button>
       </div>
     </div>
   `;
@@ -1869,6 +1935,13 @@ function renderPrivacy(){
   `;
 }
 
+function backToBrowse(){
+  state.afterLogin = null;
+  authNotice = null;
+  if(!lastLoadAt){ enterGuest(null, false); return; }   // 아직 글을 못 불러왔으면 불러와요
+  navigate('feed');
+}
+
 function toggleLoginSubmit(){
   const email = document.getElementById('loginEmail');
   const pw = document.getElementById('loginPw');
@@ -1886,7 +1959,10 @@ async function enterSession(user, greet){
   if(ME_STUDENT.id !== user.id) return;
   if(!ok){ state.view = 'loadError'; render(); return; }
   if(state.recovering){ navigate('newPassword', null, {replace:true}); return; }
-  const route = greet ? null : parseHash();
+  const after = state.afterLogin;   // 글을 쓰려다 로그인한 경우, 하려던 화면으로 돌아가요
+  state.afterLogin = null;
+  authNotice = null;
+  const route = after || (greet ? null : parseHash());
   if(route) applyRoute(route.view, route.param, true);
   else navigate('feed', null, {replace: !greet});
   const me = studentOf(user.id);
@@ -1906,13 +1982,23 @@ async function doLogin(){
   });
 }
 
-async function logout(){
+// 로그인하지 않은 상태로 글 목록을 불러와서 보여 줘요
+async function enterGuest(route, replace){
   clearLocal();
   state.role = 'student';
+  const ok = await loadAll();
+  if(ME_STUDENT.id) return;   // 그 사이 로그인함
+  if(!ok){ state.view = 'loadError'; render(); return; }
+  if(route) applyRoute(route.view, route.param, replace);
+  else navigate('feed', null, {replace:!!replace});
+}
+
+async function logout(){
   authNotice = null;
-  navigate('login');
-  showToast(t('로그아웃했어요'));
+  clearLocal();   // 먼저 비워서, 로그아웃 알림이 와도 두 번 불러오지 않게
   try{ await sb.auth.signOut(); }catch(e){}
+  await enterGuest(null, false);
+  showToast(t('로그아웃했어요'));
 }
 
 async function deleteAccount(){
@@ -1923,7 +2009,7 @@ async function deleteAccount(){
     clearLocal();
     try{ await sb.auth.signOut({scope:'local'}); }catch(e){}
     authNotice = null;
-    navigate('login');
+    await enterGuest(null, false);
     showToast(t('탈퇴했어요. 그동안 이용해 주셔서 고마워요.'));
   });
 }
@@ -2011,6 +2097,8 @@ function renderSignup2(){
 
       <div class="field-label">${t('어디에 살아요?')}</div>
       ${signupChips('area', SIGNUP_AREAS)}
+      <input id="suAreaOther" class="field other-input" type="text" maxlength="20" placeholder="${t('예) 신림동')}" aria-label="${t('직접 입력 (선택)')}"
+        value="${esc(d.areaOther)}" oninput="signupDraft.areaOther=this.value" ${d.area==='다른 지역' ? '' : 'hidden'}>
       <div class="field-help">${t('동네 이름까지만 받아요.')}</div>
 
       <div class="submit-row">
@@ -2036,6 +2124,8 @@ function renderSignup3(){
         <div class="chip-toggle-row">
           ${INDUSTRIES.map(i=>`<button type="button" class="chip ${d.jobIndustries.includes(i)?'is-active':''}" data-value="${esc(i)}" onclick="toggleSignupIndustry(this)">${esc(t(i))}</button>`).join('')}
         </div>
+        <input id="suJobOther" class="field other-input" type="text" maxlength="20" placeholder="${t('예) 꽃집, 학원 보조')}" aria-label="${t('직접 입력 (선택)')}"
+          value="${esc(d.jobOther)}" oninput="signupDraft.jobOther=this.value" ${d.jobIndustries.includes('기타') ? '' : 'hidden'}>
 
         <div class="field-label">${t('모두 합쳐 얼마나 일했어요?')}</div>
         ${signupChips('jobTotal', SIGNUP_JOB_TOTALS)}
@@ -2136,6 +2226,10 @@ function pickSignupChip(el){
   el.classList.add('is-active');
   signupDraft[key] = el.dataset.value;
   if(key==='hasJob'){ render(); return; }
+  if(key==='area'){
+    const other = document.getElementById('suAreaOther');
+    if(other){ other.hidden = el.dataset.value!=='다른 지역'; if(!other.hidden) other.focus(); }
+  }
   toggleSignupStep();
 }
 
@@ -2144,6 +2238,8 @@ function toggleSignupIndustry(el){
   const list = signupDraft.jobIndustries;
   const i = list.indexOf(el.dataset.value);
   if(i>=0) list.splice(i,1); else list.push(el.dataset.value);
+  const other = document.getElementById('suJobOther');
+  if(other && el.dataset.value==='기타'){ other.hidden = !list.includes('기타'); if(!other.hidden) other.focus(); }
   toggleSignupStep();
 }
 
@@ -2160,6 +2256,11 @@ async function completeSignup(){
   if(!signupDraft || !signup3Valid()) return;
   const d = signupDraft;
   const hasJob = d.hasJob==='있어요';
+  // '다른 지역' · '기타'를 고르고 직접 적었으면 적은 내용으로 저장해요
+  const areaOther = (d.areaOther || '').trim().slice(0, 20);
+  const area = (d.area==='다른 지역' && areaOther) ? areaOther : d.area;
+  const jobOther = (d.jobOther || '').trim().slice(0, 20);
+  const jobIndustries = d.jobIndustries.map(i=>(i==='기타' && jobOther) ? jobOther : i);
   const errEl = document.getElementById('su3Err');
   if(errEl) errEl.textContent = '';
   await withBusy('su3Done', async ()=>{
@@ -2171,8 +2272,8 @@ async function completeSignup(){
         emailRedirectTo: siteUrl(),
         data: {
           nickname:d.nickname, univ:d.univ, year:d.year, stay:d.stay, korean:d.korean,
-          birth:d.birth, area:d.area, has_job:hasJob,
-          job_industries: hasJob ? d.jobIndustries.slice() : [], job_total: hasJob ? d.jobTotal : ''
+          birth:d.birth, area, has_job:hasJob,
+          job_industries: hasJob ? jobIndustries : [], job_total: hasJob ? d.jobTotal : ''
         }
       }
     });
@@ -2270,7 +2371,7 @@ function setFilter(type, value){
 function renderFeedBody(){
   let list = REVIEWS.slice();
   if(state.filterKorean && state.filterKorean!=='전체') list = list.filter(r=>KOREAN_LEVELS.indexOf(r.korean) <= KOREAN_LEVELS.indexOf(state.filterKorean));
-  if(state.filterIndustry && state.filterIndustry!=='전체') list = list.filter(r=>r.industry===state.filterIndustry);
+  if(state.filterIndustry && state.filterIndustry!=='전체') list = list.filter(r=>industryGroup(r.industry)===state.filterIndustry);
   const emptyText = REVIEWS.length ? t('조건에 맞는 후기가 없어요. 필터를 바꿔보세요.') : t('아직 후기가 없어요. 첫 후기를 남겨보세요.');
   return `
     <div class="section-label">${t('선배들의 후기 {n}개', {n:list.length})}</div>
@@ -2285,7 +2386,7 @@ function reviewTitle(r){
 }
 
 function reviewCardHTML(r){
-  const s = studentOf(r.authorId);
+  const s = r.author;
   return `
     <div class="qcard" role="button" tabindex="0" onclick="navigate('reviewDetail','${r.id}')" onkeydown="if(event.key==='Enter') navigate('reviewDetail','${r.id}')">
       <div class="rcard-top">
@@ -2297,10 +2398,17 @@ function reviewCardHTML(r){
       <div class="rcard-body">"${esc(tc(r.tip))}"${translatedNote(r.tip)}</div>
       <div class="lvl-pill">${levelBars(r.korean)}<span>${esc(t('한국어 {tier} · {desc}', {tier:t(koreanTier(r.korean)), desc:t(r.korean)}))}</span></div>
       <div class="rcard-foot">
-        <button type="button" class="card-author-row" onclick="event.stopPropagation(); navigate('userProfile','${r.authorId}')">
-          <span class="avatar" style="width:20px;height:20px;font-size:9px;">${initial(s.name)}</span>
-          <span>${esc(s.name)}</span>
-        </button>
+        ${s.anon ? `
+          <span class="card-author-row" style="cursor:default;">
+            <span class="avatar" style="width:20px;height:20px;font-size:9px;">${initial(displayName(s.name))}</span>
+            <span>${esc(displayName(s.name))}</span>${meTag(r.isMine)}
+          </span>
+        ` : `
+          <button type="button" class="card-author-row" onclick="event.stopPropagation(); navigate('userProfile','${r.authorId}')">
+            <span class="avatar" style="width:20px;height:20px;font-size:9px;">${initial(s.name)}</span>
+            <span>${esc(s.name)}</span>${meTag(r.isMine)}
+          </button>
+        `}
         ${careerBadge(r.authorId)}
       </div>
     </div>
@@ -2325,10 +2433,10 @@ function renderQA(){
 
 function renderReviewDetail(id){
   const r = REVIEWS.find(x=>x.id===id);
-  const s = studentOf(r.authorId);
+  const s = r.author;
   const hasSchedule = r.days && r.days.length;
   const scheduleShort = hasSchedule ? scheduleText(r).replace(/ 근무$/, '') : '';
-  const mine = r.authorId===ME_STUDENT.id;
+  const mine = r.isMine;
   const liked = LIKED_REVIEWS.has(r.id);
   return `
     <div class="topbar">
@@ -2379,10 +2487,10 @@ function renderReviewDetail(id){
         </div>
       </div>
       <aside class="detail-aside">
-        <div class="author-card" role="button" tabindex="0" onclick="navigate('userProfile','${r.authorId}')" onkeydown="if(event.key==='Enter') navigate('userProfile','${r.authorId}')">
-          <div class="avatar">${initial(s.name)}</div>
+        <div class="author-card" ${s.anon ? '' : `role="button" tabindex="0" onclick="navigate('userProfile','${r.authorId}')" onkeydown="if(event.key==='Enter') navigate('userProfile','${r.authorId}')"`}>
+          <div class="avatar">${initial(displayName(s.name))}</div>
           <div>
-            <div class="author-name">${esc(s.name)}${roleTag(s)}</div>
+            <div class="author-name">${esc(displayName(s.name))}${meTag(r.isMine)}${roleTag(s)}</div>
             <div class="author-time">${personSub(s)}</div>
           </div>
           ${careerBadge(r.authorId)}
@@ -2402,6 +2510,7 @@ function renderReviewDetail(id){
 }
 
 async function toggleReviewLike(id){
+  if(isGuest()){ requireLogin('reviewDetail', id, '로그인이 필요해요'); return; }
   const r = REVIEWS.find(x=>x.id===id);
   if(!r || likeBusy.has(id)) return;
   likeBusy.add(id);
@@ -2476,7 +2585,8 @@ function renderReviewForm(){
     </div>
     <div class="content">
       <div class="field-label">${t('업종')}</div>
-      <select id="rIndustry" class="field">${INDUSTRIES.map(i=>`<option value="${i}">${t(i)}</option>`).join('')}</select>
+      <select id="rIndustry" class="field" onchange="onIndustryChange(this)">${INDUSTRIES.map(i=>`<option value="${i}">${t(i)}</option>`).join('')}</select>
+      <input id="rIndustryOther" class="field other-input" type="text" maxlength="20" placeholder="${t('예) 꽃집, 학원 보조')}" aria-label="${t('직접 입력 (선택)')}" hidden>
 
       <div class="field-label">${t('가게명 (선택)')}</div>
       <input id="rShop" class="field" type="text" maxlength="40" placeholder="${t('예) 홍대 OO카페')}">
@@ -2512,11 +2622,21 @@ function renderReviewForm(){
       <div class="field-label">${t('후배에게 한마디')}</div>
       <input id="rTip" class="field" type="text" maxlength="200" placeholder="${t('예) 돈 필요하면 추천! 근데 주말엔 좀 힘들어요')}" oninput="toggleReviewSubmit()">
 
+      ${anonCheckHTML('rAnon')}
+      <div class="field-help" style="margin-top:0;">${t('닉네임과 프로필이 다른 사람에게 보이지 않아요.')}</div>
+
       <div class="submit-row">
         <button id="rSubmitBtn" class="submit-btn" disabled onclick="submitReview()">${t('후기 등록하기')}</button>
       </div>
     </div>
   `;
+}
+
+function onIndustryChange(sel){
+  const other = document.getElementById('rIndustryOther');
+  if(!other) return;
+  other.hidden = sel.value!=='기타';
+  if(!other.hidden) other.focus();
 }
 
 function toggleDayChip(el){
@@ -2544,7 +2664,10 @@ function toggleReviewSubmit(){
 }
 
 async function submitReview(){
-  const industry = document.getElementById('rIndustry').value;
+  let industry = document.getElementById('rIndustry').value;
+  const industryOther = (document.getElementById('rIndustryOther').value || '').trim().slice(0, 20);
+  if(industry==='기타' && industryOther) industry = industryOther;   // 직접 적은 업종으로 저장해요
+  const anonymous = anonChecked('rAnon');
   const shopName = document.getElementById('rShop').value.trim();
   const months = Number(document.getElementById('rMonths').value);
   const days = Array.from(document.querySelectorAll('#rDays .chip.is-active')).map(c=>c.dataset.day);
@@ -2559,7 +2682,7 @@ async function submitReview(){
   await withBusy('rSubmitBtn', async ()=>{
     // 작성자·조회수·좋아요 수는 서버가 정해요
     const {data, error} = await sb.from('reviews')
-      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, korean, good, hard, note, tip})
+      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, korean, good, hard, note, tip, anonymous})
       .select('id').single();
     if(error) throw error;
     await loadAll();
@@ -2706,6 +2829,9 @@ function renderAsk(catId){
       <div class="field-label">${t('내용')}</div>
       <textarea id="askBody" class="field" maxlength="2000" placeholder="${t('상황을 자세히 설명하면 더 정확한 답변을 받을 수 있어요')}" oninput="toggleAskSubmit()"></textarea>
 
+      ${anonCheckHTML('askAnon')}
+      <div class="field-help" style="margin-top:0;">${t('닉네임과 프로필이 다른 사람에게 보이지 않아요.')}</div>
+
       <div class="submit-row">
         <button id="askSubmitBtn" class="submit-btn" disabled onclick="submitQuestion()">${t('질문 등록하기')}</button>
       </div>
@@ -2749,7 +2875,7 @@ async function submitQuestion(){
   const body = document.getElementById('askBody').value.trim();
   if(!title || !body) return;
   await withBusy('askSubmitBtn', async ()=>{
-    const {data, error} = await sb.from('questions').insert({cat, title, body}).select('id').single();
+    const {data, error} = await sb.from('questions').insert({cat, title, body, anonymous:anonChecked('askAnon')}).select('id').single();
     if(error) throw error;
     await loadAll();
     navigate('detail', data.id, {replace:true});
@@ -2777,7 +2903,7 @@ function renderDetail(id){
   const c = catOf(item.cat);
   const backTarget = state.role==='owner' ? `navigate('category','${item.cat}')` : `navigate('qa')`;
   const sortedAnswers = item.answers.map((a, originalIdx)=>({a, originalIdx})).sort((x,y)=>y.a.likes - x.a.likes);
-  const isAsker = state.role!=='owner' && item.author.id===ME_STUDENT.id;
+  const isAsker = state.role!=='owner' && item.isMine;
   return `
     <div class="topbar">
       <button class="iconbtn" onclick="${backTarget}" aria-label="${t('뒤로')}">${icon('back')}</button>
@@ -2792,7 +2918,7 @@ function renderDetail(id){
       <div class="author-row">
         <div class="avatar">${initial(displayName(item.author.name))}</div>
         <div>
-          <div class="author-name">${esc(displayName(item.author.name))}${roleTag(item.author)}</div>
+          <div class="author-name">${esc(displayName(item.author.name))}${meTag(item.isMine)}${roleTag(item.author)}</div>
           <div class="author-time">${timeText(item.time)}${personSub(item.author) ? ' · '+personSub(item.author) : ''}</div>
         </div>
       </div>
@@ -2815,8 +2941,13 @@ function renderDetail(id){
     </div>
     ${item.answers.length ? sortedAnswers.map(({a, originalIdx})=>answerHTML(item.id, a, originalIdx, item.answers, item, isAsker)).join('') : `<div class="empty-state">${t('아직 답변이 없어요. 첫 답변을 남겨보세요.')}</div>`}
     <div class="composer">
-      <textarea id="answerBody" class="field" data-qid="${item.id}" maxlength="2000" placeholder="${t('아는 만큼 답해주세요. 큰 도움이 돼요.')}"></textarea>
-      <button id="answerBtn" class="submit-btn" onclick="submitAnswer('${item.id}')">${t('답변 남기기')}</button>
+      ${isGuest() ? `
+        <button class="submit-btn guest-cta" onclick="requireLogin('detail','${item.id}')">${t('로그인하고 답변 남기기')}</button>
+      ` : `
+        <textarea id="answerBody" class="field" data-qid="${item.id}" maxlength="2000" placeholder="${t('아는 만큼 답해주세요. 큰 도움이 돼요.')}"></textarea>
+        ${anonCheckHTML('answerAnon')}
+        <button id="answerBtn" class="submit-btn" onclick="submitAnswer('${item.id}')">${t('답변 남기기')}</button>
+      `}
     </div>
   `;
 }
@@ -2825,7 +2956,7 @@ function answerHTML(qid, a, idx, allAnswers, item, isAsker){
   const isResolver = item.resolved && item.resolvedIdx===idx;
   const hot = !item.resolved && isHot(a, allAnswers);
   const liked = LIKED_ANSWERS.has(a.id);
-  const mine = a.author.id===ME_STUDENT.id;
+  const mine = a.isMine;
   let stamp = '';
   if(isResolver) stamp = `<div class="stamp">${icon('check')} ${t('답변완료')}</div>`;
   else if(hot) stamp = `<div class="stamp">${icon('heart')} ${t('인기 답변')}</div>`;
@@ -2835,7 +2966,7 @@ function answerHTML(qid, a, idx, allAnswers, item, isAsker){
         <div class="answer-who">
           <div class="avatar">${initial(displayName(a.author.name))}</div>
           <div>
-            <div class="author-name">${esc(displayName(a.author.name))}${roleTag(a.author)}</div>
+            <div class="author-name">${esc(displayName(a.author.name))}${meTag(a.isMine)}${roleTag(a.author)}</div>
             <div class="author-time">${timeText(a.time)}${personSub(a.author) ? ' · '+personSub(a.author) : ''}</div>
             ${careerBadge(a.author.id) ? `<div style="margin-top:6px;">${careerBadge(a.author.id)}</div>` : ''}
           </div>
@@ -2853,6 +2984,7 @@ function answerHTML(qid, a, idx, allAnswers, item, isAsker){
 }
 
 async function toggleLike(qid, answerId){
+  if(isGuest()){ requireLogin('detail', qid, '로그인이 필요해요'); return; }
   const find = ()=>{ const q = qOf(qid); return q && q.answers.find(x=>x.id===answerId); };
   const a = find();
   if(!a || likeBusy.has(answerId)) return;
@@ -2893,7 +3025,7 @@ async function submitAnswer(qid){
   const body = document.getElementById('answerBody').value.trim();
   if(!body) return;
   await withBusy('answerBtn', async ()=>{
-    const {error} = await sb.from('answers').insert({question_id:qid, body});
+    const {error} = await sb.from('answers').insert({question_id:qid, body, anonymous:anonChecked('answerAnon')});
     if(error) throw error;
     const ta = document.getElementById('answerBody');
     if(ta) ta.value = '';
@@ -3004,16 +3136,15 @@ function renderListingDetail(id){
 
 // 알림: 내 질문에 달린 답변, 답변완료로 뽑힌 내 답변
 function buildNotifs(){
-  const me = ME_STUDENT.id;
   const list = [];
   QUESTIONS.forEach(q=>{
-    if(q.author.id===me){
+    if(q.isMine){
       q.answers.forEach(a=>{
-        if(a.author.id!==me) list.push({type:'answer', name:a.author.name, title:q.title, qid:q.id, at:a.createdAt});
+        if(!a.isMine) list.push({type:'answer', name:displayName(a.author.name), title:q.title, qid:q.id, at:a.createdAt});
       });
     } else if(q.resolved){
       const a = q.answers[q.resolvedIdx];
-      if(a && a.author.id===me) list.push({type:'resolved', title:q.title, qid:q.id, at:q.resolvedAt || a.createdAt});
+      if(a && a.isMine) list.push({type:'resolved', title:q.title, qid:q.id, at:q.resolvedAt || a.createdAt});
     }
   });
   return list.sort((x,y)=>new Date(y.at) - new Date(x.at)).slice(0, 50);
@@ -3059,7 +3190,7 @@ function renderMyPageStudent(){
         <div class="stat"><b>${stats.answers}</b><span>${t('답변')}</span></div>
         <div class="stat"><b>${bestAnswerCountOf(s.id)}</b><span>${t('베스트 답변')}</span></div>
         <div class="stat"><b>${stats.likes}</b><span>${t('받은 좋아요')}</span></div>
-        <div class="stat"><b>${careerText(careerMonthsOf(ME_STUDENT.id))}</b><span>${t('경력')}</span></div>
+        <div class="stat"><b>${careerText(myCareerMonths())}</b><span>${t('경력')}</span></div>
       </div>
     </div>
     <div class="tabs">
@@ -3118,12 +3249,12 @@ function renderMyTabBody(){
     return `<div class="qlist" style="padding:0 18px;">${mine.map(listingCardHTML).join('')}</div>`;
   }
   if(state.tab==='reviews'){
-    const mine = REVIEWS.filter(r=>r.authorId===ME_STUDENT.id);
+    const mine = REVIEWS.filter(r=>r.isMine);
     if(!mine.length) return `<div class="empty-state">${t('아직 작성한 후기가 없어요.')}</div>`;
     return `<div class="qlist" style="padding:0 18px;">${mine.map(reviewCardHTML).join('')}</div>`;
   }
   if(state.tab==='openQuestions'){
-    const mine = QUESTIONS.filter(q=>q.author.id===ME_STUDENT.id && !q.resolved);
+    const mine = QUESTIONS.filter(q=>q.isMine && !q.resolved);
     if(!mine.length) return `<div class="empty-state">${t('진행중인 질문이 없어요.')}</div>`;
     return `<div class="qlist" style="padding:0 18px;">${mine.map(item=>qcardHTML(item,false)).join('')}</div>`;
   }
@@ -3147,7 +3278,7 @@ function myAnswersList(name){
 }
 
 /* ===== 시작 =====
-   이미 로그인돼 있으면 바로 홈으로, 아니면 로그인 화면으로 가요. */
+   로그인 여부와 상관없이 홈으로 가요. 글을 쓰려고 할 때만 로그인 화면이 나와요. */
 state.recovering = /[#&]type=recovery/.test(OPENED_HASH);                 // 비밀번호 재설정 메일의 링크로 들어온 경우
 const openedWithLinkError = /[#&]error(_code)?=/.test(OPENED_HASH);       // 만료된 메일 링크로 들어온 경우
 
@@ -3166,8 +3297,7 @@ async function boot(){
       if(ME_STUDENT.id && state.view!=='loading') navigate('newPassword', null, {replace:true});
     }
     if(event==='SIGNED_OUT' && ME_STUDENT.id){   // 다른 탭에서 로그아웃했거나 로그인 기간이 끝난 경우
-      clearLocal();
-      navigate('login');
+      setTimeout(()=>enterGuest(null, true), 0);
     }
   });
 
@@ -3176,9 +3306,14 @@ async function boot(){
   if(session){
     await enterSession(session.user);
   } else {
+    // 로그인하지 않아도 홈과 글은 볼 수 있어요. 글을 쓸 때만 로그인을 물어봐요.
     state.recovering = false;
-    navigate('login', null, {replace:true});
-    if(openedWithLinkError) setAuthNotice('링크가 만료됐거나 이미 사용됐어요. 다시 시도해 주세요.', false);
+    if(openedWithLinkError){
+      navigate('login', null, {replace:true});
+      setAuthNotice('링크가 만료됐거나 이미 사용됐어요. 다시 시도해 주세요.', false);
+      return;
+    }
+    await enterGuest(parseHash(), true);
   }
 }
 boot();
