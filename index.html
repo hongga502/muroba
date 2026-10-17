@@ -1424,7 +1424,7 @@ const I18N_ZH = {
   '{industry} 알바':'{industry}兼职',
   '한국어 {tier} · {desc}':'韩语{tier} · {desc}',
   '알바 경력 {career}':'兼职经验 {career}',
-  '번역됨 (예시)':'已翻译（示例）',
+  '번역됨 (예시)':'机器翻译',
   // 한국어 수준 설명
   '거의 안 씀':'几乎不用说韩语',
   '기본 인사 가능':'会基本问候即可',
@@ -1695,13 +1695,46 @@ const I18N_ZH = {
   // 학과 (예전 샘플 데이터용)
   '경영학과':'经营学系', '정치국제학과':'政治国际学系', '국어국문학과':'国语国文学系', '사회학과':'社会学系'
 };
-// 사용자가 쓴 글의 번역 자리. 지금은 비어 있어서 글은 쓴 언어 그대로 보여요. (번역 API를 붙이면 여기를 채우면 돼요)
-const CONTENT_ZH = {};
+/* ===== 사용자 글 자동 번역 (한국어 → 중국어) =====
+   화면이 중국어일 때 tc()를 거치는 글(후기·질문·답변) 중 번역이 없는 한국어 글을 모아 두었다가,
+   화면을 그린 뒤 서버 함수 translate(DeepL + 번역 저장소)에 한꺼번에 물어보고 다시 그려요.
+   한 번 번역한 글은 서버에 저장돼서 다음부터는 바로 나와요. */
+const CONTENT_ZH = {};          // 원문(앞뒤 공백 제거) → 중국어 번역
+const TR_PENDING = new Set();   // 번역을 물어볼 원문
+const TR_ASKED = new Set();     // 이미 물어본 원문 (다시 묻지 않아요)
+const HANGUL_RE = /[\uAC00-\uD7A3]/;
+const NO_RERENDER_VIEWS = ['ask','reviewForm','listingForm','login','signup1','signup2','signup3','newPassword'];
+let trBusy = false, trOff = false;
 
-function tc(s){ return (isZh() && CONTENT_ZH[s]) || s; }
+function trKey(s){ return s==null ? '' : String(s).trim(); }
+function tc(s){
+  if(!isZh() || s==null) return s;
+  const k = trKey(s);
+  if(CONTENT_ZH[k]) return CONTENT_ZH[k];
+  if(!trOff && k && HANGUL_RE.test(k) && !TR_ASKED.has(k)) TR_PENDING.add(k);
+  return s;
+}
+async function flushTranslations(){
+  if(trBusy || trOff || !sb || !isZh() || !TR_PENDING.size) return;
+  trBusy = true;
+  const batch = Array.from(TR_PENDING).slice(0, 60);
+  batch.forEach(k=>{ TR_PENDING.delete(k); TR_ASKED.add(k); });
+  let got = 0;
+  try{
+    const {data, error} = await sb.functions.invoke('translate', {body:{texts:batch}});
+    if(!error && data){
+      if(data.translations) Object.keys(data.translations).forEach(k=>{ CONTENT_ZH[k] = data.translations[k]; got++; });
+      if(data.error==='no-key') trOff = true;   // 번역 키가 아직 없으면 조용히 원문을 보여 줘요
+    }
+  }catch(e){ console.warn('[무로바] 번역 실패', e); }
+  trBusy = false;
+  // 입력 중인 화면은 다시 그리지 않아요 (쓰던 글이 지워지지 않게)
+  if(got && isZh() && !NO_RERENDER_VIEWS.includes(state.view)) render();
+  else if(TR_PENDING.size) flushTranslations();
+}
 function translatedNote(){
   // 넘겨받은 원문 중 하나라도 번역본을 보여 주고 있으면 표시해요
-  const shown = isZh() && Array.from(arguments).some(o=>CONTENT_ZH[o]);
+  const shown = isZh() && Array.from(arguments).some(o=>CONTENT_ZH[trKey(o)]);
   return shown ? `<span class="translated-note">${t('번역됨 (예시)')}</span>` : '';
 }
 function titleHTML(ko, zh){ return isZh() ? zh : `${ko}<span class="zh">${zh}</span>`; }
@@ -1933,6 +1966,7 @@ function render(){
     }
   }
   syncButtons();
+  if(isZh() && TR_PENDING.size) setTimeout(flushTranslations, 0);
 }
 
 function syncButtons(){
