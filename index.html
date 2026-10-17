@@ -801,6 +801,14 @@
   .rcard-top .rcard-stats span{display:inline-flex; align-items:center; gap:4px;}
   .rcard-top svg{width:13px; height:13px;}
   .rcard-body{font-size:13.5px; line-height:1.6; color:var(--ink-soft); margin-top:5px; text-wrap:pretty;}
+  .level-q-head{margin-top:22px; font-size:14px; font-weight:700;}
+  .level-help{padding:0 18px; margin-top:6px;}
+  .filter-panel .level-help{padding:0;}
+  .level-result{margin-top:14px; padding:12px 14px; border-radius:12px; background:var(--accent-soft);}
+  .level-result-text{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;}
+  .level-result .chip-toggle-row{margin-top:10px;}
+  .level-result .chip{flex-direction:row; align-items:center; gap:6px;}
+  .level-summary{margin:8px 18px 0; font-size:12.5px; color:var(--ink-soft); text-align:center;}
   .lvl-pill{display:inline-flex; align-items:center; gap:7px; margin-top:10px; padding:6px 10px; border-radius:8px; background:var(--accent-soft); font-size:12.5px; font-weight:600;}
   .rcard-foot{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border);}
   .rcard-foot .card-author-row{padding:0; min-height:28px;}
@@ -1048,10 +1056,29 @@ let LISTINGS = [];   // 사장님 모드용 공고 (지금은 화면에서 숨�
 
 // 알림은 따로 저장하지 않고, 불러온 질문·답변에서 만들어요 (buildNotifs)
 
-const KOREAN_LEVELS = ['거의 안 씀', '기본 인사 가능', '손님 응대 가능'];
-const KOREAN_TIERS = {'거의 안 씀':'초급', '기본 인사 가능':'중급', '손님 응대 가능':'고급'};
-function koreanTier(k){ return KOREAN_TIERS[k] || k; }
-const KOREAN_HINTS = {'거의 안 씀':'전화응대 없음', '기본 인사 가능':'간단 안내만', '손님 응대 가능':'자유로운 대화'};
+// 후기: "이 일에 필요한 한국어 수준" (작성할 때 질문 3개로 판정해요)
+const LEVELS = ['beginner', 'intermediate', 'advanced'];
+const LEVEL_TIER = {beginner:'초급', intermediate:'중급', advanced:'고급'};
+const LEVEL_BADGE = {beginner:'초급 OK', intermediate:'중급 필요', advanced:'고급 필요'};
+const LEVEL_RESULT = {beginner:'이 일은 초급 한국어로 충분해요', intermediate:'이 일은 중급 한국어가 필요해요', advanced:'이 일은 고급 한국어가 필요해요'};
+function levelTier(lv){ return LEVEL_TIER[lv] || ''; }
+// 판정 규칙: 전화 응대 → 고급 / 손님과 자유 대화 또는 직원과 자주 대화 → 중급 / 나머지 → 초급
+function judgeLevel(customerTalk, phoneRequired, coworkerTalk){
+  if(phoneRequired) return 'advanced';
+  if(customerTalk==='free' || coworkerTalk) return 'intermediate';
+  return 'beginner';
+}
+const LEVEL_QUESTIONS = [
+  {id:'rQ1', key:'customer', q:'손님과 한국어로 대화해야 하는 일이었나요?',
+   options:[{v:'none', label:'거의 없었어요'}, {v:'fixed', label:'정해진 말만 하면 됐어요'}, {v:'free', label:'자유롭게 대화해야 했어요'}]},
+  {id:'rQ2', key:'phone', q:'전화 응대를 해야 하는 일이었나요?',
+   options:[{v:'false', label:'아니요'}, {v:'true', label:'네'}]},
+  {id:'rQ3', key:'coworker', q:'일하면서 직원들과 한국어로 이야기를 많이 해야 하는 일이었나요?',
+   options:[{v:'false', label:'아니요, 필요한 말만 했어요'}, {v:'true', label:'네, 자주 이야기해야 했어요'}]}
+];
+// 회원가입 때 고른 내 한국어 수준 → 홈 필터 기본값
+const PERSON_LEVEL = {'거의 안 씀':'beginner', '기본 인사 가능':'beginner', '손님 응대 가능':'intermediate'};
+let MY_LEVEL = null;
 const INDUSTRIES = ['카페·음료', '식당·주방보조', '편의점', '물류·배송', '서빙·홀', '상하차', '전단지·판촉', '기타'];
 
 let STUDENTS = [];   // 화면에 나오는 회원들의 공개 프로필 (서버에서 불러와요)
@@ -1130,13 +1157,17 @@ async function loadAll(isRetry){
       sb.from('review_feed').select('*').order('created_at', {ascending:false}).limit(300),
       sb.from('question_feed').select('*').order('created_at', {ascending:false}).limit(300),
       uid ? sb.from('answer_likes').select('answer_id') : Promise.resolve({data:[], error:null}),
-      uid ? sb.from('review_likes').select('review_id') : Promise.resolve({data:[], error:null})
+      uid ? sb.from('review_likes').select('review_id') : Promise.resolve({data:[], error:null}),
+      uid ? sb.from('profile_private').select('korean').eq('id', uid).maybeSingle() : none
     ]);
     const failed = res.find(r=>r.error);
     if(failed) throw failed.error;
     if(ME_STUDENT.id !== uid) return false;                       // 불러오는 사이에 로그아웃함
     if(startedAt !== mutations && !isRetry) return loadAll(true);  // 그 사이 좋아요를 눌렀으면 한 번 더
-    const [me, rv, qs, al, rl] = res.map(r=>r.data);
+    const [me, rv, qs, al, rl, priv] = res.map(r=>r.data);
+    MY_LEVEL = (priv && PERSON_LEVEL[priv.korean]) || null;
+    // 직접 고르기 전까지는 내 수준을 기본으로 걸어 둬요
+    if(!state.levelChosen && MY_LEVEL) state.filterKorean = MY_LEVEL;
     if(uid && !me) throw new Error('profile-missing');
 
     const people = new Map();
@@ -1150,7 +1181,9 @@ async function loadAll(isRetry){
     REVIEWS = rv.map(r=>{
       const author = keep(personOf(r));
       return {id:r.id, industry:r.industry, shopName:r.shop_name || '', days:r.days || [], timeOfDay:r.time_of_day || '',
-              korean:r.korean, months:r.months, good:r.good, hard:r.hard, note:r.note || '', tip:r.tip,
+              level:r.required_level || 'beginner', levelOverridden:!!r.level_overridden,
+              customerTalk:r.customer_talk, phoneRequired:r.phone_required, coworkerTalk:r.coworker_talk,
+              months:r.months, good:r.good, hard:r.hard, note:r.note || '', tip:r.tip,
               author, authorId:author.id, anonymous:!!author.anon, isMine:!!r.is_mine,
               createdAt:r.created_at, time:ago(r.created_at), views:r.views, likes:r.likes};
     });
@@ -1191,6 +1224,7 @@ document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) softRef
 
 function clearLocal(){
   ME_STUDENT.id = null; ME_STUDENT.email = '';
+  MY_LEVEL = null; state.levelChosen = false; state.filterKorean = '전체';
   REVIEWS = []; QUESTIONS = []; STUDENTS = [];
   LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set();
   viewedOnce.clear(); lastLoadAt = 0;
@@ -1239,7 +1273,7 @@ const OWNER_TABS = [
   {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
 ];
 
-const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', filterIndustry:'전체', askPrefill:null, lang:'ko'};
+const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, lang:'ko'};
 
 /* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
    1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
@@ -1258,7 +1292,22 @@ const I18N_ZH = {
   '알바, 먼저 해 본 선배에게':'兼职的事，找做过的学长学姐',
   '물어봐':'问吧',
   '중앙대 유학생 선배들이 직접 쓴 후기와 답변':'中央大学留学生学长学姐亲自写的经验和回答',
-  '내 한국어 수준에 맞는 후기만 보기':'只看适合我韩语水平的经验',
+  '필요한 한국어 수준':'所需韩语水平',
+  '고른 수준 이하의 일을 모두 보여 줘요':'显示所选水平及以下的工作',
+  '초급 OK':'初级可', '중급 필요':'需中级', '고급 필요':'需高级',
+  '이 일에 필요했던 한국어':'这份工作需要的韩语',
+  '손님과 한국어로 대화해야 하는 일이었나요?':'这份工作需要用韩语和顾客交流吗？',
+  '거의 없었어요':'几乎不需要', '정해진 말만 하면 됐어요':'只说几句固定的话就行', '자유롭게 대화해야 했어요':'需要自由交流',
+  '전화 응대를 해야 하는 일이었나요?':'这份工作需要接听电话吗？',
+  '아니요':'不需要', '네':'需要',
+  '일하면서 직원들과 한국어로 이야기를 많이 해야 하는 일이었나요?':'这份工作需要经常用韩语和同事交流吗？',
+  '아니요, 필요한 말만 했어요':'不用，只说必要的话', '네, 자주 이야기해야 했어요':'需要，经常要交流',
+  '이 일은 초급 한국어로 충분해요':'这份工作初级韩语就够了',
+  '이 일은 중급 한국어가 필요해요':'这份工作需要中级韩语',
+  '이 일은 고급 한국어가 필요해요':'这份工作需要高级韩语',
+  '다르면 직접 바꿀 수 있어요':'如果不准确，可以自己修改',
+  '손님 대화':'顾客交流', '전화 응대':'接电话', '직원 대화':'同事交流',
+  '거의 없음':'几乎没有', '정해진 말만':'只说固定的话', '자유롭게':'自由交流', '있음':'有', '없음':'没有', '자주':'经常', '필요한 말만':'只说必要的话',
   '초급':'初级', '중급':'中级', '고급':'高级',
   '전체':'全部',
   '선배들의 후기 {n}개':'学长学姐的经验 {n}条',
@@ -1729,8 +1778,8 @@ function newSignupDraft(){
           nickFor:null, nickFree:null};   // nickFor: 서버에 중복 확인을 마친 닉네임, nickFree: 그 결과
 }
 
-function levelBars(korean){
-  const n = KOREAN_LEVELS.indexOf(korean) + 1;
+function levelBars(level){
+  const n = LEVELS.indexOf(level) + 1;
   return `<span class="lvl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
 }
 function careerBadge(studentId){
@@ -2348,10 +2397,11 @@ function renderFeed(){
 
 function renderFilterBar(){
   return `
-    <div class="filter-title">${t('내 한국어 수준에 맞는 후기만 보기')}</div>
+    <div class="filter-title">${t('필요한 한국어 수준')}</div>
     <div class="level-seg">
-      ${KOREAN_LEVELS.map(k=>`<button class="chip ${state.filterKorean===k?'is-active':''}" aria-pressed="${state.filterKorean===k}" onclick="setFilter('korean','${k}')">${levelBars(k)}${t(koreanTier(k))}</button>`).join('')}
+      ${LEVELS.map(k=>`<button class="chip ${state.filterKorean===k?'is-active':''}" aria-pressed="${state.filterKorean===k}" onclick="setFilter('korean','${k}')">${levelBars(k)}${t(levelTier(k))}</button>`).join('')}
     </div>
+    <div class="field-help level-help">${t('고른 수준 이하의 일을 모두 보여 줘요')}</div>
     <div class="filter-title filter-title-industry">${t('업종')}</div>
     <div class="industry-scroll" aria-label="${t('업종')}">
       ${['전체', ...INDUSTRIES].map(i=>`<button class="chip ${state.filterIndustry===i?'is-active':''}" aria-pressed="${state.filterIndustry===i}" onclick="setFilter('industry','${i}')">${t(i)}</button>`).join('')}
@@ -2360,7 +2410,7 @@ function renderFilterBar(){
 }
 
 function setFilter(type, value){
-  if(type==='korean') state.filterKorean = state.filterKorean===value ? '전체' : value;
+  if(type==='korean'){ state.filterKorean = state.filterKorean===value ? '전체' : value; state.levelChosen = true; }
   else state.filterIndustry = value;
   render();
   // 가로로 넘기는 업종 줄에서 고른 칩이 화면 밖으로 밀리지 않게
@@ -2370,7 +2420,7 @@ function setFilter(type, value){
 
 function renderFeedBody(){
   let list = REVIEWS.slice();
-  if(state.filterKorean && state.filterKorean!=='전체') list = list.filter(r=>KOREAN_LEVELS.indexOf(r.korean) <= KOREAN_LEVELS.indexOf(state.filterKorean));
+  if(state.filterKorean && state.filterKorean!=='전체') list = list.filter(r=>LEVELS.indexOf(r.level) <= LEVELS.indexOf(state.filterKorean));
   if(state.filterIndustry && state.filterIndustry!=='전체') list = list.filter(r=>industryGroup(r.industry)===state.filterIndustry);
   const emptyText = REVIEWS.length ? t('조건에 맞는 후기가 없어요. 필터를 바꿔보세요.') : t('아직 후기가 없어요. 첫 후기를 남겨보세요.');
   return `
@@ -2381,6 +2431,16 @@ function renderFeedBody(){
   `;
 }
 
+function levelSummaryHTML(r){
+  if(!r.customerTalk) return '';   // 예전 방식으로 쓴 후기는 답이 없어요
+  const customer = {none:'거의 없음', fixed:'정해진 말만', free:'자유롭게'}[r.customerTalk];
+  const parts = [
+    `${t('손님 대화')}: ${t(customer)}`,
+    `${t('전화 응대')}: ${t(r.phoneRequired ? '있음' : '없음')}`,
+    `${t('직원 대화')}: ${t(r.coworkerTalk ? '자주' : '필요한 말만')}`
+  ];
+  return `<div class="level-summary">${parts.map(esc).join(' · ')}</div>`;
+}
 function reviewTitle(r){
   return r.shopName ? esc(tc(r.shopName)) : esc(t('{industry} 알바', {industry:t(r.industry)}));
 }
@@ -2396,7 +2456,7 @@ function reviewCardHTML(r){
       </div>
       <div class="qcard-title">${reviewTitle(r)}</div>
       <div class="rcard-body">"${esc(tc(r.tip))}"${translatedNote(r.tip)}</div>
-      <div class="lvl-pill">${levelBars(r.korean)}<span>${esc(t('한국어 {tier} · {desc}', {tier:t(koreanTier(r.korean)), desc:t(r.korean)}))}</span></div>
+      <div class="lvl-pill">${levelBars(r.level)}<span>${esc(t(LEVEL_BADGE[r.level]))}</span></div>
       <div class="rcard-foot">
         ${s.anon ? `
           <span class="card-author-row" style="cursor:default;">
@@ -2452,9 +2512,10 @@ function renderReviewDetail(id){
         <div class="facts">
           <div><span>${t('업종')}</span><b>${esc(t(r.industry))}</b></div>
           <div><span>${t('근무 기간')}</span><b>${careerText(r.months)}</b></div>
-          <div><span>${t('필요한 한국어')}</span><b>${t(koreanTier(r.korean))}</b><span>${esc(t(r.korean))}</span></div>
+          <div><span>${t('필요한 한국어')}</span><b>${t(levelTier(r.level))}</b></div>
           ${hasSchedule ? `<div class="fact-desktop"><span>${t('근무 요일 · 시간')}</span><b>${esc(scheduleShort)}</b></div>` : ''}
         </div>
+        ${levelSummaryHTML(r)}
         <div class="content" style="padding-top:16px; padding-bottom:0;">
           <div class="hl-block">
             <b>${t('후배에게 한마디')}</b>
@@ -2605,9 +2666,18 @@ function renderReviewForm(){
         ${['오전','오후','저녁','심야'].map(x=>`<option value="${x}">${t(x)}</option>`).join('')}
       </select>
 
-      <div class="field-label">${t('필요했던 한국어 수준')}</div>
-      <div class="chip-toggle-row" id="rKorean">
-        ${KOREAN_LEVELS.map(k=>`<button type="button" class="chip" data-korean="${k}" onclick="selectKoreanChip(this)">${t(k)}<small>${t(KOREAN_HINTS[k])}</small></button>`).join('')}
+      <div class="level-q-head">${t('이 일에 필요했던 한국어')}</div>
+      ${LEVEL_QUESTIONS.map(q=>`
+        <div class="field-label">${t(q.q)}</div>
+        <div class="chip-toggle-row" id="${q.id}">
+          ${q.options.map(o=>`<button type="button" class="chip" data-v="${o.v}" aria-pressed="false" onclick="pickLevelAnswer(this)">${t(o.label)}</button>`).join('')}
+        </div>`).join('')}
+      <div id="rLevelBox" class="level-result" hidden>
+        <div id="rLevelText" class="level-result-text"></div>
+        <div class="field-help" style="margin-top:2px;">${t('다르면 직접 바꿀 수 있어요')}</div>
+        <div class="chip-toggle-row" id="rLevel">
+          ${LEVELS.map(k=>`<button type="button" class="chip" data-level="${k}" aria-pressed="false" onclick="pickLevelOverride(this)">${levelBars(k)}${t(levelTier(k))}</button>`).join('')}
+        </div>
       </div>
 
       <div class="field-label">${t('좋았던 점')}</div>
@@ -2643,10 +2713,40 @@ function toggleDayChip(el){
   el.classList.toggle('is-active');
 }
 
-function selectKoreanChip(el){
-  const row = document.getElementById('rKorean');
-  row.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
-  el.classList.add('is-active');
+function selectInRow(el){
+  el.parentElement.querySelectorAll('.chip').forEach(c=>{ c.classList.remove('is-active'); c.setAttribute('aria-pressed','false'); });
+  el.classList.add('is-active'); el.setAttribute('aria-pressed','true');
+}
+function levelAnswers(){
+  const v = id=>{ const c = document.querySelector('#'+id+' .chip.is-active'); return c ? c.dataset.v : null; };
+  const a = {customer:v('rQ1'), phone:v('rQ2'), coworker:v('rQ3')};
+  a.complete = !!(a.customer && a.phone && a.coworker);
+  a.auto = a.complete ? judgeLevel(a.customer, a.phone==='true', a.coworker==='true') : null;
+  return a;
+}
+function chosenLevel(){
+  const c = document.querySelector('#rLevel .chip.is-active');
+  return c ? c.dataset.level : null;
+}
+function showLevelResult(level){
+  document.querySelectorAll('#rLevel .chip').forEach(c=>{
+    const on = c.dataset.level===level;
+    c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', String(on));
+  });
+  const text = document.getElementById('rLevelText');
+  if(text) text.innerHTML = `${levelBars(level)}<span>${esc(t(LEVEL_RESULT[level]))}</span>`;
+}
+// 답을 고르거나 바꾸면 판정을 다시 해요 (직접 고친 값도 자동 판정으로 돌아가요)
+function pickLevelAnswer(el){
+  selectInRow(el);
+  const a = levelAnswers();
+  const box = document.getElementById('rLevelBox');
+  box.hidden = !a.complete;
+  if(a.complete) showLevelResult(a.auto);
+  toggleReviewSubmit();
+}
+function pickLevelOverride(el){
+  showLevelResult(el.dataset.level);
   toggleReviewSubmit();
 }
 
@@ -2657,7 +2757,7 @@ function toggleReviewSubmit(){
   const months = document.getElementById('rMonths');
   const btn = document.getElementById('rSubmitBtn');
   if(!good || !btn) return;
-  const koreanSelected = document.querySelector('#rKorean .chip.is-active');
+  const koreanSelected = levelAnswers().complete && chosenLevel();
   const m = Number(months.value);
   const monthsValid = months.value && Number.isInteger(m) && m >= 1 && m <= 60;
   btn.disabled = !(good.value.trim() && hard.value.trim() && tip.value.trim() && koreanSelected && monthsValid);
@@ -2672,17 +2772,19 @@ async function submitReview(){
   const months = Number(document.getElementById('rMonths').value);
   const days = Array.from(document.querySelectorAll('#rDays .chip.is-active')).map(c=>c.dataset.day);
   const timeOfDay = document.getElementById('rTimeOfDay').value;
-  const koreanEl = document.querySelector('#rKorean .chip.is-active');
-  const korean = koreanEl ? koreanEl.dataset.korean : '';
+  const ans = levelAnswers();
+  const level = chosenLevel();
   const good = document.getElementById('rGood').value.trim();
   const hard = document.getElementById('rHard').value.trim();
   const note = document.getElementById('rNote').value.trim();
   const tip = document.getElementById('rTip').value.trim();
-  if(!good || !hard || !tip || !korean || !Number.isInteger(months) || months < 1 || months > 60) return;
+  if(!good || !hard || !tip || !ans.complete || !level || !Number.isInteger(months) || months < 1 || months > 60) return;
   await withBusy('rSubmitBtn', async ()=>{
     // 작성자·조회수·좋아요 수는 서버가 정해요
     const {data, error} = await sb.from('reviews')
-      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, korean, good, hard, note, tip, anonymous})
+      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, good, hard, note, tip, anonymous,
+               customer_talk:ans.customer, phone_required:ans.phone==='true', coworker_talk:ans.coworker==='true',
+               required_level:level, level_overridden:level!==ans.auto})
       .select('id').single();
     if(error) throw error;
     await loadAll();
