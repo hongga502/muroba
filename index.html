@@ -1287,7 +1287,7 @@ async function loadAll(isRetry){
 
     REVIEWS = rv.map(r=>{
       const author = keep(personOf(r));
-      return {id:r.id, industry:r.industry, shopName:r.shop_name || '', days:r.days || [], timeOfDay:r.time_of_day || '',
+      return {id:r.id, industry:r.industry, title:r.title || '', shopName:r.shop_name || '', days:r.days || [], timeOfDay:r.time_of_day || '',
               level:r.required_level || 'beginner', levelOverridden:!!r.level_overridden,
               customerTalk:r.customer_talk, phoneRequired:r.phone_required, coworkerTalk:r.coworker_talk,
               months:r.months, good:r.good, hard:r.hard, note:r.note || '', tip:r.tip,
@@ -1656,6 +1656,7 @@ const I18N_ZH = {
   '중앙대 시간제 취업 안내 페이지 열기':'打开中央大学兼职说明页面',
   '준비 서류 체크리스트':'材料清单',
   '중앙대 국제교육지원팀 안내 기준 · 출입국 신청 때도 그대로 가져가요':'按中央大学国际教育支援组的说明 · 去出入境申请时也要带上',
+  '후기 제목 (선택)':'经验标题（选填）', '예) 한국어 초보도 할 만한 카페 알바':'例）韩语初级也能做的咖啡店兼职',
   '통합신청서':'综合申请书', '(직접 프린트하거나 출입국사무소에서 받아 작성)':'（可自己打印，或在出入境管理事务所领取填写）',
   '양식 내려받기 (하이코리아 민원서식)':'下载表格（HiKorea民愿书式）',
   '중앙대 양식 받으러 가기':'去中央大学下载表格',
@@ -2679,6 +2680,8 @@ function levelSummaryHTML(r){
   return `<div class="level-summary">${parts.map(esc).join(' · ')}</div>`;
 }
 function reviewTitle(r){
+  // 제목 → 가게명 → "업종 알바" 순서로 보여 줘요
+  if(r.title) return esc(tc(r.title));
   return r.shopName ? esc(tc(r.shopName)) : esc(t('{industry} 알바', {industry:t(r.industry)}));
 }
 
@@ -3019,7 +3022,7 @@ function renderReviewDetail(id){
     <div class="detail-layout">
       <div class="detail-main">
         <div class="q-detail-head" style="border-bottom:none; padding-bottom:12px;">
-          <div class="q-detail-cat">${esc(t(r.industry))}</div>
+          <div class="q-detail-cat">${esc(t(r.industry))}${r.title && r.shopName ? ' · ' + esc(tc(r.shopName)) : ''}</div>
           <div class="q-detail-title">${reviewTitle(r)}</div>
         </div>
         <div class="facts">
@@ -3162,6 +3165,9 @@ function renderReviewForm(){
       <select id="rIndustry" class="field" onchange="onIndustryChange(this)">${INDUSTRIES.map(i=>`<option value="${i}">${t(i)}</option>`).join('')}</select>
       <input id="rIndustryOther" class="field other-input" type="text" maxlength="20" placeholder="${t('예) 꽃집, 학원 보조')}" aria-label="${t('직접 입력 (선택)')}" hidden>
 
+      <div class="field-label">${t('후기 제목 (선택)')}</div>
+      <input id="rTitle" class="field" type="text" maxlength="60" placeholder="${t('예) 한국어 초보도 할 만한 카페 알바')}">
+
       <div class="field-label">${t('가게명 (선택)')}</div>
       <input id="rShop" class="field" type="text" maxlength="40" placeholder="${t('예) 홍대 OO카페')}">
 
@@ -3281,6 +3287,7 @@ async function submitReview(){
   const industryOther = (document.getElementById('rIndustryOther').value || '').trim().slice(0, 20);
   if(industry==='기타' && industryOther) industry = industryOther;   // 직접 적은 업종으로 저장해요
   const anonymous = anonChecked('rAnon');
+  const title = document.getElementById('rTitle').value.trim().slice(0, 60);
   const shopName = document.getElementById('rShop').value.trim();
   const months = Number(document.getElementById('rMonths').value);
   const days = Array.from(document.querySelectorAll('#rDays .chip.is-active')).map(c=>c.dataset.day);
@@ -3295,7 +3302,7 @@ async function submitReview(){
   await withBusy('rSubmitBtn', async ()=>{
     // 작성자·조회수·좋아요 수는 서버가 정해요
     const {data, error} = await sb.from('reviews')
-      .insert({industry, shop_name:shopName, months, days, time_of_day:timeOfDay, good, hard, note, tip, anonymous,
+      .insert({industry, title, shop_name:shopName, months, days, time_of_day:timeOfDay, good, hard, note, tip, anonymous,
                customer_talk:ans.customer, phone_required:ans.phone==='true', coworker_talk:ans.coworker==='true',
                required_level:level, level_overridden:level!==ans.auto})
       .select('id').single();
