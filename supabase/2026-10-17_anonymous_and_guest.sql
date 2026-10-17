@@ -1,5 +1,5 @@
 -- 무로바: 익명 글 · '기타' 직접 입력 · 로그인 없이 둘러보기
--- Supabase 대시보드 → SQL Editor 에 통째로 붙여 넣고 Run 을 누르면 돼요. (기존 글·회원 정보는 그대로예요)
+-- 2026-10-17 서버(Supabase)에 적용 완료. 기록용 파일이에요. (기존 글·회원 정보는 그대로예요)
 
 -- 1) 익명 여부 칸 (기존 글은 실명 그대로)
 alter table public.reviews   add column if not exists anonymous boolean not null default false;
@@ -9,7 +9,7 @@ grant insert (anonymous) on public.reviews, public.questions, public.answers to 
 
 -- 2) 업종 '기타'를 고르고 직접 적은 내용 허용 (1~20자)
 alter table public.reviews drop constraint if exists reviews_industry_check;
-alter table public.reviews add constraint reviews_industry_check
+alter table public.reviews add constraint reviews_industry_len_check
   check (char_length(btrim(industry)) between 1 and 20);
 
 -- 3) 작성자 id는 표에서 직접 못 읽게 (익명 글 작성자가 드러나지 않도록)
@@ -19,8 +19,7 @@ grant select (id, cat, title, body, views, resolved_answer_id, resolved_at, crea
 grant select (id, question_id, body, likes, created_at, anonymous) on public.answers to authenticated;
 
 -- 4) 화면용 목록: 익명 글은 작성자를 가리고 "내 글인지"만 알려 줘요. 로그인 안 한 사람도 읽을 수 있어요.
-drop view if exists public.review_feed;
-create view public.review_feed with (security_invoker = false) as
+create or replace view public.review_feed with (security_invoker = false) as
 select r.id,
   case when r.anonymous then null else r.author_id end as author_id,
   r.industry, r.shop_name, r.months, r.days, r.time_of_day, r.korean,
@@ -34,8 +33,7 @@ select r.id,
 from public.reviews r
 join public.profiles p on p.id = r.author_id;
 
-drop view if exists public.question_feed;
-create view public.question_feed with (security_invoker = false) as
+create or replace view public.question_feed with (security_invoker = false) as
 select q.id,
   case when q.anonymous then null else q.author_id end as author_id,
   q.cat, q.title, q.body, q.views, q.resolved_answer_id, q.resolved_at, q.created_at,
@@ -43,8 +41,6 @@ select q.id,
   case when q.anonymous then null else p.univ end as author_univ,
   case when q.anonymous then null else p.year end as author_year,
   case when q.anonymous then null else p.stay end as author_stay,
-  q.anonymous,
-  coalesce(q.author_id = (select auth.uid()), false) as is_mine,
   coalesce((
     select jsonb_agg(jsonb_build_object(
       'id', a.id,
@@ -60,9 +56,10 @@ select q.id,
     from public.answers a
     join public.profiles ap on ap.id = a.author_id
     where a.question_id = q.id
-  ), '[]'::jsonb) as answers
+  ), '[]'::jsonb) as answers,
+  q.anonymous,
+  coalesce(q.author_id = (select auth.uid()), false) as is_mine
 from public.questions q
 join public.profiles p on p.id = q.author_id;
 
-revoke all on public.review_feed, public.question_feed from anon, authenticated;
 grant select on public.review_feed, public.question_feed to anon, authenticated;
