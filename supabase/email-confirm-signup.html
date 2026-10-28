@@ -1,0 +1,10 @@
+<!-- Supabase → Authentication → Emails → "Confirm signup" 메일 내용
+     제목(Subject): [무로바] 인증번호 / 验证码
+     아래 내용을 Body(Message)에 통째로 붙여 넣으세요. {{ .Token }} 자리에 인증번호가 들어가요. -->
+<div style="font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','PingFang SC','Microsoft YaHei',sans-serif; max-width:420px; margin:0 auto; padding:24px; color:#222;">
+  <p style="font-size:15px; margin:0 0 6px;">무로바 가입 인증번호예요.</p>
+  <p style="font-size:15px; margin:0 0 20px; color:#555;">这是问吧的注册验证码。</p>
+  <p style="font-size:32px; font-weight:700; letter-spacing:8px; margin:0 0 20px; color:#c8341f;">{{ .Token }}</p>
+  <p style="font-size:13px; color:#666; margin:0 0 4px;">가입 화면에 이 번호를 입력해 주세요. 직접 가입하지 않았다면 이 메일은 무시하셔도 돼요.</p>
+  <p style="font-size:13px; color:#666; margin:0;">请在注册页面输入这个验证码。如果不是你本人注册，请忽略这封邮件。</p>
+</div>
