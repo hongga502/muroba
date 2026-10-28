@@ -1,0 +1,14 @@
+-- 무로바: 이메일 인증이 끝나야 회원이 만들어지도록 변경
+-- 2026-10-28 서버(Supabase)에 적용 완료. 기록용 파일이에요.
+-- 전체 함수 내용은 Supabase 마이그레이션 기록
+--   "create_member_only_after_email_confirmed", "fix_nickname_check_excludes_self" 에 있어요.
+--
+-- 바뀐 흐름
+-- 1) 가입하기를 누르면 auth.users에 "인증 대기" 상태로만 저장돼요.
+--    이때는 프로필·위챗 아이디·부가 정보를 만들지 않아요. (= 아직 회원 아님, 로그인·글쓰기 불가)
+--    위챗 아이디 형식이 틀리거나 닉네임이 겹치면(인증 대기 중인 닉네임 포함) 가입 요청 자체를 막아요.
+-- 2) 메일로 받은 인증번호를 넣는 순간(email_confirmed_at이 채워지는 순간)
+--    트리거 on_auth_user_confirmed → create_member_from_auth()가 프로필·위챗 아이디·부가 정보를 만들어요.
+-- 3) 24시간 안에 인증하지 않은 가입 대기는 매시간 17분에 자동으로 지워요 (pg_cron 작업 delete_unconfirmed_signups).
+--
+-- 참고: Supabase의 "Confirm email"을 끄면 가입 즉시 인증된 것으로 처리돼서 바로 회원이 만들어져요.
