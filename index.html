@@ -742,6 +742,7 @@
   .anon-row{margin-top:14px;}
   .anon-row label{min-height:40px;}
   .composer .anon-row{margin-top:0; margin-bottom:4px;}
+  .anon-help{margin:-4px 0 8px 29px;}
   .composer .anon-row label{min-height:32px; font-size:12.5px;}
   .other-input{margin-top:8px;}
   .other-input[hidden]{display:none;}
@@ -1460,6 +1461,11 @@ const I18N_ZH = {
   '이미 쓰고 있는 닉네임이에요':'这个昵称已被使用',
   '생년월일':'出生日期',
   '다른 사람에게는 보이지 않아요.':'不会向其他人公开。',
+  '위챗 아이디':'微信号',
+  '예) wxid_abc123 또는 muroba_2026':'例）wxid_abc123 或 muroba_2026',
+  '위챗 → 나(我) → 프로필에서 위챗 아이디(微信号)를 복사해 넣어 주세요. 다른 사용자에게는 보이지 않고, 신고 처리 등 운영에 필요할 때 운영진만 확인해요.':'请在微信 →「我」→ 个人资料里复制你的微信号填进来。其他用户看不到，只有在处理举报等运营需要时，运营团队才会查看。',
+  '위챗 아이디 형식이 맞지 않아요. 영문으로 시작하는 6~20자(영문·숫자·_·-)예요.':'微信号格式不对。微信号以字母开头，由6~20位字母、数字、下划线或减号组成。',
+  '익명 글도 운영진은 신고 처리 등을 위해 작성자를 확인할 수 있어요.':'即使匿名发布，运营团队在处理举报等情况时也可以确认作者。',
   '학교와 한국 생활을 알려 주세요':'说说你的学校和在韩生活',
   '비슷한 상황의 선배 후기를 찾는 데 도움이 돼요.':'方便找到和你情况相似的学长学姐的经验。',
   '대학교':'大学', '중앙대학교':'中央大学', '다른 학교 (준비 중)':'其他学校（准备中）',
@@ -1744,7 +1750,8 @@ function anonCheckHTML(id){
   return `<div class="agree-row anon-row"><label for="${id}">
     <input id="${id}" type="checkbox" checked>
     <span>${t('익명으로 올리기')}</span>
-  </label></div>`;
+  </label></div>
+  <div class="field-help anon-help">${t('익명 글도 운영진은 신고 처리 등을 위해 작성자를 확인할 수 있어요.')}</div>`;
 }
 function anonChecked(id){ const el = document.getElementById(id); return !!(el && el.checked); }
 function catName(c){ return isZh() ? c.zh : c.name; }
@@ -2033,6 +2040,8 @@ function renderTopNav(){
 const AUTH_VIEWS = ['login','signup1','signup2','signup3'];
 const NO_NAV_VIEWS = [...AUTH_VIEWS, 'onboarding', 'privacy', 'newPassword', 'loading', 'setup', 'loadError'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// 위챗 아이디(微信号) 규칙: 영문으로 시작, 6~20자, 영문·숫자·_·- (기본으로 받은 wxid_… 도 통과)
+const WECHAT_RE = /^[a-zA-Z][a-zA-Z0-9_-]{5,19}$/;
 const SIGNUP_UNIVS = ['중앙대학교'];
 const SIGNUP_YEARS = ['1학년','2학년','3학년','4학년','대학원'];
 const SIGNUP_KOREAN = [
@@ -2045,7 +2054,7 @@ const SIGNUP_AREAS = ['흑석동','상도동','노량진','사당','기숙사','
 const SIGNUP_JOB_TOTALS = ['3개월 미만','3~6개월','6개월~1년','1년 이상'];
 
 function newSignupDraft(){
-  return {email:'', password:'', nickname:'', birth:'', univ:SIGNUP_UNIVS[0], year:'', korean:'', stay:'', area:'', areaOther:'', hasJob:'', jobIndustries:[], jobOther:'', jobTotal:'', agree:false,
+  return {email:'', password:'', nickname:'', wechat:'', birth:'', univ:SIGNUP_UNIVS[0], year:'', korean:'', stay:'', area:'', areaOther:'', hasJob:'', jobIndustries:[], jobOther:'', jobTotal:'', agree:false,
           nickFor:null, nickFree:null};   // nickFor: 서버에 중복 확인을 마친 닉네임, nickFree: 그 결과
 }
 
@@ -2213,9 +2222,10 @@ const PRIVACY_TEXT = {
   ko: {
     intro: '무로바는 서비스에 꼭 필요한 정보만 받아요.',
     items: [
-      ['수집하는 정보', '이메일, 비밀번호(암호화해서 저장), 닉네임, 생년월일, 대학교, 학년, 한국어 수준, 한국에 온 기간, 사는 동네, 아르바이트 경험(유무·업종·기간)'],
-      ['이용 목적', '회원 확인과 로그인, 후기·질문·답변의 작성자 표시, 서비스 개선'],
-      ['다른 회원에게 보이는 정보', '닉네임, 대학교, 학년, 한국에 온 기간만 보여요. 이메일, 생년월일, 한국어 수준, 사는 동네, 아르바이트 경험은 공개하지 않아요.'],
+      ['수집하는 정보', '이메일, 비밀번호(암호화해서 저장), 닉네임, 위챗 아이디, 생년월일, 대학교, 학년, 한국어 수준, 한국에 온 기간, 사는 동네, 아르바이트 경험(유무·업종·기간)'],
+      ['이용 목적', '회원 확인과 로그인, 후기·질문·답변의 작성자 표시, 서비스 개선. 위챗 아이디는 허위 후기·악용 등 부정 이용 확인, 신고 처리, 운영 관련 연락에만 써요.'],
+      ['다른 회원에게 보이는 정보', '닉네임, 대학교, 학년, 한국에 온 기간만 보여요. 이메일, 위챗 아이디, 생년월일, 한국어 수준, 사는 동네, 아르바이트 경험은 공개하지 않아요.'],
+      ['익명 글', '익명으로 올린 글은 다른 회원에게 작성자가 보이지 않아요. 다만 운영진은 신고 처리와 부정 이용 확인을 위해 작성자와 위챗 아이디를 확인할 수 있어요.'],
       ['보관 기간', '회원 탈퇴할 때까지 보관해요. 탈퇴하면 계정 정보와 내가 쓴 글이 함께 삭제돼요.'],
       ['동의하지 않을 권리', '동의하지 않을 수 있어요. 다만 동의하지 않으면 가입할 수 없어요.']
     ],
@@ -2224,9 +2234,10 @@ const PRIVACY_TEXT = {
   zh: {
     intro: '问吧只收集提供服务所必需的信息。',
     items: [
-      ['收集的信息', '邮箱、密码（加密保存）、昵称、出生日期、大学、年级、韩语水平、来韩时间、居住街区、兼职经历（有无·行业·时长）'],
-      ['使用目的', '确认会员身份与登录、显示经验·提问·回答的作者、改进服务'],
-      ['对其他会员公开的信息', '只公开昵称、大学、年级和来韩时间。邮箱、出生日期、韩语水平、居住街区和兼职经历不会公开。'],
+      ['收集的信息', '邮箱、密码（加密保存）、昵称、微信号、出生日期、大学、年级、韩语水平、来韩时间、居住街区、兼职经历（有无·行业·时长）'],
+      ['使用目的', '确认会员身份与登录、显示经验·提问·回答的作者、改进服务。微信号仅用于确认虚假经验、滥用等不当使用行为，处理举报，以及与运营相关的联系。'],
+      ['对其他会员公开的信息', '只公开昵称、大学、年级和来韩时间。邮箱、微信号、出生日期、韩语水平、居住街区和兼职经历不会公开。'],
+      ['匿名发布', '匿名发布的内容不会向其他会员显示作者。但为了处理举报和确认不当使用，运营团队可以查看作者及其微信号。'],
       ['保存期限', '保存到你注销账号为止。注销后，账号信息和你发布的内容会一并删除。'],
       ['不同意的权利', '你可以选择不同意，但不同意就无法注册。']
     ],
@@ -2381,6 +2392,11 @@ function renderSignup1(){
       <div id="suNickErr" class="field-error" role="alert"></div>
       <div class="field-help">${t('2~12자. 후기와 답변에 이 이름으로 보여요.')}</div>
 
+      <label class="field-label" for="suWechat">${t('위챗 아이디')}</label>
+      <input id="suWechat" class="field" type="text" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${t('예) wxid_abc123 또는 muroba_2026')}" value="${esc(d.wechat)}" oninput="toggleSignupStep()">
+      <div id="suWechatErr" class="field-error" role="alert"></div>
+      <div class="field-help">${t('위챗 → 나(我) → 프로필에서 위챗 아이디(微信号)를 복사해 넣어 주세요. 다른 사용자에게는 보이지 않고, 신고 처리 등 운영에 필요할 때 운영진만 확인해요.')}</div>
+
       <label class="field-label" for="suBirth">${t('생년월일')}</label>
       <input id="suBirth" class="field" type="date" max="${today}" value="${esc(d.birth)}" oninput="toggleSignupStep()">
       <div class="field-help">${t('다른 사람에게는 보이지 않아요.')}</div>
@@ -2478,6 +2494,7 @@ function saveSignup1(){
   signupDraft.email = email.value.trim();
   signupDraft.password = document.getElementById('suPw').value;
   signupDraft.nickname = document.getElementById('suNick').value.trim();
+  signupDraft.wechat = document.getElementById('suWechat').value.trim();
   signupDraft.birth = document.getElementById('suBirth').value;
 }
 
@@ -2506,7 +2523,7 @@ function checkNickname(){
 function signup1Valid(){
   const d = signupDraft;
   return EMAIL_RE.test(d.email) && d.password.length>=8 && Array.from(d.nickname).length>=2
-    && d.nickFor===d.nickname && d.nickFree===true && !!d.birth;
+    && d.nickFor===d.nickname && d.nickFree===true && WECHAT_RE.test(d.wechat) && !!d.birth;
 }
 function signup2Valid(){
   const d = signupDraft;
@@ -2528,6 +2545,8 @@ function toggleSignupStep(){
     const taken = d.nickname==='익명' || (d.nickFor===d.nickname && d.nickFree===false);
     const err = document.getElementById('suNickErr');
     if(err) err.textContent = taken ? t('이미 쓰고 있는 닉네임이에요') : '';
+    const wErr = document.getElementById('suWechatErr');
+    if(wErr) wErr.textContent = (d.wechat && !WECHAT_RE.test(d.wechat)) ? t('위챗 아이디 형식이 맞지 않아요. 영문으로 시작하는 6~20자(영문·숫자·_·-)예요.') : '';
     const btn = document.getElementById('su1Next');
     if(btn) btn.disabled = !signup1Valid();
   } else if(state.view==='signup2'){
@@ -2591,7 +2610,7 @@ async function completeSignup(){
       options: {
         emailRedirectTo: siteUrl(),
         data: {
-          nickname:d.nickname, univ:d.univ, year:d.year, stay:d.stay, korean:d.korean,
+          nickname:d.nickname, wechat_id:d.wechat, univ:d.univ, year:d.year, stay:d.stay, korean:d.korean,
           birth:d.birth, area, has_job:hasJob,
           job_industries: hasJob ? jobIndustries : [], job_total: hasJob ? d.jobTotal : ''
         }
