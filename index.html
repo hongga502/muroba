@@ -1080,6 +1080,30 @@
   .gc-extra .guide-link{margin-top:0; min-height:40px;}
   .guide-check input{flex:none; width:20px; height:20px; margin:0; accent-color:var(--accent);}
   .guide-check small{font-size:11.5px; color:var(--ink-faint);}
+  .fit-card{margin-top:20px; padding:16px; border:1px solid var(--border); border-radius:16px; background:var(--surface);}
+  .fit-q{margin-top:16px;}
+  .fit-q-title{display:flex; gap:8px; font-size:14px; font-weight:700; line-height:1.5; word-break:keep-all;}
+  .fit-q-title span{flex:none; width:22px; height:22px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:12px; display:flex; align-items:center; justify-content:center; margin-top:1px;}
+  .fit-q-help{margin:4px 0 0 30px; font-size:12.5px; line-height:1.55; color:var(--ink-soft); word-break:keep-all;}
+  .fit-opts{display:flex; flex-direction:column; gap:6px; margin:8px 0 0 30px;}
+  .fit-opts.is-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr));}
+  .fit-opts .chip{justify-content:flex-start; text-align:left; word-break:keep-all; line-height:1.4;}
+  .fit-opts.is-grid .chip{justify-content:center; text-align:center;}
+  .fit-link{border:none; background:none; padding:0; color:var(--accent); font-family:inherit; font-size:12.5px; font-weight:700; text-decoration:underline; cursor:pointer;}
+  .fit-result{margin-top:18px; padding:14px 16px; border-radius:12px; border:1.5px solid var(--border); font-size:13.5px; line-height:1.6;}
+  .fit-result.is-wait{color:var(--ink-soft); text-align:center; border-style:dashed;}
+  .fit-result b{display:block; font-size:15px; margin-bottom:4px;}
+  .fit-result ul{margin:4px 0 0; padding-left:18px;}
+  .fit-result p{margin:0;}
+  .fit-result small{display:block; margin:8px 0 6px; font-size:11.5px; color:var(--ink-faint);}
+  .fit-result.is-no{border-color:var(--accent); background:var(--accent-soft);}
+  .fit-result.is-no b{color:var(--accent);}
+  .fit-result.is-warn{border-color:#C98A12; background:rgba(201,138,18,.10);}
+  .fit-result.is-warn b{color:#B07400;}
+  .fit-result.is-ok{border-color:#2E8B57; background:rgba(46,139,87,.10);}
+  .fit-result.is-ok b{color:#237A4A;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .fit-result.is-warn b{color:#F2B84B;} :root:not([data-theme="light"]) .fit-result.is-ok b{color:#6FD3A0;} }
+  :root[data-theme="dark"] .fit-result.is-warn b{color:#F2B84B;} :root[data-theme="dark"] .fit-result.is-ok b{color:#6FD3A0;}
   .gdoc-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
   .gdoc-head span{font-size:13px; font-weight:700; color:var(--accent);}
   .guide-options{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
@@ -1417,7 +1441,7 @@ const OWNER_TABS = [
   {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
 ];
 
-const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, askStep:null, guideCourse:'u12', guideTopik:true, lang:'zh'};
+const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, askStep:null, guideCourse:'u12', guideTopik:true, guideFit:{}, lang:'zh'};
 
 /* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
    1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
@@ -1666,6 +1690,51 @@ const I18N_ZH = {
   '이 단계를 마쳤으면 눌러서 기록하세요':'完成这一步后，点这里记录下来',
   '{d}에 기록했어요 · 다시 누르면 취소돼요':'{d} 已记录 · 再点一次可取消',
   '내 계정에 저장돼서 어느 기기에서나 볼 수 있어요':'会保存到你的账号，换手机也能看到',
+  '10시간 이하':'10小时以内',
+  '11~15시간':'11～15小时',
+  '16~30시간':'16～30小时',
+  '31~35시간':'31～35小时',
+  '36시간 이상':'36小时以上',
+  '주말에만 일해요':'只在周末上班',
+  '어떤 일인가요?':'是什么工作？',
+  '음식점·카페·편의점 등 매장 일':'餐厅、咖啡店、便利店等店铺工作',
+  '사무보조·행사보조·관광안내·면세점 판매':'办公辅助、活动辅助、旅游向导、免税店销售',
+  '배달·택배·대리운전, 학원·영어키즈카페, 공장·건설현장':'外卖配送、快递、代驾，补习班、英语儿童咖啡厅，工厂、建筑工地',
+  '잘 모르겠어요 / 다른 일':'不太清楚 / 其他工作',
+  '평일(월~금)에 주 몇 시간 일하나요?':'工作日（周一至周五）每周工作几小时？',
+  '인력소개소·파견업체·용역업체를 통해 일하나요?':'是通过职业介绍所、派遣公司或外包公司去上班吗？',
+  '아니요, 가게와 직접 계약해요':'不是，直接和店里签合同',
+  '네, 업체를 통해요':'是，通过中介公司',
+  '잘 모르겠어요':'不太清楚',
+  '학교나 집에서 다니기에 가까운 곳인가요?':'离学校或住的地方近吗？',
+  '네, 매일 다닐 수 있어요':'近，每天都能去',
+  '아니요, 지방·먼 곳이에요':'不近，在外地或很远的地方',
+  '사장님이 서류(사업자등록증 사본·신분증 사본·표준근로계약서)를 준비해 줄 수 있나요?':'老板能准备材料（营业执照复印件、身份证复印件、标准劳动合同）吗？',
+  '네, 해 준대요':'能，老板答应了',
+  '아직 안 물어봤어요':'还没问',
+  '안 된대요':'老板说不行',
+  '할 수 없는 업종이에요. 이 일로는 허가를 받을 수 없어요.':'这是不能做的行业，这份工作拿不到许可。',
+  '할 수 있는 업종인지 국제교육지원팀에 먼저 물어보세요.':'请先问国际教育支援组这个行业能不能做。',
+  '파견·용역·알선 형태로는 허가를 받을 수 없어요. 가게와 직접 계약해야 해요.':'派遣、外包、中介形式拿不到许可，必须直接和店里签合同。',
+  '누구와 계약하는지(가게인지 업체인지) 사장님께 확인하세요.':'请向老板确认是和谁签合同（店里还是中介公司）。',
+  '원거리 근무는 허가 대상이 아니에요. 학교·집 근처에서 찾아보세요.':'远程（异地）工作不能获得许可，请在学校或住处附近找。',
+  '평일 허용 시간(주 {h}시간)을 넘어요. 근무 시간을 줄여서 계약하세요.':'超过了工作日允许时间（每周{h}小时），请减少工作时间再签合同。',
+  '대학원 수료생의 주말 근무 기준은 안내에 없어요. 국제교육지원팀에 확인하세요.':'说明里没有写研究生结业者的周末打工标准，请向国际教育支援组确认。',
+  '사장님 서류가 없으면 3단계 확인서를 받을 수 없어요.':'没有老板的材料，就拿不到第3步的确认书。',
+  '계약 전에 사장님께 서류를 준비해 줄 수 있는지 물어보세요.':'签合同前，先问老板能不能准备材料。',
+  '1단계 조건: {course} · TOPIK {lv} {yn} → 평일 주 {h}시간까지':'第1步条件：{course} · TOPIK {lv} {yn} → 工作日每周最多{h}小时',
+  '있음':'有',
+  '없음':'没有',
+  '바꾸기':'修改',
+  '{n} / {total}개 답했어요 · 모두 답하면 결과가 나와요':'已回答 {n} / {total} 题 · 全部回答后显示结果',
+  '이대로는 허가 받기 어려워요':'按现在的情况很难拿到许可',
+  '확인할 게 있어요':'还有需要确认的地方',
+  '허가 받을 수 있을 것 같아요':'应该能拿到许可',
+  '이제 사장님과 표준근로계약서를 쓰고, 3단계로 넘어가세요. 허가가 나오기 전에는 아직 출근하면 안 돼요.':'现在可以和老板签标准劳动合同，然后进入第3步。许可下来之前还不能上班哦。',
+  '셀프 체크는 참고용이에요. 최종 판단은 국제교육지원팀과 출입국에서 해요.':'自查结果仅供参考，最终由国际教育支援组和出入境管理局决定。',
+  '다시 체크하기':'重新检查',
+  '이 가게 괜찮을까? 셀프 체크':'这家店能不能做？自查一下',
+  '일할 곳을 정하기 전에 5가지만 확인해 보세요.':'决定打工地点前，先确认这5点。',
   '{n} / {total}개 준비됨':'已准备 {n} / {total} 项',
   '로그인하면 어느 기기에서나 이어서 볼 수 있어요':'登录后，换手机也能接着看进度',
   '내 진행 {n}/5':'我的进度 {n}/5',
@@ -3220,10 +3289,85 @@ function guideHoursHTML(){
   `;
 }
 
+// 2단계: "이 가게 괜찮을까?" 셀프 체크 (중앙대 국제교육지원팀 안내 기준)
+const FIT_HOURS = [
+  {id:'h10', label:'10시간 이하', max:10},
+  {id:'h15', label:'11~15시간', max:15},
+  {id:'h30', label:'16~30시간', max:30},
+  {id:'h35', label:'31~35시간', max:35},
+  {id:'h99', label:'36시간 이상', max:99},
+  {id:'wk',  label:'주말에만 일해요', max:0}
+];
+const FIT_QS = [
+  {key:'job', q:'어떤 일인가요?', opts:[
+    ['ok','음식점·카페·편의점 등 매장 일'], ['ok2','사무보조·행사보조·관광안내·면세점 판매'],
+    ['ban','배달·택배·대리운전, 학원·영어키즈카페, 공장·건설현장'], ['unsure','잘 모르겠어요 / 다른 일']]},
+  {key:'hours', q:'평일(월~금)에 주 몇 시간 일하나요?', hours:true},
+  {key:'agency', q:'인력소개소·파견업체·용역업체를 통해 일하나요?', opts:[['no','아니요, 가게와 직접 계약해요'], ['yes','네, 업체를 통해요'], ['unsure','잘 모르겠어요']]},
+  {key:'near', q:'학교나 집에서 다니기에 가까운 곳인가요?', opts:[['yes','네, 매일 다닐 수 있어요'], ['no','아니요, 지방·먼 곳이에요']]},
+  {key:'docs', q:'사장님이 서류(사업자등록증 사본·신분증 사본·표준근로계약서)를 준비해 줄 수 있나요?', opts:[['yes','네, 해 준대요'], ['unsure','아직 안 물어봤어요'], ['no','안 된대요']]}
+];
+function setGuideFit(key, value){
+  state.guideFit = Object.assign({}, state.guideFit, {[key]:value});
+  render();
+}
+function guideFitResult(){
+  const a = state.guideFit;
+  const cur = GUIDE_HOURS.find(h=>h.id===state.guideCourse) || GUIDE_HOURS[0];
+  const limit = state.guideTopik ? cur.yes : cur.no;
+  const hours = FIT_HOURS.find(h=>h.id===a.hours);
+  const stop = [], check = [];
+  if(a.job==='ban') stop.push('할 수 없는 업종이에요. 이 일로는 허가를 받을 수 없어요.');
+  if(a.job==='unsure') check.push('할 수 있는 업종인지 국제교육지원팀에 먼저 물어보세요.');
+  if(a.agency==='yes') stop.push('파견·용역·알선 형태로는 허가를 받을 수 없어요. 가게와 직접 계약해야 해요.');
+  if(a.agency==='unsure') check.push('누구와 계약하는지(가게인지 업체인지) 사장님께 확인하세요.');
+  if(a.near==='no') stop.push('원거리 근무는 허가 대상이 아니에요. 학교·집 근처에서 찾아보세요.');
+  if(hours && hours.max > limit) stop.push(t('평일 허용 시간(주 {h}시간)을 넘어요. 근무 시간을 줄여서 계약하세요.', {h:limit}));
+  if(hours && hours.id==='wk' && cur.id==='gc') check.push('대학원 수료생의 주말 근무 기준은 안내에 없어요. 국제교육지원팀에 확인하세요.');
+  if(a.docs==='no') stop.push('사장님 서류가 없으면 3단계 확인서를 받을 수 없어요.');
+  if(a.docs==='unsure') check.push('계약 전에 사장님께 서류를 준비해 줄 수 있는지 물어보세요.');
+  return {stop, check, limit, cur};
+}
+function guideFitHTML(){
+  const a = state.guideFit;
+  const answered = FIT_QS.filter(q=>a[q.key]).length;
+  const {stop, check, limit, cur} = guideFitResult();
+  const qHTML = FIT_QS.map((q, i)=>`
+    <div class="fit-q">
+      <div class="fit-q-title"><span>${i+1}</span>${t(q.q)}</div>
+      ${q.hours ? `<div class="fit-q-help">${t('1단계 조건: {course} · TOPIK {lv} {yn} → 평일 주 {h}시간까지', {course:t(cur.label), lv:t(cur.topik), yn:t(state.guideTopik?'있음':'없음'), h:limit})} <button type="button" class="fit-link" onclick="navigate('guideStep','1')">${t('바꾸기')}</button></div>` : ''}
+      <div class="fit-opts ${q.hours?'is-grid':''}">
+        ${(q.hours ? FIT_HOURS.map(h=>[h.id,h.label]) : q.opts).map(([v,label])=>`<button type="button" class="chip ${a[q.key]===v?'is-active':''}" aria-pressed="${a[q.key]===v}" onclick="setGuideFit('${q.key}','${v}')">${t(label)}</button>`).join('')}
+      </div>
+    </div>`).join('');
+  let result;
+  if(answered < FIT_QS.length){
+    result = `<div class="fit-result is-wait">${t('{n} / {total}개 답했어요 · 모두 답하면 결과가 나와요', {n:answered, total:FIT_QS.length})}</div>`;
+  } else {
+    const kind = stop.length ? 'no' : check.length ? 'warn' : 'ok';
+    const head = {no:'이대로는 허가 받기 어려워요', warn:'확인할 게 있어요', ok:'허가 받을 수 있을 것 같아요'}[kind];
+    const items = [...stop, ...check];
+    result = `<div class="fit-result is-${kind}" aria-live="polite">
+      <b>${t(head)}</b>
+      ${items.length ? `<ul>${items.map(x=>`<li>${t(x)}</li>`).join('')}</ul>` : `<p>${t('이제 사장님과 표준근로계약서를 쓰고, 3단계로 넘어가세요. 허가가 나오기 전에는 아직 출근하면 안 돼요.')}</p>`}
+      <small>${t('셀프 체크는 참고용이에요. 최종 판단은 국제교육지원팀과 출입국에서 해요.')}</small>
+      <button type="button" class="fit-link" onclick="state.guideFit={}; render();">${t('다시 체크하기')}</button>
+    </div>`;
+  }
+  return `
+    <section class="fit-card">
+      <h2 class="guide-h2" style="margin-top:0;">${t('이 가게 괜찮을까? 셀프 체크')}</h2>
+      <p class="field-help" style="margin:-4px 0 4px;">${t('일할 곳을 정하기 전에 5가지만 확인해 보세요.')}</p>
+      ${qHTML}
+      ${result}
+    </section>`;
+}
+
 function guideStepBodyHTML(n){
   if(n===1) return guideHoursHTML();
   if(n===2) return `
     <p class="guide-lead">${t('허가는 일할 가게를 기준으로 나와요. 그래서 일할 곳을 먼저 정하고 계약서를 써요.')}</p>
+    ${guideFitHTML()}
     <h2 class="guide-h2">${t('할 수 있는 일 (중앙대 안내 예시)')}</h2>
     <ul class="guide-list">${GUIDE_ALLOWED.map(x=>`<li>${t(x)}</li>`).join('')}</ul>
     <p class="field-help">${t('목록은 예시예요. 다른 업종은 국제교육지원팀에 확인하세요.')}</p>
