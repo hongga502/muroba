@@ -1246,6 +1246,7 @@ function bestAnswerCountOf(userId){
    글을 쓰거나 지울 때마다 서버에 저장한 뒤 목록을 다시 불러와요. */
 let LIKED_ANSWERS = new Set();   // 내가 좋아요 누른 답변 id
 let LIKED_REVIEWS = new Set();   // 내가 좋아요 누른 후기 id
+let GUIDE_DONE = null;            // 로그인했을 때 서버에서 불러온 내 가이드 기록 {단계: 완료 시각 ms}
 let lastLoadAt = 0;
 let lastLoadError = '';
 let busy = false;                // 저장 중에는 버튼을 두 번 누르지 못하게
@@ -1289,13 +1290,14 @@ async function loadAll(isRetry){
       sb.from('question_feed').select('*').order('created_at', {ascending:false}).limit(300),
       uid ? sb.from('answer_likes').select('answer_id') : Promise.resolve({data:[], error:null}),
       uid ? sb.from('review_likes').select('review_id') : Promise.resolve({data:[], error:null}),
-      uid ? sb.from('profile_private').select('korean').eq('id', uid).maybeSingle() : none
+      uid ? sb.from('profile_private').select('korean').eq('id', uid).maybeSingle() : none,
+      uid ? sb.from('guide_progress').select('step,done_at') : Promise.resolve({data:[], error:null})
     ]);
     const failed = res.find(r=>r.error);
     if(failed) throw failed.error;
     if(ME_STUDENT.id !== uid) return false;                       // 불러오는 사이에 로그아웃함
     if(startedAt !== mutations && !isRetry) return loadAll(true);  // 그 사이 좋아요를 눌렀으면 한 번 더
-    const [me, rv, qs, al, rl, priv] = res.map(r=>r.data);
+    const [me, rv, qs, al, rl, priv, gp] = res.map(r=>r.data);
     MY_LEVEL = (priv && PERSON_LEVEL[priv.korean]) || null;
     // 직접 고르기 전까지는 내 수준을 기본으로 걸어 둬요
     if(!state.levelChosen && MY_LEVEL) state.filterKorean = MY_LEVEL;
@@ -1331,6 +1333,11 @@ async function loadAll(isRetry){
     STUDENTS = Array.from(people.values());
     LIKED_ANSWERS = new Set(al.map(x=>x.answer_id));
     LIKED_REVIEWS = new Set(rl.map(x=>x.review_id));
+    if(uid){
+      GUIDE_DONE = {};
+      gp.forEach(x=>{ GUIDE_DONE[x.step] = new Date(x.done_at).getTime(); });
+      syncGuestGuide();
+    }
     lastLoadAt = Date.now();
     lastLoadError = '';
     return true;
@@ -1358,7 +1365,7 @@ function clearLocal(){
   ME_STUDENT.id = null; ME_STUDENT.email = '';
   MY_LEVEL = null; state.levelChosen = false; state.filterKorean = '전체';
   REVIEWS = []; QUESTIONS = []; STUDENTS = [];
-  LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set();
+  LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set(); GUIDE_DONE = null;
   viewedOnce.clear(); lastLoadAt = 0;
 }
 
@@ -1653,7 +1660,8 @@ const I18N_ZH = {
   '이 단계를 마쳤어요':'这一步已完成',
   '이 단계를 마쳤으면 눌러서 기록하세요':'完成这一步后，点这里记录下来',
   '{d}에 기록했어요 · 다시 누르면 취소돼요':'{d} 已记录 · 再点一次可取消',
-  '내 진행 상황에 저장돼요':'会保存到「我的进度」里',
+  '내 계정에 저장돼서 어느 기기에서나 볼 수 있어요':'会保存到你的账号，换手机也能看到',
+  '로그인하면 어느 기기에서나 이어서 볼 수 있어요':'登录后，换手机也能接着看进度',
   '내 진행 {n}/5':'我的进度 {n}/5',
   '이 단계 질문 {n}개 · 답변완료 {m}개':'这一步的提问 {n}个 · 已解决 {m}个',
   '가이드에 없는 내용이에요?':'指南里没有你想问的？',
@@ -2976,19 +2984,47 @@ const GUIDE_BANNED = [
   '불법고용 처벌 이력으로 제한된 업체·사업장'
 ];
 // 내 가이드 진행 기록 — 단계 번호: 완료한 시각(ms). 이 기기 브라우저에 저장돼요
-function guideDoneMap(){
+// 로그인 전에는 이 기기에 저장하고, 로그인하면 계정(서버)에 저장해요
+function guideLocalMap(){
   try{ return JSON.parse(localStorage.getItem('muroba-guide-done') || '{}') || {}; }catch(e){ return {}; }
+}
+function guideDoneMap(){ return (ME_STUDENT.id && GUIDE_DONE) ? GUIDE_DONE : guideLocalMap(); }
+// 로그인 전에 이 기기에 남긴 기록을 계정으로 옮겨요
+async function syncGuestGuide(){
+  const local = guideLocalMap();
+  const rows = Object.keys(local).filter(n=>GUIDE_DONE && !GUIDE_DONE[n])
+    .map(n=>({step:Number(n), done_at:new Date(local[n]).toISOString()}));
+  try{ localStorage.removeItem('muroba-guide-done'); }catch(e){}
+  if(!rows.length) return;
+  rows.forEach(r=>{ GUIDE_DONE[r.step] = new Date(r.done_at).getTime(); });
+  const {error} = await sb.from('guide_progress').upsert(rows, {onConflict:'user_id,step', ignoreDuplicates:true});
+  if(error) console.error('[무로바] 가이드 기록 옮기기 실패', error);
+  render();
 }
 function guideDoneCount(){ const m = guideDoneMap(); return GUIDE_STEPS.filter(s=>m[s.n]).length; }
 function guideDateText(ms){
   const d = new Date(ms);
   return isZh() ? `${d.getMonth()+1}月${d.getDate()}日` : `${d.getMonth()+1}월 ${d.getDate()}일`;
 }
-function toggleGuideDone(n){
+async function toggleGuideDone(n){
   const m = guideDoneMap();
-  if(m[n]) delete m[n]; else m[n] = Date.now();
-  try{ localStorage.setItem('muroba-guide-done', JSON.stringify(m)); }catch(e){}
-  render();
+  const wasAt = m[n];
+  if(wasAt) delete m[n]; else m[n] = Date.now();
+  if(!(ME_STUDENT.id && GUIDE_DONE)){
+    try{ localStorage.setItem('muroba-guide-done', JSON.stringify(m)); }catch(e){}
+    render();
+    return;
+  }
+  render();   // 먼저 화면에 보여 주고 서버에 저장해요
+  const {error} = wasAt
+    ? await sb.from('guide_progress').delete().eq('user_id', ME_STUDENT.id).eq('step', n)
+    : await sb.from('guide_progress').insert({step:n, done_at:new Date(m[n]).toISOString()});
+  if(error && error.code !== '23505'){   // 23505: 다른 기기에서 이미 기록함 → 그대로 둬요
+    console.error('[무로바] 가이드 기록 실패', error);
+    if(wasAt) m[n] = wasAt; else delete m[n];
+    render();
+    showToast(t(FAIL_MSG));
+  }
 }
 function guideMyProgressHTML(){
   const m = guideDoneMap(), done = guideDoneCount();
@@ -3228,7 +3264,7 @@ function renderGuideStep(param){
           <span class="gc-box">${doneAt ? icon('check') : ''}</span>
           <span class="gc-text">
             <b>${doneAt ? t('이 단계를 마쳤어요') : t('이 단계를 마쳤으면 눌러서 기록하세요')}</b>
-            <small>${doneAt ? t('{d}에 기록했어요 · 다시 누르면 취소돼요', {d:guideDateText(doneAt)}) : t('내 진행 상황에 저장돼요')}</small>
+            <small>${doneAt ? t('{d}에 기록했어요 · 다시 누르면 취소돼요', {d:guideDateText(doneAt)}) : (ME_STUDENT.id ? t('내 계정에 저장돼서 어느 기기에서나 볼 수 있어요') : t('로그인하면 어느 기기에서나 이어서 볼 수 있어요'))}</small>
           </span>
         </button>
       </div>`; })()}
