@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -986,7 +986,7 @@
   .guide-banner:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
   .gb-kicker{font-size:12.5px; font-weight:600; opacity:.92;}
   .gb-title{font-size:19px; font-weight:700; line-height:1.38; letter-spacing:-.01em;}
-  .gb-foot{display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:8px;}
+  .gb-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px;}
   .gb-cta{flex:none; min-height:36px; display:inline-flex; align-items:center; padding:0 14px; border-radius:18px; background:var(--accent-contrast); color:var(--accent); font-size:13.5px; font-weight:700;}
 
   .ghost-btn{min-height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer;}
@@ -1024,6 +1024,31 @@
   .guide-progress{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:4px; padding:0 18px;}
   .guide-progress i{height:4px; border-radius:2px; background:var(--border);}
   .guide-progress i.is-on{background:var(--accent);}
+  .guide-progress i.is-here{box-shadow:0 0 0 1.5px var(--ink) inset;}
+  .gb-mine{font-size:12.5px; font-weight:700; padding:3px 9px; border-radius:999px; background:rgba(255,255,255,.2);}
+  .guide-mine{margin-top:18px; padding:16px; border:1px solid var(--border); border-radius:14px; background:var(--surface);}
+  .gm-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+  .gm-head b{font-size:14.5px;}
+  .gm-head span{font-size:13px; font-weight:700; color:var(--accent);}
+  .gm-bar{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:4px; margin-top:10px;}
+  .gm-bar i{height:6px; border-radius:3px; background:var(--border);}
+  .gm-bar i.is-on{background:var(--accent);}
+  .gm-next{display:block; width:100%; margin-top:12px; padding:10px 12px; border:none; border-radius:10px; background:var(--chip-bg); color:var(--ink); font-family:inherit; font-size:13px; font-weight:600; text-align:left; cursor:pointer; word-break:keep-all;}
+  .gm-next.is-all{display:flex; align-items:center; gap:6px; background:var(--accent-soft); color:var(--accent); cursor:default;}
+  .gm-next.is-all svg{width:16px; height:16px; flex:none;}
+  .guide-steps li.is-done .gs-num{background:var(--accent); color:var(--accent-contrast);}
+  .guide-steps li.is-done .gs-line{background:var(--accent);}
+  .gs-num svg{width:16px; height:16px;}
+  .gs-done{margin-left:8px; padding:2px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); font-size:11.5px; font-weight:700; vertical-align:2px;}
+  .guide-check{margin-top:26px;}
+  .guide-check button{display:flex; align-items:center; gap:12px; width:100%; padding:14px 16px; border:1.5px dashed var(--accent); border-radius:14px; background:var(--surface); color:var(--ink); font-family:inherit; text-align:left; cursor:pointer;}
+  .guide-check.is-done button{border-style:solid; background:var(--accent-soft);}
+  .guide-check button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .gc-box{flex:none; width:26px; height:26px; border-radius:8px; border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent-contrast);}
+  .guide-check.is-done .gc-box{background:var(--accent);}
+  .gc-box svg{width:16px; height:16px;}
+  .gc-text b{display:block; font-size:14.5px;}
+  .gc-text small{display:block; margin-top:2px; font-size:12.5px; color:var(--ink-soft);}
   .guide-choice{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px;}
   .guide-result{margin-top:22px; padding:18px; border-radius:16px; background:var(--accent); color:var(--accent-contrast);}
   .gr-sub{font-size:12.5px; font-weight:600; opacity:.92;}
@@ -1380,7 +1405,7 @@ const OWNER_TABS = [
   {key:'mypage', label:'마이페이지', icon:'user', onclick:"navigate('mypage')"}
 ];
 
-const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, askStep:null, guideCourse:'u12', guideTopik:true, lang:'ko'};
+const state = {view:'loading', param:null, afterLogin:null, recovering:false, tab:'reviews', catTab:'questions', role:'student', filterKorean:'전체', levelChosen:false, filterIndustry:'전체', askPrefill:null, askStep:null, guideCourse:'u12', guideTopik:true, lang:'zh'};
 
 /* ===== 언어 전환 (학생 화면 전체. 사장님 모드 화면은 한국어 그대로) =====
    1) 화면의 고정 문구: 아래 번역 표에서 "한국어 원문 → 중국어"를 찾아 바꿔요. 표에 없는 문구는 한국어 그대로 나와요.
@@ -1620,6 +1645,16 @@ const I18N_ZH = {
   '내 조건 체크하기':'查查我的条件', '자세히 보기':'查看详情', '필요 서류 보기':'查看所需材料',
   '신청 방법 보기':'查看申请方法', '주의사항 보기':'查看注意事项',
   '이 부분이 헷갈려요':'这里没看懂',
+  '내 진행 상황':'我的进度',
+  '{n} / 5단계 완료':'已完成 {n} / 5 步',
+  '다음 할 일':'下一步',
+  '5단계를 모두 마쳤어요. 첫 출근 축하해요!':'5个步骤全部完成啦，恭喜你第一次上班！',
+  '{d} 완료':'{d} 已完成',
+  '이 단계를 마쳤어요':'这一步已完成',
+  '이 단계를 마쳤으면 눌러서 기록하세요':'完成这一步后，点这里记录下来',
+  '{d}에 기록했어요 · 다시 누르면 취소돼요':'{d} 已记录 · 再点一次可取消',
+  '내 진행 상황에 저장돼요':'会保存到「我的进度」里',
+  '내 진행 {n}/5':'我的进度 {n}/5',
   '이 단계 질문 {n}개 · 답변완료 {m}개':'这一步的提问 {n}个 · 已解决 {m}个',
   '가이드에 없는 내용이에요?':'指南里没有你想问的？',
   '비슷한 상황을 겪은 선배가 답해줘요':'经历过类似情况的学长学姐会回答你',
@@ -1794,8 +1829,8 @@ function detectLang(){
     const saved = localStorage.getItem('muroba-lang');
     if(saved==='ko' || saved==='zh') return saved;
   }catch(e){}
-  // 휴대폰·브라우저 언어가 중국어면 처음부터 중국어로 열어요
-  return (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'ko';
+  // 직접 언어를 바꾼 적이 없으면 중국어로 열어요
+  return 'zh';
 }
 function isZh(){ return state.lang==='zh'; }
 function t(ko, vars){
@@ -2940,6 +2975,36 @@ const GUIDE_BANNED = [
   '원거리 근무',
   '불법고용 처벌 이력으로 제한된 업체·사업장'
 ];
+// 내 가이드 진행 기록 — 단계 번호: 완료한 시각(ms). 이 기기 브라우저에 저장돼요
+function guideDoneMap(){
+  try{ return JSON.parse(localStorage.getItem('muroba-guide-done') || '{}') || {}; }catch(e){ return {}; }
+}
+function guideDoneCount(){ const m = guideDoneMap(); return GUIDE_STEPS.filter(s=>m[s.n]).length; }
+function guideDateText(ms){
+  const d = new Date(ms);
+  return isZh() ? `${d.getMonth()+1}月${d.getDate()}日` : `${d.getMonth()+1}월 ${d.getDate()}일`;
+}
+function toggleGuideDone(n){
+  const m = guideDoneMap();
+  if(m[n]) delete m[n]; else m[n] = Date.now();
+  try{ localStorage.setItem('muroba-guide-done', JSON.stringify(m)); }catch(e){}
+  render();
+}
+function guideMyProgressHTML(){
+  const m = guideDoneMap(), done = guideDoneCount();
+  const nextStep = GUIDE_STEPS.find(s=>!m[s.n]);
+  return `
+    <div class="guide-mine">
+      <div class="gm-head">
+        <b>${t('내 진행 상황')}</b>
+        <span>${t('{n} / 5단계 완료', {n:done})}</span>
+      </div>
+      <div class="gm-bar" aria-hidden="true">${GUIDE_STEPS.map(s=>`<i class="${m[s.n]?'is-on':''}"></i>`).join('')}</div>
+      ${nextStep
+        ? `<button type="button" class="gm-next" onclick="navigate('guideStep','${nextStep.n}')">${t('다음 할 일')} · ${t('{n}단계', {n:nextStep.n})} ${t(nextStep.title)} →</button>`
+        : `<div class="gm-next is-all">${icon('check')} ${t('5단계를 모두 마쳤어요. 첫 출근 축하해요!')}</div>`}
+    </div>`;
+}
 function guideStepOf(n){ return GUIDE_STEPS.find(s=>String(s.n)===String(n)); }
 function guideQuestions(n){
   // 답변완료를 먼저, 그다음 조회수 순
@@ -2978,7 +3043,8 @@ function guideBannerHTML(){
       <span class="gb-kicker">${kicker}</span>
       <span class="gb-title">${t('허가부터 첫 출근까지 5단계로 알려줄게요')}</span>
       <span class="gb-foot">
-        <span class="gb-cta">${t('가이드 보기')} →</span>
+        ${guideDoneCount() ? `<span class="gb-mine">${t('내 진행 {n}/5', {n:guideDoneCount()})}</span>` : ''}
+        <span class="gb-cta" style="margin-left:auto;">${t('가이드 보기')} →</span>
       </span>
     </button>
   `;
@@ -3008,15 +3074,18 @@ function renderGuide(){
         </div>
       </div>
 
+      ${guideMyProgressHTML()}
+
       <ol class="guide-steps">
         ${GUIDE_STEPS.map(s=>{
+          const doneAt = guideDoneMap()[s.n];
           const qs = guideQuestions(s.n);
           const done = qs.filter(q=>q.resolved).length;
           return `
-          <li>
-            <div class="gs-rail"><span class="gs-num">${s.n}</span><span class="gs-line"></span></div>
+          <li class="${doneAt?'is-done':''}">
+            <div class="gs-rail"><span class="gs-num">${doneAt ? icon('check') : s.n}</span><span class="gs-line"></span></div>
             <div class="gs-body">
-              <div class="gs-title">${t(s.title)}</div>
+              <div class="gs-title">${t(s.title)}${doneAt ? `<span class="gs-done">${t('{d} 완료', {d:guideDateText(doneAt)})}</span>` : ''}</div>
               <div class="gs-short">${t(s.short)}</div>
               ${qs.length ? `<div class="gs-count">${t('이 단계 질문 {n}개 · 답변완료 {m}개', {n:qs.length, m:done})}</div>` : ''}
               <div class="gs-actions">
@@ -3147,11 +3216,22 @@ function renderGuideStep(param){
       <div class="topbar-title" style="font-size:14px; font-weight:600;">${t('{n} / 5단계', {n})}</div>
       ${langToggleHTML()}
     </div>
-    <div class="guide-progress" aria-hidden="true">${GUIDE_STEPS.map(x=>`<i class="${x.n<=n?'is-on':''}"></i>`).join('')}</div>
+    <div class="guide-progress" aria-hidden="true">${GUIDE_STEPS.map(x=>`<i class="${guideDoneMap()[x.n]?'is-on':''}${x.n===n?' is-here':''}"></i>`).join('')}</div>
     <div class="content guide">
       <span class="guide-badge">${t('중앙대학교 기준')}</span>
       <h1 class="guide-h1">${t(s.title)}</h1>
       ${guideStepBodyHTML(n)}
+
+      ${(()=>{ const doneAt = guideDoneMap()[n]; return `
+      <div class="guide-check ${doneAt?'is-done':''}">
+        <button type="button" onclick="toggleGuideDone(${n})" aria-pressed="${doneAt?'true':'false'}">
+          <span class="gc-box">${doneAt ? icon('check') : ''}</span>
+          <span class="gc-text">
+            <b>${doneAt ? t('이 단계를 마쳤어요') : t('이 단계를 마쳤으면 눌러서 기록하세요')}</b>
+            <small>${doneAt ? t('{d}에 기록했어요 · 다시 누르면 취소돼요', {d:guideDateText(doneAt)}) : t('내 진행 상황에 저장돼요')}</small>
+          </span>
+        </button>
+      </div>`; })()}
 
       <h2 class="guide-h2" style="margin-top:30px;">${t('선배들이 많이 물어본 질문')}</h2>
       <div class="qlist" style="padding:0;">
