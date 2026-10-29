@@ -1040,15 +1040,15 @@
   .guide-steps li.is-done .gs-line{background:var(--accent);}
   .gs-num svg{width:16px; height:16px;}
   .gs-done{margin-left:8px; padding:2px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); font-size:11.5px; font-weight:700; vertical-align:2px;}
-  .guide-check{margin-top:26px;}
-  .guide-check button{display:flex; align-items:center; gap:12px; width:100%; padding:14px 16px; border:1.5px dashed var(--accent); border-radius:14px; background:var(--surface); color:var(--ink); font-family:inherit; text-align:left; cursor:pointer;}
-  .guide-check.is-done button{border-style:solid; background:var(--accent-soft);}
-  .guide-check button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-  .gc-box{flex:none; width:26px; height:26px; border-radius:8px; border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent-contrast);}
-  .guide-check.is-done .gc-box{background:var(--accent);}
-  .gc-box svg{width:16px; height:16px;}
-  .gc-text b{display:block; font-size:14.5px;}
-  .gc-text small{display:block; margin-top:2px; font-size:12.5px; color:var(--ink-soft);}
+  .guide-mark{margin-top:26px;}
+  .guide-mark button{display:flex; align-items:center; gap:12px; width:100%; padding:14px 16px; border:1.5px dashed var(--accent); border-radius:14px; background:var(--surface); color:var(--ink); font-family:inherit; text-align:left; cursor:pointer;}
+  .guide-mark.is-done button{border-style:solid; background:var(--accent-soft);}
+  .guide-mark button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .gk-box{flex:none; width:26px; height:26px; border-radius:8px; border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent-contrast);}
+  .guide-mark.is-done .gk-box{background:var(--accent);}
+  .gk-box svg{width:16px; height:16px;}
+  .gk-text b{display:block; font-size:14.5px;}
+  .gk-text small{display:block; margin-top:2px; font-size:12.5px; color:var(--ink-soft);}
   .guide-choice{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px;}
   .guide-result{margin-top:22px; padding:18px; border-radius:16px; background:var(--accent); color:var(--accent-contrast);}
   .gr-sub{font-size:12.5px; font-weight:600; opacity:.92;}
@@ -1080,6 +1080,8 @@
   .gc-extra .guide-link{margin-top:0; min-height:40px;}
   .guide-check input{flex:none; width:20px; height:20px; margin:0; accent-color:var(--accent);}
   .guide-check small{font-size:11.5px; color:var(--ink-faint);}
+  .gdoc-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+  .gdoc-head span{font-size:13px; font-weight:700; color:var(--accent);}
   .guide-options{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
   .guide-option{padding:14px 16px; border:1px solid var(--border); border-radius:14px;}
   .guide-option b{display:block; font-size:14.5px;}
@@ -1246,6 +1248,7 @@ function bestAnswerCountOf(userId){
    글을 쓰거나 지울 때마다 서버에 저장한 뒤 목록을 다시 불러와요. */
 let LIKED_ANSWERS = new Set();   // 내가 좋아요 누른 답변 id
 let LIKED_REVIEWS = new Set();   // 내가 좋아요 누른 후기 id
+let GUIDE_DOCS_DONE = null;       // 로그인했을 때 서버에서 불러온 준비 서류 체크 (서류 이름 Set)
 let GUIDE_DONE = null;            // 로그인했을 때 서버에서 불러온 내 가이드 기록 {단계: 완료 시각 ms}
 let lastLoadAt = 0;
 let lastLoadError = '';
@@ -1291,13 +1294,14 @@ async function loadAll(isRetry){
       uid ? sb.from('answer_likes').select('answer_id') : Promise.resolve({data:[], error:null}),
       uid ? sb.from('review_likes').select('review_id') : Promise.resolve({data:[], error:null}),
       uid ? sb.from('profile_private').select('korean').eq('id', uid).maybeSingle() : none,
-      uid ? sb.from('guide_progress').select('step,done_at') : Promise.resolve({data:[], error:null})
+      uid ? sb.from('guide_progress').select('step,done_at') : Promise.resolve({data:[], error:null}),
+      uid ? sb.from('guide_checklist').select('item') : Promise.resolve({data:[], error:null})
     ]);
     const failed = res.find(r=>r.error);
     if(failed) throw failed.error;
     if(ME_STUDENT.id !== uid) return false;                       // 불러오는 사이에 로그아웃함
     if(startedAt !== mutations && !isRetry) return loadAll(true);  // 그 사이 좋아요를 눌렀으면 한 번 더
-    const [me, rv, qs, al, rl, priv, gp] = res.map(r=>r.data);
+    const [me, rv, qs, al, rl, priv, gp, gc] = res.map(r=>r.data);
     MY_LEVEL = (priv && PERSON_LEVEL[priv.korean]) || null;
     // 직접 고르기 전까지는 내 수준을 기본으로 걸어 둬요
     if(!state.levelChosen && MY_LEVEL) state.filterKorean = MY_LEVEL;
@@ -1336,6 +1340,7 @@ async function loadAll(isRetry){
     if(uid){
       GUIDE_DONE = {};
       gp.forEach(x=>{ GUIDE_DONE[x.step] = new Date(x.done_at).getTime(); });
+      GUIDE_DOCS_DONE = new Set(gc.map(x=>x.item));
       syncGuestGuide();
     }
     lastLoadAt = Date.now();
@@ -1365,7 +1370,7 @@ function clearLocal(){
   ME_STUDENT.id = null; ME_STUDENT.email = '';
   MY_LEVEL = null; state.levelChosen = false; state.filterKorean = '전체';
   REVIEWS = []; QUESTIONS = []; STUDENTS = [];
-  LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set(); GUIDE_DONE = null;
+  LIKED_ANSWERS = new Set(); LIKED_REVIEWS = new Set(); GUIDE_DONE = null; GUIDE_DOCS_DONE = null;
   viewedOnce.clear(); lastLoadAt = 0;
 }
 
@@ -1661,6 +1666,7 @@ const I18N_ZH = {
   '이 단계를 마쳤으면 눌러서 기록하세요':'完成这一步后，点这里记录下来',
   '{d}에 기록했어요 · 다시 누르면 취소돼요':'{d} 已记录 · 再点一次可取消',
   '내 계정에 저장돼서 어느 기기에서나 볼 수 있어요':'会保存到你的账号，换手机也能看到',
+  '{n} / {total}개 준비됨':'已准备 {n} / {total} 项',
   '로그인하면 어느 기기에서나 이어서 볼 수 있어요':'登录后，换手机也能接着看进度',
   '내 진행 {n}/5':'我的进度 {n}/5',
   '이 단계 질문 {n}개 · 답변완료 {m}개':'这一步的提问 {n}个 · 已解决 {m}个',
@@ -2990,12 +2996,50 @@ function guideLocalMap(){
 }
 function guideDoneMap(){ return (ME_STUDENT.id && GUIDE_DONE) ? GUIDE_DONE : guideLocalMap(); }
 // 로그인 전에 이 기기에 남긴 기록을 계정으로 옮겨요
+function guideDocsLocal(){
+  try{ return new Set(JSON.parse(localStorage.getItem('muroba-guide-docs') || '[]') || []); }catch(e){ return new Set(); }
+}
+function guideDocsSet(){ return (ME_STUDENT.id && GUIDE_DOCS_DONE) ? GUIDE_DOCS_DONE : guideDocsLocal(); }
+function guideDocsCountText(set){
+  const done = GUIDE_DOCS.filter(([name])=>set.has(name)).length;
+  return t('{n} / {total}개 준비됨', {n:done, total:GUIDE_DOCS.length});
+}
+async function toggleGuideDoc(i, checked){
+  const name = GUIDE_DOCS[i][0];
+  const set = guideDocsSet();
+  if(checked) set.add(name); else set.delete(name);
+  const counter = document.getElementById('gdocCount');
+  if(counter) counter.textContent = guideDocsCountText(set);
+  if(!(ME_STUDENT.id && GUIDE_DOCS_DONE)){
+    try{ localStorage.setItem('muroba-guide-docs', JSON.stringify([...set])); }catch(e){}
+    return;
+  }
+  const {error} = checked
+    ? await sb.from('guide_checklist').insert({item:name})
+    : await sb.from('guide_checklist').delete().eq('user_id', ME_STUDENT.id).eq('item', name);
+  if(error && error.code !== '23505'){
+    console.error('[무로바] 체크리스트 저장 실패', error);
+    if(checked) set.delete(name); else set.add(name);
+    const box = document.getElementById('gdoc'+i);
+    if(box) box.checked = !checked;
+    if(counter) counter.textContent = guideDocsCountText(set);
+    showToast(t(FAIL_MSG));
+  }
+}
 async function syncGuestGuide(){
+  // 체크리스트도 같이 옮겨요
+  const localDocs = [...guideDocsLocal()].filter(x=>GUIDE_DOCS_DONE && !GUIDE_DOCS_DONE.has(x));
+  try{ localStorage.removeItem('muroba-guide-docs'); }catch(e){}
+  if(localDocs.length){
+    localDocs.forEach(x=>GUIDE_DOCS_DONE.add(x));
+    const {error} = await sb.from('guide_checklist').upsert(localDocs.map(item=>({item})), {onConflict:'user_id,item', ignoreDuplicates:true});
+    if(error) console.error('[무로바] 체크리스트 옮기기 실패', error);
+  }
   const local = guideLocalMap();
   const rows = Object.keys(local).filter(n=>GUIDE_DONE && !GUIDE_DONE[n])
     .map(n=>({step:Number(n), done_at:new Date(local[n]).toISOString()}));
   try{ localStorage.removeItem('muroba-guide-done'); }catch(e){}
-  if(!rows.length) return;
+  if(!rows.length){ if(localDocs.length) render(); return; }
   rows.forEach(r=>{ GUIDE_DONE[r.step] = new Date(r.done_at).getTime(); });
   const {error} = await sb.from('guide_progress').upsert(rows, {onConflict:'user_id,step', ignoreDuplicates:true});
   if(error) console.error('[무로바] 가이드 기록 옮기기 실패', error);
@@ -3209,11 +3253,11 @@ function guideStepBodyHTML(n){
       </dl>
       <a class="guide-link" href="${CAU_PARTTIME_URL}" target="_blank" rel="noopener">${t('중앙대 시간제 취업 안내 페이지 열기')} ↗</a>
     </section>
-    <h2 class="guide-h2">${t('준비 서류 체크리스트')}</h2>
+    <h2 class="guide-h2 gdoc-head">${t('준비 서류 체크리스트')}<span id="gdocCount">${guideDocsCountText(guideDocsSet())}</span></h2>
     <div class="field-help" style="margin:-4px 0 10px;">${t('중앙대 국제교육지원팀 안내 기준 · 출입국 신청 때도 그대로 가져가요')}</div>
     <div class="guide-check">
       ${GUIDE_DOCS.map(([name, note, extra], i)=>`<div class="gc-item">
-        <label for="gdoc${i}"><input id="gdoc${i}" type="checkbox"><span>${t(name)}${note ? ` <small>${t(note)}</small>` : ''}</span></label>
+        <label for="gdoc${i}"><input id="gdoc${i}" type="checkbox" ${guideDocsSet().has(name)?'checked':''} onchange="toggleGuideDoc(${i}, this.checked)"><span>${t(name)}${note ? ` <small>${t(note)}</small>` : ''}</span></label>
         ${extra==='form' ? `<div class="gc-extra"><a class="guide-link" href="${FORM_URL}" target="_blank" rel="noopener">${t('양식 내려받기 (하이코리아 민원서식)')} ↗</a><small>${t('hwp 파일이라 휴대폰에서 안 열리면 출입국사무소에서 받아 써도 돼요')}</small></div>` : ''}
         ${extra==='cauform' ? `<div class="gc-extra"><a class="guide-link" href="${CAU_FORM_URL}" target="_blank" rel="noopener">${t('중앙대 양식 받으러 가기')} ↗</a></div>` : ''}
       </div>`).join('')}
@@ -3259,10 +3303,10 @@ function renderGuideStep(param){
       ${guideStepBodyHTML(n)}
 
       ${(()=>{ const doneAt = guideDoneMap()[n]; return `
-      <div class="guide-check ${doneAt?'is-done':''}">
+      <div class="guide-mark ${doneAt?'is-done':''}">
         <button type="button" onclick="toggleGuideDone(${n})" aria-pressed="${doneAt?'true':'false'}">
-          <span class="gc-box">${doneAt ? icon('check') : ''}</span>
-          <span class="gc-text">
+          <span class="gk-box">${doneAt ? icon('check') : ''}</span>
+          <span class="gk-text">
             <b>${doneAt ? t('이 단계를 마쳤어요') : t('이 단계를 마쳤으면 눌러서 기록하세요')}</b>
             <small>${doneAt ? t('{d}에 기록했어요 · 다시 누르면 취소돼요', {d:guideDateText(doneAt)}) : (ME_STUDENT.id ? t('내 계정에 저장돼서 어느 기기에서나 볼 수 있어요') : t('로그인하면 어느 기기에서나 이어서 볼 수 있어요'))}</small>
           </span>
