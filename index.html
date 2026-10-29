@@ -986,10 +986,7 @@
   .guide-banner:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
   .gb-kicker{font-size:12.5px; font-weight:600; opacity:.92;}
   .gb-title{font-size:19px; font-weight:700; line-height:1.38; letter-spacing:-.01em;}
-  .gb-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px;}
-  .gb-dots{display:flex; gap:5px;}
-  .gb-dots i{width:20px; height:5px; border-radius:3px; background:currentColor; opacity:.4;}
-  .gb-dots i:first-child{opacity:1;}
+  .gb-foot{display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:8px;}
   .gb-cta{flex:none; min-height:36px; display:inline-flex; align-items:center; padding:0 14px; border-radius:18px; background:var(--accent-contrast); color:var(--accent); font-size:13.5px; font-weight:700;}
 
   .ghost-btn{min-height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer;}
@@ -1598,7 +1595,7 @@ const I18N_ZH = {
   '중앙대학교 기준':'以中央大学为准',
   '중앙대 유학생 알바,':'中央大学留学生打工，',
   '이 순서대로 하면 돼요':'按这个顺序来就行',
-  '모르는 부분이 있으면 “이 부분이 헷갈려요”를 눌러 선배에게 바로 물어보세요.':'有不懂的地方，点「这里没看懂」直接问学长学姐。',
+  '단계를 눌러 자세히 보고, 궁금한 건 그 단계에서 바로 물어보세요.':'点开每一步查看详情，有疑问可以直接在那一步提问。',
   '허가 먼저, 일은 나중':'先拿许可，再上班',
   '출입국 허가가 나온 뒤부터 일할 수 있어요. 심사 중에 먼저 일하면 무허가 취업이 될 수 있어요.':'出入境许可下来之后才能开始工作。审查期间先去上班，可能会被认定为无许可就业。',
   '신청할 수 있는지 확인':'确认自己能不能申请',
@@ -2981,7 +2978,6 @@ function guideBannerHTML(){
       <span class="gb-kicker">${kicker}</span>
       <span class="gb-title">${t('허가부터 첫 출근까지 5단계로 알려줄게요')}</span>
       <span class="gb-foot">
-        <span class="gb-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
         <span class="gb-cta">${t('가이드 보기')} →</span>
       </span>
     </button>
@@ -3002,7 +2998,7 @@ function renderGuide(){
     <div class="content guide">
       <span class="guide-badge">${t('중앙대학교 유학생(D-2) 기준')}</span>
       <h1 class="guide-h1">${t('중앙대 유학생 알바,')}<br>${t('이 순서대로 하면 돼요')}</h1>
-      <p class="guide-lead">${t('모르는 부분이 있으면 “이 부분이 헷갈려요”를 눌러 선배에게 바로 물어보세요.')}</p>
+      <p class="guide-lead">${t('단계를 눌러 자세히 보고, 궁금한 건 그 단계에서 바로 물어보세요.')}</p>
 
       <div class="guide-warn" role="note">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/></svg>
@@ -3025,7 +3021,6 @@ function renderGuide(){
               ${qs.length ? `<div class="gs-count">${t('이 단계 질문 {n}개 · 답변완료 {m}개', {n:qs.length, m:done})}</div>` : ''}
               <div class="gs-actions">
                 <button type="button" class="gs-more" onclick="navigate('guideStep','${s.n}')">${t(s.more)}</button>
-                <button type="button" class="gs-ask" onclick="askFromGuide(${s.n})">${t('이 부분이 헷갈려요')}</button>
               </div>
             </div>
           </li>`;
